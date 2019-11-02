@@ -36,8 +36,7 @@ public class ListIntroduction2 {
         System.out.println(List_B.indexOf("Durian"));
 
         //Add Passion Fruit and Pomelo to List B in a single statement
-        ArrayList<String> NewList = new ArrayList<>(Arrays.asList("Fruit", "Pomelo"));
-        List_B.addAll(NewList);
+        List_B.addAll(Arrays.asList("Fruit, Pomelo"));
         System.out.println(List_B);
 
         //Print out the 3rd element from List A

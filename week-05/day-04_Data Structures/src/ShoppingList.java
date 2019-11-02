@@ -7,6 +7,7 @@ public class ShoppingList {
         ArrayList<String> shoppingList = new ArrayList<>(Arrays.asList("Eggs", "milk", "fish", "apples", "bread", "chicken"));
         //Do we have milk on the list?
         //Do we have bananas on the list?
+
         Scanner Scanner = new Scanner(System.in);
         System.out.println("Check your shopping list!");
         String item = Scanner.nextLine();
