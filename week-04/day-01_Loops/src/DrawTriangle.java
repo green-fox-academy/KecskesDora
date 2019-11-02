@@ -8,7 +8,7 @@ public class DrawTriangle {
         int totalSize = scanner.nextInt();
         int numberOfStars = 1;
 
-        for (int raw = 0; raw < totalSize; raw++) {
+        for (int rawIndex = 0; rawIndex < totalSize; rawIndex++) {
             for (int i = 0; i < numberOfStars; i++) {
                 System.out.print("*");
             }
@@ -26,9 +26,8 @@ public class DrawTriangle {
             System.out.println();
             row++;
         }*/
-        }
     }
-
+}
 
 // Write a program that reads a number from the standard input, then draws a
 // triangle like this:
