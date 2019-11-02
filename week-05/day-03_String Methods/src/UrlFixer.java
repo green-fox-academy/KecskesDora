@@ -6,7 +6,7 @@ public class UrlFixer {
         url = url.replace("https", "https:");
         System.out.println(url);
 
-
+        //OR
         url = "https//www.reddit.com/r/nevertellmethebots";
 
         String urlPart1 = url.substring(0, 5);
