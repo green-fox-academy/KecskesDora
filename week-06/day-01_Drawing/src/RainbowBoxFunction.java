@@ -11,6 +11,7 @@ public class RainbowBoxFunction {
         // and draws a square of that size and color to the center of the canvas.
         // Create a loop that fills the canvas with rainbow colored squares (red, orange, yellow, green, blue, indigo, violet).
         int a = 200;
+        int x = 10;
         Color color = Color.red;
         for (int i = 0; i < 7; i++) {
 
@@ -35,8 +36,11 @@ public class RainbowBoxFunction {
             else if (i == 6) {
                 color = new Color(50,0, 100);
             }
+            // OR
+            //color = new Color(50 + x ,0 , 200 - x);
             drawSquare(a, color, graphics);
-            a -= 20;
+            //x += 5;
+            a -= 30;
         }
     }
     public static void drawSquare(int size, Color color, Graphics graphics) {

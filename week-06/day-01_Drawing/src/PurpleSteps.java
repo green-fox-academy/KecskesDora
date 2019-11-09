@@ -4,22 +4,19 @@ import java.awt.*;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class CenterBoxFunction {
-
+public class PurpleSteps {
     public static void mainDraw(Graphics graphics) {
-        // create a function that draws one square and takes 2 parameters:
-        // the square size and the graphics
-        // and draws a square of that size to the center of the canvas.
-        // draw 3 squares with that function.
-        // avoid code duplication.
-        int a = 100;
-        for (int i = 1; i <= 3; i++) {
-            drawSquare(a * i, graphics);
+        int a = 10;
+        for (int i = 1; i < 20; i++) {
+            drawRect(a * i, graphics);
         }
     }
-    public static void drawSquare(int size, Graphics graphics) {
-            graphics.drawRect(WIDTH / 2 - size / 2, HEIGHT / 2 - size / 2, size, size);
-        }
+
+    public static void drawRect(int a, Graphics graphics) {
+
+        graphics.setColor(new Color(52, 0, 52));
+        graphics.fillRect(a, a, a, a);
+    }
 
     // Don't touch the code below
     static int WIDTH = 320;

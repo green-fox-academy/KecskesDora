@@ -4,22 +4,29 @@ import java.awt.*;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class CenterBoxFunction {
-
+public class StarryNight {
     public static void mainDraw(Graphics graphics) {
-        // create a function that draws one square and takes 2 parameters:
-        // the square size and the graphics
-        // and draws a square of that size to the center of the canvas.
-        // draw 3 squares with that function.
-        // avoid code duplication.
-        int a = 100;
-        for (int i = 1; i <= 3; i++) {
-            drawSquare(a * i, graphics);
+        // Draw the night sky:
+        //  - The background should be black
+        //  - The stars can be small squares
+        //  - The stars should have random positions on the canvas
+        //  - The stars should have random color (some shade of grey)
+
+        graphics.setColor(Color.black);
+        graphics.fillRect(0,0, WIDTH, HEIGHT);
+
+        for (int i = 0; i < 1000; i++) {
+            drawStar(graphics);
         }
+        }
+
+    public static void drawStar(Graphics graphics){
+
+        graphics.setColor(new Color(105 + (int)(Math.random() * 116),
+                                    105 + (int)(Math.random() * 116),
+                                    105 + (int)(Math.random() * 116)));
+        graphics.fillRect((int)(Math.random() * WIDTH), (int)(Math.random() * HEIGHT), 1, 1);
     }
-    public static void drawSquare(int size, Graphics graphics) {
-            graphics.drawRect(WIDTH / 2 - size / 2, HEIGHT / 2 - size / 2, size, size);
-        }
 
     // Don't touch the code below
     static int WIDTH = 320;

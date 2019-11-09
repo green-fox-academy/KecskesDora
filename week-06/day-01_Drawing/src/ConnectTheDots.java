@@ -4,22 +4,18 @@ import java.awt.*;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class CenterBoxFunction {
-
+public class ConnectTheDots {
     public static void mainDraw(Graphics graphics) {
-        // create a function that draws one square and takes 2 parameters:
-        // the square size and the graphics
-        // and draws a square of that size to the center of the canvas.
-        // draw 3 squares with that function.
-        // avoid code duplication.
-        int a = 100;
-        for (int i = 1; i <= 3; i++) {
-            drawSquare(a * i, graphics);
-        }
+        // Create a function that takes 2 parameters:
+        // An array of {x, y} points and graphics
+        // and connects them with green lines.
+        // Connect these to get a box: {{10, 10}, {290,  10}, {290, 290}, {10, 290}}
+        // Connect these: {{50, 100}, {70, 70}, {80, 90}, {90, 90}, {100, 70},
+        // {120, 100}, {85, 130}, {50, 100}}
+
+
+
     }
-    public static void drawSquare(int size, Graphics graphics) {
-            graphics.drawRect(WIDTH / 2 - size / 2, HEIGHT / 2 - size / 2, size, size);
-        }
 
     // Don't touch the code below
     static int WIDTH = 320;
