@@ -18,7 +18,7 @@ public class StarryNight {
         for (int i = 0; i < 1000; i++) {
             drawStar(graphics);
         }
-        }
+    }
 
     public static void drawStar(Graphics graphics){
 

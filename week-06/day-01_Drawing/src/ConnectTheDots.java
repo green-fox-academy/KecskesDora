@@ -13,8 +13,24 @@ public class ConnectTheDots {
         // Connect these: {{50, 100}, {70, 70}, {80, 90}, {90, 90}, {100, 70},
         // {120, 100}, {85, 130}, {50, 100}}
 
+        graphics.setColor(Color.green);
+        int[][] polygon1 = {
+                {10, 10},
+                {290, 10},
+                {290, 290},
+                {10, 290},
+        };
+        int[][] polygon2 = {{50, 100}, {70, 70}, {80, 90}, {90, 90}, {100, 70},
+                {120, 100}, {85, 130}, {50, 100}};
 
-
+        connectLines(polygon1, graphics);
+        connectLines(polygon2, graphics);
+    }
+    public static void connectLines(int points[][], Graphics graphics) {
+        for (int i = 0; i < points.length - 1; i++) {
+            graphics.drawLine(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1]);
+        }
+        graphics.drawLine(points[points.length - 1][0], points[points.length - 1][1], points[0][0], points[0][1]);
     }
 
     // Don't touch the code below

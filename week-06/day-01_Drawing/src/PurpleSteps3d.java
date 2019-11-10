@@ -6,11 +6,11 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class PurpleSteps3d {
     public static void mainDraw(Graphics graphics) {
-        int positon = 5;
-        int size = 5;
+
+        int size = 10;
         for (int i = 1; i < 7; i++) {
-            drawRect(positon + size, size, graphics);
-            size += size;
+            drawRect(2 * size, size, graphics);
+            size += size / 2;
         }
     }
     public static void drawRect(int position, int size, Graphics graphics) {
