@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -6,10 +8,22 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class EnvelopeStar {
 
-        public static void mainDraw(Graphics graphics) {
+    public static void mainDraw(Graphics graphics) {
 
+        graphics.setColor(Color.green);
+        int numberOflLines = 10;
+        int a = WIDTH / 2 / numberOflLines;
+        int b = 0;
 
+        int npoints = 4;
+        for (int i = 0; i < 10; i++) {
+            int xpoints[] = {WIDTH / 2, WIDTH / 2 + a, WIDTH / 2, WIDTH / 2 -a};
+            int ypoints[] = {b, HEIGHT / 2, HEIGHT - b, HEIGHT / 2};
+            graphics.drawPolygon(xpoints, ypoints, npoints);
+            a += WIDTH / 2 / numberOflLines;
+            b += WIDTH / 2 / numberOflLines;
         }
+    }
 
         static int WIDTH = 320;
         static int HEIGHT = 320;
