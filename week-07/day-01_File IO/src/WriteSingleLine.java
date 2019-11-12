@@ -12,7 +12,8 @@ public class WriteSingleLine {
         // The file should be named "my-file.txt"
         // In case the program is unable to write the file,
         // It should print the following error message: "Unable to write file: my-file.txt"
-        writeInTheFile("my-file.txt");
+
+        writeInTheFile("my-file2.txt");
     }
         public static void writeInTheFile(String filename) {
 
@@ -22,7 +23,7 @@ public class WriteSingleLine {
              Path filePath = Paths.get(filename);
              Files.write(filePath, content);
         } catch (Exception e) {
-            System.out.println("Unable to write file: my-file.txt");
+            System.out.println("Unable to write file: " + filename);
         }
     }
 }
