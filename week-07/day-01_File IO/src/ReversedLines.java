@@ -9,6 +9,7 @@ public class ReversedLines {
         // Create a method that decrypts reversed-lines.txt
         System.out.println(decryptReversed("reversed-lines.txt"));
     }
+
     public static String decryptReversed(String fileName){
 
         Path filePath = Paths.get(fileName);
@@ -16,18 +17,19 @@ public class ReversedLines {
 
         try {
             originalLines = Files.readAllLines(filePath);
-            String reversedLines = "";
-
-            for (String line : originalLines){
-
-                for (int i = originalLines.size(); i > 0 ; i++) {
-                    reversedLines += line.charAt(line.length() -1 - i);
-                }
-                reversedLines += "\n";
-            }
-            return reversedLines;
         } catch (Exception e) {
             return "0";
         }
+
+        String reversedLines = "";
+
+        for (String line : originalLines){
+
+            for (int i = line.length() - 1; i >= 0 ; i--) {
+                reversedLines += line.charAt(i);
+            }
+            reversedLines += "\n";
+        }
+        return reversedLines;
     }
 }

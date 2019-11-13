@@ -18,12 +18,12 @@ public class ReversedOrder {
         try {
             originalText = Files.readAllLines(filePath);
 
-                for (int i = originalText.size() - 1; i >= 0; i--) {
-                    reversedOrderedText += originalText.get(i) + "\n";
-                }
-        return reversedOrderedText;
         } catch (Exception e){
         return "0";
         }
+        for (int i = originalText.size() - 1; i >= 0; i--) {
+            reversedOrderedText += originalText.get(i) + "\n";
+        }
+        return reversedOrderedText;
     }
 }

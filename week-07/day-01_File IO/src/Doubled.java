@@ -18,19 +18,19 @@ public class Doubled {
 
         try {
             originalLines = Files.readAllLines(filepath);
-            String decryptedLines = "";
 
-            for (String line : originalLines) {
-
-                for (int i = 0; i < line.length(); i += 2) {
-                    decryptedLines += line.charAt(i);
-                }
-                decryptedLines += "\n";
-            }
-            return decryptedLines;
         } catch (Exception e) {
             return "0";
         }
+        String decryptedLines = "";
 
+        for (String line : originalLines) {
+
+            for (int i = 0; i < line.length(); i += 2) {
+                decryptedLines += line.charAt(i);
+            }
+            decryptedLines += "\n";
+        }
+        return decryptedLines;
     }
 }
