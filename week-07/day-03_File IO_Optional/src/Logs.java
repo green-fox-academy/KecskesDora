@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,8 +27,8 @@ public class Logs {
         List<String> IPAddresses = new ArrayList<>();           // ArrayList for IP address list below
 
         for (int i = 0; i < eachLines.size(); i++) {
-            String[] splittedLines = eachLines.get(i).split(" ");   // split each line by spaces
-            IPAddresses.add(i, splittedLines[8]);                         // add the IP addresses into an ArrayList
+            String[] splitLines = eachLines.get(i).split(" ");   // split each line by spaces
+            IPAddresses.add(i, splitLines[8]);                         // add the IP addresses into an empty Array
             }                                                             // (IP address is the 8. element of the splitted line)
 
         HashSet<String> setOfUniqueIPAddresses = new HashSet<>(IPAddresses); // HashSet<> contains unique elements only
