@@ -23,8 +23,6 @@ public class CandyShop{
         list.add(list.indexOf(false), "Ice cream");
         list.remove(false);
 
-
-
         return list;
         }
 
