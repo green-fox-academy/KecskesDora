@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static java.util.Arrays.asList;
+
 public class Lottery {
 
     public static void main(String[] args) {
@@ -36,27 +38,40 @@ public class Lottery {
             a--;
         }
         System.out.println(lotteryNumbersList);
-        HashMap<String, Integer> lotteryNumbersCounter = new HashMap<>();
+        HashMap<String, Integer> lotteryNumberCountersMap = new HashMap<>();
 
         for (String number : lotteryNumbersList) {
-            if (!lotteryNumbersCounter.containsKey(number)) {
-                lotteryNumbersCounter.put(number, 1);
+            if (!lotteryNumberCountersMap.containsKey(number)) {
+                lotteryNumberCountersMap.put(number, 1);
             } else {
-                lotteryNumbersCounter.replace(number, lotteryNumbersCounter.get(number) + 1);
+                lotteryNumberCountersMap.replace(number, lotteryNumberCountersMap.get(number) + 1);
             }
         }
-        System.out.println(lotteryNumbersCounter);
+        System.out.println(lotteryNumberCountersMap);
+
+        //eddig jó
 
         HashMap<String, Integer> fiveMostCommon = new HashMap<>();
-        //eddig jó
-            for (Map.Entry<String, Integer> number : lotteryNumbersCounter.entrySet()) {
-                if (fiveMostCommon == null
-                        || number.getValue().compareTo(fiveMostCommon.getValue()) > 0) {
-                    for (int i = 0; i < 5; i++) {
-                        fiveMostCommon.put(number, i);
-                    }
 
-                }
+        int memoryValue = 0;
+        String memoryKey = "";
+
+        for (int i = 0; i < 7; i++) {
+
+        for (Map.Entry<String, Integer> lotteryNumberCounter : lotteryNumberCountersMap.entrySet()) {
+            if (lotteryNumberCounter.getValue() == Collections.max(lotteryNumberCountersMap.values())) {
+                memoryValue = lotteryNumberCounter.getValue();
+                memoryKey = lotteryNumberCounter.getKey();
+            break;
             }
         }
+        lotteryNumberCountersMap.remove(memoryKey, memoryValue);
+        fiveMostCommon.put(memoryKey, memoryValue);
+        
+       }
+        System.out.println(fiveMostCommon);
     }
+}
+
+
+
