@@ -1,7 +1,6 @@
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WriteMultipleLines {
@@ -11,7 +10,8 @@ public class WriteMultipleLines {
     }
     public static void writeMultipleLines(String path, String word, int number){
         Path filePath = Paths.get(path);
-        List<String> content = new ArrayList<>();
+        List<String> content;
+
         try {
             content = Files.readAllLines(filePath);
             for (int i = 1; i <= number; i++) {

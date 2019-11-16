@@ -5,13 +5,14 @@ import java.util.List;
 
 public class CopyFile {
     public static void main(String[] args) {
+
         System.out.println(copyContent("my-file.txt", "my-file2.txt"));
     }
 
     public static boolean copyContent(String fileName1, String fileName2) {
         Path filePath1 = Paths.get(fileName1);
         Path filePath2 = Paths.get(fileName2);
-        //Files.copy(fileName1(fileName2));
+
         List<String> content1;
         List<String> content2;
 
@@ -21,6 +22,8 @@ public class CopyFile {
 
             for (int i = 0; i < content2.size(); i++) {
               content1.add(content2.get(i));
+              //OR:
+              //Files.copy(Paths.get(fileName1), Paths.get(fileName2)));
             }
             Files.write(filePath1, content1);
             return true;

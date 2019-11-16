@@ -14,9 +14,8 @@ public class DivideByZero {
             } catch (ArithmeticException e) {
                 System.out.println("fail");
             }
-        }
     }
-
+}
 
 // Create a function that takes a number
 // divides ten with it,

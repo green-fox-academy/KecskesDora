@@ -22,7 +22,7 @@ public class PrintEachLine {
             }
                 for (String line : lines) {
                 System.out.println(line);
-            }
-        }
+                }
     }
+}
 
