@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Calculator {
@@ -11,15 +9,50 @@ public class Calculator {
 
         calculate(expressionInput);
     }
-    public static void calculate(String expression) {
-        String[] splittedExpression = expression.split(" ", 3);
-           String operation = splittedExpression[0];
-           int operand1 = Integer.valueOf(splittedExpression[1]);
-           int operand2 = Integer.valueOf(splittedExpression[2]);
 
-        System.out.println(operand1 + operation + operand2);
+    public static int calculate(String expression) {
+        String[] splittedExpression = expression.split(" ", 3);
+        String operation = splittedExpression[0];
+        int operand1 = Integer.valueOf(splittedExpression[1]);
+        int operand2 = Integer.valueOf(splittedExpression[2]);
+        int value = 0;
+
+        if (operation.equals("+")) {
+            value = operand1 + operand2;
+        } else if (operation.equals("-")) {
+            value = operand1 - operand2;
+        } else if (operation.equals("*")) {
+            value = operand1 * operand2;
+        } else if (operation.equals("%")) {
+            value = operand1 % operand2;
+        } else if (operation.equals("/")) {
+            value = operand1 / operand2;
+        }
+        return value;
     }
 }
+           /*switch (operation) {
+            case "+":
+                value = operand1 + operand2;
+                break;
+            case "-":
+                value = operand1 - operand2;
+                break;
+            case "*":
+                value = operand1 * operand2;
+                break;
+            case "%":
+                value = operand1 % operand2;
+                break;
+            case "/":
+                value = operand1 / operand2;
+                break;
+
+            default:
+                System.out.println("Please type again the expression.");
+        }
+        System.out.println(value);*/
+
 // Create a simple calculator application which reads the parameters from the prompt
 // and prints the result to the prompt.
 // It should support the following operations,
