@@ -10,16 +10,23 @@ public class Unique {
         //  should print: `[1, 11, 34, 52, 61]`
     }
 
-    private static List<Integer> unique(int[] list) {
+    private static ArrayList<Integer> unique(int[] list) {
         Arrays.sort(list);
-        List<Integer> uniqueList = new ArrayList<Integer>();
-        int i = 0;
-        while (i < list.length) {
-            if (list[i] != list [i+1]) {
-                uniqueList.add(i, list[i]);
 
+        ArrayList<Integer> uniqueList = new ArrayList<Integer>();
+        for (int i = 0; i < list.length; i++) {
+            uniqueList.add(i, list[i]);
+        }
+
+        int i = 0;
+       
+        while (i < uniqueList.size()) {
+            if (i + 1 < uniqueList.size()) {
+                if (uniqueList.get(i) == uniqueList.get(i + 1)) {
+                    uniqueList.remove(i);
+                }
             }
-            i += 2;
+            i += 1;
         }
         return uniqueList;
     }
