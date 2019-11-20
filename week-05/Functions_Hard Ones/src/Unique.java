@@ -19,14 +19,15 @@ public class Unique {
         }
 
         int i = 0;
-       
+
         while (i < uniqueList.size()) {
             if (i + 1 < uniqueList.size()) {
                 if (uniqueList.get(i) == uniqueList.get(i + 1)) {
                     uniqueList.remove(i);
+                    i--;
                 }
             }
-            i += 1;
+            i++;
         }
         return uniqueList;
     }
