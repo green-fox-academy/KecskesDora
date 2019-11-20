@@ -18,6 +18,7 @@ public class BlogMain {
         System.out.println(blog);
         blog.update2(1, blogPost5);
         System.out.println(blog);
+
     }
 }
 

@@ -17,6 +17,6 @@ public class Thing {
 
     @Override
     public String toString() {
-        return (completed ? "[x] " : "[ ] ") + name;
+        return (completed ? "[x] " : "[ ] ") + this.name;
     }
 }
