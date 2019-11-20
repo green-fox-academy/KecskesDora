@@ -7,22 +7,21 @@ import java.util.Map;
 
 public class Farm {
 
-    ArrayList<Animal> farm;
+    ArrayList<Animal> listOfAnimals;
     int slot;
 
     public Farm(){
-        farm = new ArrayList<>();
+        listOfAnimals = new ArrayList<>();
         slot = 5;
     }
-
     public void add(Animal animal){
-        farm.add(animal);
-        slot--;
+        listOfAnimals.add(animal);
     }
 
-    public void breed(Animal animal) {
+    public void breed(String type) {
+        Animal newAnimal = new Animal(type);
         if ( 0 < slot && slot < 11) {
-            farm.add(animal);
+            listOfAnimals.add(newAnimal);
             slot--;
         } else {
             System.out.println("There is no slot for new animals.");
@@ -32,8 +31,8 @@ public class Farm {
     public void slaughter(){
         HashMap<Integer, Integer> animalHungerMap = new HashMap<>();
 
-        for (int i = 0; i < farm.size(); i++) {
-            animalHungerMap.put(i, farm.get(i).hungerValue);
+        for (int i = 0; i < listOfAnimals.size(); i++) {
+            animalHungerMap.put(i, listOfAnimals.get(i).hungerValue);
         }
         int killIndex = 0;
         for(Map.Entry<Integer, Integer> animalHungerValue : animalHungerMap.entrySet()) {
@@ -42,7 +41,7 @@ public class Farm {
                 killIndex = animalHungerValue.getKey();
             }
         }
-        farm.remove(killIndex);
+        listOfAnimals.remove(killIndex);
 
         slot++;
         //System.out.println(animalHungerMap);
@@ -63,20 +62,20 @@ public class Farm {
 
     public void slaughter2() {
         int killIndex = 0;
-        for (int i = 1; i < farm.size(); i++) {
-            if (farm.get(killIndex).hungerValue > farm.get(i).hungerValue) {
+        for (int i = 1; i < listOfAnimals.size(); i++) {
+            if (listOfAnimals.get(killIndex).hungerValue > listOfAnimals.get(i).hungerValue) {
                 killIndex = i;
             }
         }
         slot++;
-        farm.remove(killIndex);
+        listOfAnimals.remove(killIndex);
     }
 
     @Override
     public String toString() {
         String result = "";
-        for(int i = 0; i < farm.size(); i++) {
-            result += farm.get(i) + " ";
+        for(int i = 0; i < listOfAnimals.size(); i++) {
+            result += listOfAnimals.get(i) + " ";
         }
         return result;
     }

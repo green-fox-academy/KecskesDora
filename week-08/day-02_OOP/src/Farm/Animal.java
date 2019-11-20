@@ -1,14 +1,14 @@
 package Farm;
 
 public class Animal {
-    String type;
-    int hungerValue;
-    int thirstValue;
+    public String type;
+    public int hungerValue;
+    public int thirstValue;
 
-    public Animal () {
+    /*public Animal () {
         this.hungerValue = 50;
         this.thirstValue = 50;
-    }
+    }*/
 
     public Animal (String type) {
         this.type = type;
