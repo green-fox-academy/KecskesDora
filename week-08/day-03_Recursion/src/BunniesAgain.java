@@ -5,7 +5,7 @@
 public class BunniesAgain {
     public static void main(String[] args) {
 
-        System.out.println(countEars(5));
+        System.out.println(countEars(6));
     }
 
     public static int countEars(int n) {
