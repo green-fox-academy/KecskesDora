@@ -26,7 +26,7 @@ public class GuessMyNumber {
         int lives = 5;
         System.out.println("I have a number between "  + min + " and " + max + ". You have " + lives + " lives. Guess my number!");
 
-        while (guess != number || lives == 1) {
+        while (guess != number || lives == 0) {
         guess = scanner.nextInt();
 
                 if (guess > number) {
@@ -35,6 +35,7 @@ public class GuessMyNumber {
                         System.out.println("Too high. Guess again. You have " + lives + " lives left.");
                     } else {
                         System.out.println("Sorry, you don't have any lives left. Game is over.");
+                        break;
                     }
                 } else if (guess < number) {
                     lives--;
@@ -42,9 +43,11 @@ public class GuessMyNumber {
                         System.out.println("Too low. Guess again. You have " + lives + " lives left.");
                     } else {
                     System.out.println("Sorry, you don't have more lives. Game is over.");
+                    break;
                     }
                 } else {
                 System.out.println("Congratulations. You won!");
+                break;
             }
         }
     }
