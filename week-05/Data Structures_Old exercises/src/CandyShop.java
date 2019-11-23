@@ -1,3 +1,10 @@
+// Accidentally we added "2" and "false" to the list.
+// Your task is to change from "2" to "Croissant" and change from "false" to "Ice cream"
+// No, don't just remove the lines
+// Create a method called sweets() which takes the list as a parameter.
+
+// Expected output: "Cupcake", "Croissant", "Brownie", "Ice cream"
+
 import java.util.*;
 
 public class CandyShop{
@@ -8,15 +15,11 @@ public class CandyShop{
         arrayList.add("Brownie");
         arrayList.add(false);
 
-        // Accidentally we added "2" and "false" to the list.
-        // Your task is to change from "2" to "Croissant" and change from "false" to "Ice cream"
-        // No, don't just remove the lines
-        // Create a method called sweets() which takes the list as a parameter.
-
         System.out.println(sweets(arrayList));
-        // Expected output: "Cupcake", "Croissant", "Brownie", "Ice cream"
     }
-    public static List<Object> sweets(ArrayList<Object> list){
+
+    public static List<Object> sweets(ArrayList<Object> list) {
+
         list.add(list.indexOf(2), "Croissant");
         list.remove(2);
 
@@ -24,8 +27,5 @@ public class CandyShop{
         list.remove(false);
 
         return list;
-        }
-
-
-
+    }
 }

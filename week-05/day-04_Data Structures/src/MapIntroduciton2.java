@@ -16,6 +16,7 @@ public class MapIntroduciton2 {
         //Lupus (ISBN: 978-1-60309-459-7)
         //Red Panda and Moon Bear (ISBN: 978-1-60309-444-3)
         //The Lab (ISBN: 978-1-60309-461-0)
+
         for (Map.Entry<String, String> pairs : table.entrySet()) {
             System.out.println(pairs.getValue() + " (ISBN: " + pairs.getKey() + ")");
             //OR
