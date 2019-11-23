@@ -3,17 +3,17 @@ import java.util.Scanner;
 public class GuessTheNumber {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println("Guess a number:");
         int n = 42;
         int guess = 0;
 
        while (guess != n) {
-           System.out.println("Guess a number:");
+
            guess = scanner.nextInt();
            if (guess > n) {
-               System.out.println("The stored number is lower");
+               System.out.println("The stored number is lower. Guess again.");
            } else if (guess < n) {
-               System.out.println("The stored number is higher");
+               System.out.println("The stored number is higher. Guess again.");
            } else {
                System.out.println("You found the number: " + n);
            }
