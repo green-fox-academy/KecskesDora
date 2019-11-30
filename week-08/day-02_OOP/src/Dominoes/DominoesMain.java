@@ -23,20 +23,14 @@ public class DominoesMain {
                 if (newDominoes.get(newDominoes.size() - 1).getRightSide() == dominoes.get(i).getLeftSide()) {
                     newDominoes.add(newDominoes.size(), dominoes.get(i));
                     dominoes.remove(i);
+                    // if you want to build snake in both directions:
+                } else if (newDominoes.get(0).getLeftSide() == dominoes.get(i).getRightSide()) {
+                    newDominoes.add(0, dominoes.get(i));
+                    dominoes.remove(i);
                 }
             }
         }
         System.out.println(newDominoes);
-
-        /*for (int i = 1; i < dominoes.size(); i++) {
-            if (newDominoes.get(firstIndex).getRightSide() == dominoes.get(i).getLeftSide()
-                    || newDominoes.get(firstIndex).getRightSide() == dominoes.get(i).getRightSide()) {
-                newDominoes.add(firstIndex + 1, dominoes.get(i));
-            } else if (newDominoes.get(firstIndex).getLeftSide() == dominoes.get(i).getLeftSide()
-                    || newDominoes.get(firstIndex).getLeftSide() == dominoes.get(i).getRightSide()) {
-                dominoes.add(firstIndex, dominoes.get(i));
-            }
-        }*/
     }
 
     static List<Domino> initializeDominoes() {

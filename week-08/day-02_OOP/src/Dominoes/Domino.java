@@ -1,7 +1,5 @@
 package Dominoes;
 
-import java.util.Arrays;
-
 public class Domino {
     private final int left;
     private final int right;
