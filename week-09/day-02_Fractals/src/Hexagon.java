@@ -5,7 +5,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class Hexagon {
     public static void mainDraw(Graphics graphics) {
-        
+
         drawHexagonFractal(0, 40, WIDTH / 2, 5, graphics);
     }
 
