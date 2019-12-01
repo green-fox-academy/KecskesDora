@@ -25,6 +25,9 @@ public class SquareGrid {
     }
 
     public static void drawSquare(int x, int y, int size, Graphics graphics) {
+
+        Color color = new Color((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
+        graphics.setColor(color);
         graphics.drawRect(x + size / 4, y + size / 4, size / 2, size / 2);
     }
 

@@ -45,6 +45,8 @@ public class SierpinskyCarpet {
 
     public static void drawSquarePattern(int x, int y, int size, Graphics graphics) {
 
+        Color color = new Color((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
+        graphics.setColor(color);
         graphics.fillRect(x + size / 3, y + size / 3, size / 3, size / 3);
 
     }

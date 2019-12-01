@@ -24,6 +24,9 @@ public class Hexagon {
 
     public static void drawHexagon(int x, int y, int size, Graphics graphics) {
 
+        Color color = new Color((int)(Math.random() * 255), (int)(Math.random() * 255), (int)(Math.random() * 255));
+        graphics.setColor(color);
+        
         int xPoints[] = {x + size / 2, x + size / 2 * 3, x + size * 2, x + size / 2 * 3, x + size / 2, x};
         int yPoints[] = {y, y, y + (int)(Math.sqrt(3) / 2 * size), y + (int)(Math.sqrt(3) / 2 * size) * 2,
                                 y + (int)(Math.sqrt(3) / 2 * size) * 2, y + (int)(Math.sqrt(3) / 2 * size)};
