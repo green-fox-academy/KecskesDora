@@ -1,11 +1,6 @@
 public class Plant {
     private String color;
     private double currentWaterAmount;
-    private boolean needWater;
-
-    public Plant() {
-
-    }
 
     public Plant(String color) {
         this.color = color;

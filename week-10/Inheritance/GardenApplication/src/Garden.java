@@ -1,3 +1,8 @@
+//The Garden
+//is able to hold unlimited amount of flowers or trees
+//when watering it should only water those what needs water with equally divided amount amongst them
+//eg. watering with 40 and 4 of them need water then each gets watered with 10
+
 import java.util.ArrayList;
 
 public class Garden {
@@ -13,19 +18,21 @@ public class Garden {
 
     public void water(int waterAmount){
         System.out.printf("\nWatering with %d", waterAmount);
-        int needWaterCounter = 0;
+        int necessaryWaterCounter = 0;
+
         for (Plant plant : listOfPlants) {
             if (plant instanceof Flower && plant.getCurrentWaterAmount() < 5) {
-                needWaterCounter++;
+                necessaryWaterCounter++;
             } else if (plant instanceof Tree && plant.getCurrentWaterAmount() < 10) {
-                needWaterCounter++;
+                necessaryWaterCounter++;
             }
         }
+
         for (Plant plant : listOfPlants) {
             if (plant instanceof Flower) {
-                ((Flower) plant).water(waterAmount / needWaterCounter);
+                ((Flower) plant).water(waterAmount / necessaryWaterCounter);
             } else if (plant instanceof Tree) {
-                ((Tree) plant).water(waterAmount / needWaterCounter);
+                ((Tree) plant).water(waterAmount / necessaryWaterCounter);
             }
         }
     }
