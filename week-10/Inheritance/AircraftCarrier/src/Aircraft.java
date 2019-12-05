@@ -15,6 +15,8 @@ public class Aircraft {
     public int maxAmmoLevel;
     public int baseDamage;
     public boolean isPriority;
+    public int neededAmmo;
+
 
     public Aircraft(){
         this.ammoLevel = 0;
@@ -32,7 +34,7 @@ public class Aircraft {
         return ammoLevel;
     }
 
-    public int fight(Aircraft otherAircraft){
+    public int fight(){
         //It should use all the ammo (set it to 0) and it should return the damage it deals
         //The damage dealt is calculated by multiplying the base damage by the ammunition
         int damageDealt = 0;
@@ -47,6 +49,7 @@ public class Aircraft {
         // (can't get more ammo than what's coming from the parameter or the max ammo of the aircraft)
         //It should return the remaining ammo
         //Eg. Filling an empty F35 with 300 would completely fill the storage of the aircraft and would return the remaining 288
+
         int remainingAmmo = 0;
         if (ammo > maxAmmoLevel - ammoLevel) {
             remainingAmmo = ammo - (maxAmmoLevel - ammoLevel);
@@ -58,15 +61,13 @@ public class Aircraft {
         return remainingAmmo;
     }
 
-
     public String getType() {
-        String typeName = this.getClass().getSimpleName();
-        return typeName;
+        return this.getClass().getSimpleName();
     }
 
     public String getStatus() {
         //It should return a string like: Type F35, Ammo: 10, Base Damage: 50, All Damage: 500
-        String status = "Type: " + this.getClass().getSimpleName() + ", Ammo: " + ammoLevel + ", Base Damage: " + baseDamage + ", All Damage: " + baseDamage * ammoLevel;
+        String status = "Type: " + this.getClass().getSimpleName() + ", Ammo: " + ammoLevel + ", Base Damage: " + baseDamage + ", All Damage: " + getAllDamage();
         return status;
     }
 
@@ -75,5 +76,13 @@ public class Aircraft {
         // It's true for F35 and false for F16
         this.isPriority = isPriority;
         return this.isPriority;
+    }
+
+    public int getNeededAmmo() {
+        return maxAmmoLevel - ammoLevel;
+    }
+
+    public int getAllDamage() {
+        return baseDamage * ammoLevel;
     }
 }

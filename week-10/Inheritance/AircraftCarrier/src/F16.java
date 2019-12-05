@@ -6,5 +6,4 @@ public class F16 extends Aircraft {
         super.setBaseDamage(30);
         super.setPriority(false);
     }
-
 }

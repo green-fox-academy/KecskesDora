@@ -6,8 +6,4 @@ public class F35 extends Aircraft {
         super.setBaseDamage(50);
         super.setPriority(true);
     }
-
-    public boolean isPriority() {
-        return true;
-    }
 }
