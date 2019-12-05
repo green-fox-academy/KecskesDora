@@ -17,6 +17,6 @@ public class Carrier {
 
     public void fill(int ammo){
 
-        if
+
     }
 }
