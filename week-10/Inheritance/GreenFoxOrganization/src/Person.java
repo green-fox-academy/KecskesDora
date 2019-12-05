@@ -12,7 +12,7 @@
 //Person(name, age, gender)
 //Person(): sets name to Jane Doe, age to 30, gender to female
 
-public class Person {
+public class Person implements Cloneable{
     private String name;
     private int age;
     private String gender;
@@ -35,5 +35,15 @@ public class Person {
 
     public void getGoal() {
         System.out.println("\nMy goal is: Live for the moment!");
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public String getName() {
+        String name = this.name;
+        return name;
     }
 }

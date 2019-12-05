@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Test {
@@ -44,5 +45,13 @@ public class Test {
         awesome.addMentor(gandhi);
         awesome.info();
 
+        Student johnTheClone = new Student();
+        try {
+            johnTheClone = (Student) john.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(johnTheClone.getName());
     }
 }

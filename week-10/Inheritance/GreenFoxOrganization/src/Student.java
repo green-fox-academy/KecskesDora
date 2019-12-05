@@ -43,4 +43,6 @@ public class Student extends Person{
     public void getGoal() {
         System.out.println("\nMy goal is: Be a junior software developer.");
     }
+
+
 }
