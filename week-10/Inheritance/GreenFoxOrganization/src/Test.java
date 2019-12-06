@@ -51,7 +51,6 @@ public class Test {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-
         System.out.println(johnTheClone.getName());
     }
 }
