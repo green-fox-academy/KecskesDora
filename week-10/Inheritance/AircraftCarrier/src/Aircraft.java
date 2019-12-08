@@ -11,15 +11,25 @@
 
 public class Aircraft {
 
-    public int ammoLevel;
-    public int maxAmmoLevel;
-    public int baseDamage;
-    public boolean isPriority;
-    public int neededAmmo;
-
+    private int ammoLevel;
+    private int maxAmmoLevel;
+    private int baseDamage;
+    private boolean isPriority;
 
     public Aircraft(){
         this.ammoLevel = 0;
+    }
+
+    public int getAmmoLevel() {
+        return this.ammoLevel;
+    }
+
+    public void setAmmoLevel(int newAmmoLevel) {
+        this.ammoLevel = newAmmoLevel;
+    }
+
+    public int getMaxAmmoLevel(){
+        return this.maxAmmoLevel;
     }
 
     public void setMaxAmmoLevel(int maxAmmoLevel) {
@@ -30,15 +40,11 @@ public class Aircraft {
         this.baseDamage = baseDamage;
     }
 
-    public int getAmmoLevel() {
-        return ammoLevel;
-    }
-
     public int fight(){
         //It should use all the ammo (set it to 0) and it should return the damage it deals
         //The damage dealt is calculated by multiplying the base damage by the ammunition
         int damageDealt = 0;
-        damageDealt = this.baseDamage * this.ammoLevel;
+        damageDealt = getDealtDamage();
         this.ammoLevel = 0;
         return damageDealt;
     }
@@ -50,39 +56,43 @@ public class Aircraft {
         //It should return the remaining ammo
         //Eg. Filling an empty F35 with 300 would completely fill the storage of the aircraft and would return the remaining 288
 
-        int remainingAmmo = 0;
-        if (ammo > maxAmmoLevel - ammoLevel) {
-            remainingAmmo = ammo - (maxAmmoLevel - ammoLevel);
-            ammoLevel = maxAmmoLevel;
-        } else if (ammo <= maxAmmoLevel - ammoLevel) {
-            ammoLevel += ammo;
+        int remainingAmmo = ammo;
+        if (ammo > this.getNeededAmmo()) {
+            remainingAmmo = ammo - this.getNeededAmmo();
+            this.ammoLevel = this.maxAmmoLevel;
+        } else {
+            this.ammoLevel += ammo;
             remainingAmmo = 0;
         }
         return remainingAmmo;
     }
 
-    public String getType() {
-        return this.getClass().getSimpleName();
-    }
-
     public String getStatus() {
         //It should return a string like: Type F35, Ammo: 10, Base Damage: 50, All Damage: 500
-        String status = "Type: " + this.getClass().getSimpleName() + ", Ammo: " + ammoLevel + ", Base Damage: " + baseDamage + ", All Damage: " + getAllDamage();
+        String status = "Type: " + getType() + ", Ammo: " + this.ammoLevel + ", Base Damage: " + this.baseDamage + ", All Damage: " + getDealtDamage();
         return status;
     }
 
-    public boolean setPriority(boolean isPriority) {
-        //It should return if the aircraft is priority in the ammo fill queue.
-        // It's true for F35 and false for F16
-        this.isPriority = isPriority;
+    public String getType(){
+        return this.getClass().getSimpleName();
+    }
+
+    public boolean getPriority(){
         return this.isPriority;
     }
 
-    public int getNeededAmmo() {
-        return maxAmmoLevel - ammoLevel;
+    public void setPriority(boolean isPriority) {
+        //It should return if the aircraft is priority in the ammo fill queue.
+        // It's true for F35 and false for F16
+        this.isPriority = isPriority;
     }
 
-    public int getAllDamage() {
-        return baseDamage * ammoLevel;
+    public int getNeededAmmo() {
+        return this.maxAmmoLevel - this.ammoLevel;
     }
+
+    public int getDealtDamage() {
+        return this.baseDamage * this.ammoLevel;
+    }
+
 }
