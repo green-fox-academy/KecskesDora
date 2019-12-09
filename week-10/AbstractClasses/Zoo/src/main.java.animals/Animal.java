@@ -1,4 +1,4 @@
-package animals;
+package main.java.animals;
 
 public abstract class Animal {
     private String name;

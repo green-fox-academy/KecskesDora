@@ -1,5 +1,4 @@
-
-import animals.*;
+import main.java.animals.*;
 
 public class ZooApp {
 
