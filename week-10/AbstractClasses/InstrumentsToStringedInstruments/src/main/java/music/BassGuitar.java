@@ -2,17 +2,20 @@ package main.java.music;
 
 public class BassGuitar extends StringedInstrument {
 
+    private static String name = "Bass Guitar";
+    private static int numberOfStrings = 4;
+
     public BassGuitar() {
-        super("Bass Guitar", 4);
+        super(name, numberOfStrings);
     }
 
     public BassGuitar(int numberOfStrings) {
-        super("Bass Guitar", numberOfStrings);
+        super(name, numberOfStrings);
     }
 
     @Override
-    public String sound() {
-        return "Duum-duum-duum";
+    public void sound() {
+        System.out.print("Duum-duum-duum\n");
     }
 }
 

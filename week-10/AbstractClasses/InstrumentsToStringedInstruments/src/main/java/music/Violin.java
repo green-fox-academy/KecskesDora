@@ -2,16 +2,19 @@ package main.java.music;
 
 public class Violin extends StringedInstrument {
 
+    private static String name = "Violin";
+    private static int numberOfStrings = 4;
+
     public Violin() {
-        super("Violin", 4);
+        super(name, numberOfStrings);
     }
 
     public Violin(int numberOfStrings) {
-        super("Violin", numberOfStrings);
+        super(name, numberOfStrings);
     }
 
     @Override
-    public String sound() {
-        return "Screech";
+    public void sound() {
+        System.out.print("Screech\n");
     }
 }
