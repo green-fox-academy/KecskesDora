@@ -3,10 +3,12 @@ import Reservations.Reservation;
 public class BookingApp {
     public static void main(String[] args) {
 
-        Reservation reservation = new Reservation();
+        Reservation Christmas = new Reservation();
+        Reservation NewYears = new Reservation();
+        Reservation Easter = new Reservation();
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(reservation.toString());
-        }
+        System.out.println(Christmas.toString());
+        System.out.println(NewYears.toString());
+        System.out.println(Easter.toString());
     }
 }

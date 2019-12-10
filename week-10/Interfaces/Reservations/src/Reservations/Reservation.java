@@ -7,8 +7,8 @@ import java.util.Random;
 
 public class Reservation implements Reservationy {
 
-    public static final String NAME = "Booking#";
-    public static final ArrayList<String> DOW = new ArrayList<>(Arrays.asList("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"));
+    private static final String NAME = "Booking#";
+    private static final ArrayList<String> DOW = new ArrayList<>(Arrays.asList("MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"));
 
     public void Reservation(){
 
