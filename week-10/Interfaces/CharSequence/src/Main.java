@@ -8,6 +8,6 @@ public class Main {
         Shifter s = new Shifter("example", 4);
         System.out.println(s.charAt(1));
         System.out.println(s.length());
-        System.out.println(s.subSequence(0,5));
+        System.out.println(s.subSequence(0,4));
     }
 }
