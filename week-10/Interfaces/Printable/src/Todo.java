@@ -8,24 +8,8 @@ public class Todo implements Printable{
         this.priority = priority;
     }
 
-    public String getTask() {
-        return task;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public void setDone(boolean done) {
-        isDone = done;
-    }
-
     @Override
     public void printAllFields() {
-        System.out.println(getTask() + " | " + getPriority() + " | " + isDone());
+        System.out.println(this.task + " | " + this.priority + " | " + this.isDone);
     }
 }

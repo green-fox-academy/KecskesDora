@@ -18,6 +18,7 @@ public class Gnirts implements CharSequence{
     @Override
     public CharSequence subSequence(int startChar, int endChar) {
         String reversedSequence = "";
+
         for (int i = endChar; i >= startChar; i--) {
             reversedSequence += this.text.charAt(i);
         }
