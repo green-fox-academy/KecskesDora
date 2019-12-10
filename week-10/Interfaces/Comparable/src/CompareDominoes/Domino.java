@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Collections;
+package CompareDominoes;
 
 public class Domino implements Comparable <Domino> {
     private final int left;
