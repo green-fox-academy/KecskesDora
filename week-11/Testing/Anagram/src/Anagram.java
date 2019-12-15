@@ -31,13 +31,13 @@ public class Anagram {
             text2WithoutSpaces += element;
         }
 
-        char[] charArrayFromWord = textWithoutSpaces.toCharArray();
-        char[] charArrayFromWord2 = text2WithoutSpaces.toCharArray();
+        char[] charArrayFromText = textWithoutSpaces.toCharArray();
+        char[] charArrayFromText2 = text2WithoutSpaces.toCharArray();
 
-        Arrays.sort(charArrayFromWord);
-        Arrays.sort(charArrayFromWord2);
+        Arrays.sort(charArrayFromText);
+        Arrays.sort(charArrayFromText2);
 
-        return Arrays.equals(charArrayFromWord, charArrayFromWord2);
+        return Arrays.equals(charArrayFromText, charArrayFromText2);
     }
 }
 
