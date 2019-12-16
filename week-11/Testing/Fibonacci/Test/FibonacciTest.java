@@ -6,8 +6,8 @@ public class FibonacciTest {
 
     @Test
     public void fibonacciCreator_ShouldWork_When_PositiveIntegerIsGiven() throws NotPositiveIntegerException{
-        int n = 5;
-        int expectedResult = 3;
+        int n = 6;
+        int expectedResult = 5;
 
         int result = Fibonacci.fibonacciCreator(n);
 
