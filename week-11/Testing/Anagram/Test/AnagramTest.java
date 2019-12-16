@@ -59,11 +59,18 @@ public class AnagramTest {
     }
 
     @Test(expected = OneOfTheStringsIsMissingException.class)
-    public void anagramTester_Should_throwOneOfTheStringsIsMissingException_When_OneOfTheStringsMissing() throws OneOfTheStringsIsMissingException{
+    public void anagramTester_When_OneOfTheStringsMissing() throws OneOfTheStringsIsMissingException{
         String text = "angel";
 
         boolean result = Anagram.anagramTester(text, null);
+    }
 
+    @Test(expected = OneOfTheStringsIsMissingException.class)
+    public void anagramTester_When_OneOfTheStringsisEmpty() throws OneOfTheStringsIsMissingException{
+        String text = "angel";
+        String text2 = "";
+
+        boolean result = Anagram.anagramTester(text, text2);
     }
 }
 

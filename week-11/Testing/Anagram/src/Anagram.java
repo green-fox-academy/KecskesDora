@@ -11,7 +11,7 @@ public class Anagram {
     }
 
     public static boolean anagramTester(String text, String text2) throws OneOfTheStringsIsMissingException {
-        if (text == null || text2 == null) {
+        if (text == null || text2 == null || text == "" || text2 == "") {
             throw new OneOfTheStringsIsMissingException();
         }
 
