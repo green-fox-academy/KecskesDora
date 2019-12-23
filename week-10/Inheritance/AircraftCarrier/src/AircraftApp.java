@@ -1,34 +1,36 @@
 public class AircraftApp {
     public static void main(String[] args) {
-        Carrier queenElizabethClass = new Carrier(200, 500);
-        Carrier nimitzClass = new Carrier(250, 600);
-        Carrier juanCarlos = new Carrier(300, 550);
+        Carrier queenElizabeth = new Carrier(200, 2000);
+        Carrier juanCarlos = new Carrier(300, 2500);
 
-        F16 eagle = new F16();
-        F16 sparrow = new F16();
-        F35 hawk = new F35();
-        F35 falcon = new F35();
-
-        queenElizabethClass.addAircraft(eagle);
-        queenElizabethClass.addAircraft(sparrow);
-        queenElizabethClass.addAircraft(hawk);
-        queenElizabethClass.addAircraft(falcon);
-
-        System.out.println(queenElizabethClass.getStatus());
-
+        queenElizabeth.add(new F16("eagle"));
+        queenElizabeth.add(new F16("sparrow"));
+        queenElizabeth.add(new F35("hawk"));
+        queenElizabeth.add(new F35("falcon"));
 
         try {
-            queenElizabethClass.fill();
+            queenElizabeth.fill();
         } catch (StoreOfAmmoIsEmptyException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println(queenElizabeth.getStatus());
 
-        System.out.println(queenElizabethClass.getStatus());
+        juanCarlos.add(new F16("tiger"));
+        juanCarlos.add(new F16("cougar"));
+        juanCarlos.add(new F35("lion"));
+        juanCarlos.add(new F35("bear"));
+        juanCarlos.add(new F35("leopard"));
 
-        System.out.println(falcon.getStatus());
-        falcon.refill(10);
-        System.out.println(falcon.getStatus());
-        falcon.fight();
-        System.out.println(falcon.getStatus());
+        try {
+            juanCarlos.fill();
+        } catch (StoreOfAmmoIsEmptyException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println(juanCarlos.getStatus());
+
+        queenElizabeth.fight(juanCarlos);
+        System.out.println("After fight");
+        System.out.println(queenElizabeth.getStatus());
+        System.out.println(juanCarlos.getStatus());
     }
 }
