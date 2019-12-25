@@ -29,7 +29,12 @@ public class AircraftApp {
         System.out.println(juanCarlos.getStatus());
 
         queenElizabeth.fight(juanCarlos);
-        System.out.println("After fight");
+        System.out.println("After fight1");
+        System.out.println(queenElizabeth.getStatus());
+        System.out.println(juanCarlos.getStatus());
+
+        juanCarlos.fight(queenElizabeth);
+        System.out.println("After fight2");
         System.out.println(queenElizabeth.getStatus());
         System.out.println(juanCarlos.getStatus());
     }

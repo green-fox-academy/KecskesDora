@@ -48,9 +48,9 @@ public class Carrier {
     public void fight(Carrier otherCarrier) {
         //It should take another carrier as a reference parameter and fire all the ammo from the aircrafts to it,
         // then subtract all the damage from its health points
+        otherCarrier.healthPoint -= getAllDamage();
         for (Aircraft aircraft : listOfAircraft) {
             aircraft.fight();
-            otherCarrier.healthPoint -= getAllDamage();
         }
     }
 

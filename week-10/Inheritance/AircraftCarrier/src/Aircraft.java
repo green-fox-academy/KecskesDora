@@ -9,7 +9,7 @@
 //Base damage: 50
 //All aircrafts should be created with an empty ammo storage
 
-public abstract class Aircraft {
+public class Aircraft {
 
     private String name;
     private int ammoLevel;
