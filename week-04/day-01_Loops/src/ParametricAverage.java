@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class ParametricAverage {
     public static void main(String[] args) {
 
-        int rep = 5;
-        int sum = sum(rep);
-        float average = (float) sum / rep;
+        int repeat = 5;
+        int sum = sum(repeat);
+        float average = (float) sum / repeat;
 
         System.out.printf("Sum: %d, Average: %.1f", sum, average);
     }
