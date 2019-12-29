@@ -8,7 +8,7 @@ import java.util.List;
 public class PalindromeSearcher {
     public static void main(String[] args) {
 
-        System.out.println(searchPalindrome("abcdedcba"));
+        System.out.println(searchPalindrome("aaabbbcccbbbaaa"));
     }
 
     public static List<String> searchPalindrome(String input) {
@@ -21,7 +21,7 @@ public class PalindromeSearcher {
 
             for (int indexOfSubstring = 0; indexOfSubstring <= input.length() - palLength; indexOfSubstring++) {
                 currentSubstring = input.substring(indexOfSubstring, (indexOfSubstring + palLength));
-                if (currentSubstring.equals(reverseMaker(currentSubstring)) == true) {
+                if (currentSubstring.equals(reverseMaker(currentSubstring))) {
                     palindromeList.add(palindromeCounter, currentSubstring);
                     palindromeCounter++;
                 }

@@ -9,11 +9,11 @@ public class Bubble {
         //  Example:
         System.out.println(bubble(new int[] {34, 12, 24, 9, 5}));
         //  should print [5, 9, 12, 24, 34]
-        advancedBubble(new int[] {34, 12, 24, 9, 5}, true);
+        System.out.println(advancedBubble(new int[] {34, 12, 24, 9, 5}, true));
         //  should print [34, 24, 12, 9, 5]
     }
     private static List<Integer> bubble(int[] list) {
-        int temp = 0;
+        int temp;
         List<Integer> ascendingList = new ArrayList<Integer>();
 
         for (int i = 0; i < list.length; i++) {
@@ -30,23 +30,13 @@ public class Bubble {
     }
 
     private static List<Integer> advancedBubble(int[] list, boolean descending) {
-        int temp;
-        List<Integer> ascendingList = new ArrayList<Integer>();
-        List<Integer> descendingList = new ArrayList<Integer>();
 
-        if (descending == false) {
-            for (int i = 0; i < list.length; i++) {
-                for (int j = i + 1; j < list.length; j++) {
-                    if (list[i] > list[j]) {
-                        temp = list[i];
-                        list[i] = list[j];
-                        list[j] = temp;
-                    }
-                }
-                ascendingList.add(i, list[i]);
-            }
-            temp = 0;
-        } else if (descending == true) {
+        if (!descending) {
+            return bubble(list);
+        } else {
+            List<Integer> descendingList = new ArrayList<>();
+            int temp;
+
             for (int i = 0; i < list.length; i++) {
                 for (int j = i + 1; j < list.length; j++) {
                     if (list[i] < list[j]) {
@@ -57,7 +47,7 @@ public class Bubble {
                 }
                 descendingList.add(i, list[i]);
             }
+            return descendingList;
         }
-       return descendingList;
     }
 }

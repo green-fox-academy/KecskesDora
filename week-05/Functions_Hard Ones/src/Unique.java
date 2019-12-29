@@ -13,13 +13,11 @@ public class Unique {
     private static ArrayList<Integer> unique(int[] list) {
         Arrays.sort(list);
 
-        ArrayList<Integer> uniqueList = new ArrayList<Integer>();
+        ArrayList<Integer> uniqueList = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
             uniqueList.add(i, list[i]);
         }
-
         int i = 0;
-
         while (i < uniqueList.size()) {
             if (i + 1 < uniqueList.size()) {
                 if (uniqueList.get(i) == uniqueList.get(i + 1)) {
@@ -32,47 +30,5 @@ public class Unique {
         return uniqueList;
     }
 }
-
-       /* for (int i = 0; i < list.length; i++) {
-            for (int j = i + 1; j < list.length; j++) {
-                if (list[i] == list[j]) {
-                    temp = list[i];
-                }
-            }
-            uniqueList.add(i, list[i]);
-        }
-        return uniqueList;*/
-
-    /*private static List<Integer> unique(int[] list) {
-        String[] stringList = new String[list.length];
-
-        for (int i = 0; i < list.length; i++) {
-            stringList[i] = String.valueOf(list[i]);
-            if Collections.
-        }
-
-    }*/
-    /*private static List<Integer> unique(int[] list) {
-        List<Integer> sortedList = new ArrayList<Integer>();
-        List<Integer> uniqueList = new ArrayList<Integer>();
-
-        for (int i = 0; i < list.length; i++) {
-            sortedList.add(i, list[i]);
-        }
-        Collections.sort(sortedList);
-
-        for (int i = 0; i < sortedList.size(); i++) {
-            for (int j = 0; j < i; j++) {
-                if (sortedList.get(i) == sortedList.get(j)) {
-                    break;
-                }
-                if (i == j){
-                    uniqueList.add(i, sortedList.get(i));
-                }
-            }
-        }
-        return uniqueList;
-    }*/
-
 
 
