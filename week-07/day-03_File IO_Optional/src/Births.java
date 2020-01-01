@@ -9,13 +9,13 @@ public class Births {
     public static void main(String[] args){
 
 
-        yearOfMostBirths("births.csv.txt");
+        yearOfMostBirths("C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-07\\day-03_File IO_Optional\\assets\\births.csv");
     }
 
     public static void yearOfMostBirths(String fileName) {
 
         Path filePath = Paths.get(fileName);
-        List<String> eachLines = new ArrayList<String>();
+        List<String> eachLines = new ArrayList<>();
 
         try {
             eachLines = Files.readAllLines(filePath);

@@ -1,3 +1,8 @@
+// Read all data from 'log.txt'.
+// Each line represents a log message from a web server
+// Write a function that returns an array with the unique IP adresses.
+// Write a function that returns the GET / POST request ratio.
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,8 +14,8 @@ import java.util.List;
 
 public class Logs {
     public static void main(String[] args) {
-        findUniqueIP("log.txt");
-        calculateRatio("log.txt");
+        findUniqueIP("C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-07\\day-03_File IO_Optional\\assets\\log.txt");
+        calculateRatio("C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-07\\day-03_File IO_Optional\\assets\\log.txt");
     }
 
     public static void findUniqueIP (String fileName) {
@@ -63,7 +68,3 @@ public class Logs {
         System.out.println(numberOfGET + " / " + numberOfPOST);
     }
 }
-// Read all data from 'log.txt'.
-// Each line represents a log message from a web server
-// Write a function that returns an array with the unique IP adresses.
-// Write a function that returns the GET / POST request ratio.

@@ -4,14 +4,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static java.util.Arrays.asList;
-
 public class Lottery {
 
     public static void main(String[] args) {
         // Create a method that find the 5 most common lottery numbers in lottery.csv
-        find5MostCommon("lottery.csv");
-
+        find5MostCommon("C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-07\\day-03_File IO_Optional\\assets\\lottery.csv");
     }
 
     public static void find5MostCommon(String fileName) {
@@ -61,7 +58,6 @@ public class Lottery {
         }
         lotteryNumberCountersMap.remove(memoryKey, memoryValue);
         fiveMostCommon.put(memoryKey, memoryValue);
-
        }
         System.out.println(fiveMostCommon);
     }
