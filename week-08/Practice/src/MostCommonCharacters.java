@@ -11,7 +11,7 @@ import java.util.*;
 public class MostCommonCharacters {
     public static void main(String[] args) {
 
-        findCharacters("countchar.txt");
+        findCharacters("C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-08\\Practice\\assets\\countchar.txt");
     }
 
     public static void findCharacters(String filename) {

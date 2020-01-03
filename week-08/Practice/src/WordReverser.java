@@ -7,7 +7,11 @@
 
 public class WordReverser {
 
-    public String reverseWords(String sentence) {
+    public String reverseWords(String sentence) throws SentenceIsMissingException{
+        if (sentence == "" || sentence == null) {
+            throw new SentenceIsMissingException();
+        }
+
         String[] words = sentence.split(" ");
         String word = "";
         String newSentence = "";

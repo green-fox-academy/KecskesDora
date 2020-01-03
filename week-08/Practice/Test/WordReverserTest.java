@@ -14,7 +14,7 @@ public class WordReverserTest {
     }
 
     @Test
-    public void reverseWords_Should_ReverseCharactersInWords_When_SentenceIsGiven() {
+    public void reverseWords_Should_ReverseCharactersInWords_When_SentenceIsGiven() throws SentenceIsMissingException{
         String sentence = "lleW ,enod taht saw ton taht drah";
 
         String expectedResult = "Well done, that was not that hard";
@@ -22,13 +22,16 @@ public class WordReverserTest {
         assertEquals(expectedResult, wordReverser.reverseWords(sentence));
     }
 
-    @Test
-    public void reverseWords_Should_ReturnEmptyString_When_EmptyStringIsGiven() {
-        String sentence = "";
+    @Test (expected = SentenceIsMissingException.class)
+    public void reverseWords_When_EmptyStringIsGiven() throws SentenceIsMissingException{
 
-        String expectedResult = "";
+        assertEquals("", wordReverser.reverseWords(""));
+    }
 
-        assertEquals(expectedResult, wordReverser.reverseWords(sentence));
+    @Test (expected = SentenceIsMissingException.class)
+    public void reverseWords_When_StringDoesNotExist() throws SentenceIsMissingException{
+
+        assertEquals(null, wordReverser.reverseWords(null));
     }
 
     @Test
