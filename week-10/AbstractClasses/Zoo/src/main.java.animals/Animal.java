@@ -14,9 +14,9 @@ public abstract class Animal {
         return this.name;
     }
 
-    public abstract String breed();
+    protected abstract String breed();
 
-    public abstract String sound();
+    protected abstract String sound();
 
-    public abstract String move();
+    protected abstract String move();
 }
