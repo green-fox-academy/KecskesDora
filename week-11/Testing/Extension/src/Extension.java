@@ -8,6 +8,7 @@
 //  -  Check again, if you can create failing tests
 //  -  Implement if needed
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -43,15 +44,12 @@ public class Extension {
         //Still not working
         int length = hungarian.length();
         String translated = "";
-        for (int i = 0; i < length; i++) {
-
-            char c = hungarian.charAt(i);
-            if (isVowel(c)) {
-                translated = String.join(c + "v" + c, hungarian.split("" + c, length));
-                i += 3;
-                length += 2;
+        List<String> vowels = new ArrayList<>(Arrays.asList("a", "A", "á", "Á", "u", "U", "ú", "Ú", "ü", "Ű", "ö", "Ö", "Ő", "o", "Ó", "e", "E", "é", "É", "i", "Í"));
+        for (int i = 0; i < vowels.size(); i++) {
+            String c = vowels.get(i);
+            if (hungarian.contains(c)) {
+                translated = String.join(c + "v" + c, hungarian.split(c));
             }
-
         }
         return translated;
     }
