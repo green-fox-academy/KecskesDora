@@ -1,11 +1,13 @@
 package AnimalProtection;
 
 public class Animal {
+    private String name;
     private String ownerName;
     private boolean isHealthy;
     private int healCost;
 
-    public Animal(){
+    public Animal(String name){
+        this.name = name;
     }
 
     public void heal() {
@@ -18,10 +20,10 @@ public class Animal {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(getClass().getSimpleName());
+        builder.append(name);
         builder.append(isHealthy? " is healthy " : " is not healthy ");
         builder.append("(healing would cost: " + healCost + " €) and");
-        builder.append(isAdoptable()? " adoptable" : " not adoptable");
+        builder.append(isAdoptable()? " adoptable\n" : " not adoptable\n");
         return builder.toString();
     }
 
@@ -37,11 +39,7 @@ public class Animal {
         this.healCost = healCost;
     }
 
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public String getName() {
+        return name;
     }
 }

@@ -6,12 +6,12 @@ import java.util.List;
 public class AnimalShelter {
     private int budget;
     private List<Animal> animals;
-    private List<String> adopters;
+    private List<String> adoptersName;
 
     public AnimalShelter(){
-        int budget = 50;
+        budget = 50;
         animals = new ArrayList<>();
-        adopters = new ArrayList<>();
+        adoptersName = new ArrayList<>();
     }
 
     public int rescue(Animal animal) {
@@ -31,26 +31,24 @@ public class AnimalShelter {
     }
 
     public void addAdopter(String name) {
-        adopters.add(name);
+        adoptersName.add(name);
     }
 
     public String findNewOwner() {
-        int randomAdoptersIndex = (int) (Math.random() * adopters.size());
+        int randomAdoptersIndex = (int) (Math.random() * adoptersName.size());
+        String newPair = adoptersName.get(randomAdoptersIndex) + " - ";
+        adoptersName.remove(randomAdoptersIndex);
 
-        List<Animal> healthyAnimals = new ArrayList<>();
-        for (Animal animal : animals) {
-            if (animal.isAdoptable()) {
-                healthyAnimals.add(animal);
+        Animal randomAnimal;
+        do {
+            randomAnimal = animals.get((int) (Math.random() * animals.size()));
+            if (randomAnimal.isAdoptable()) {
+            newPair += randomAnimal.getName();
+            animals.remove(randomAnimal);
             }
         }
-        int randomAnimalsIndex = (int) (Math.random() * healthyAnimals.size());
-        Animal randomAnimal = healthyAnimals.get(randomAnimalsIndex);
-        randomAnimal.setOwnerName(adopters.get(randomAdoptersIndex));
-
-        animals.remove(randomAnimal);
-        adopters.remove(randomAdoptersIndex);
-
-        return randomAnimal.getOwnerName() + " - " + randomAnimal.getClass().getSimpleName();
+        while (!randomAnimal.isAdoptable());
+        return newPair;
     }
 
     public int earnDonation(int amount) {
@@ -59,11 +57,11 @@ public class AnimalShelter {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("There are " + animals.size() + " animal(s) and " + adopters.size() + " potential adopters\n");
+
+        String result = String.format("Budget: %d €\nThere are %d animal(s) and %d potential adopters\n", budget, animals.size(), adoptersName.size());
         for (Animal animal : animals) {
-            builder.append(animal.toString());
+            result += animal.toString();
         }
-        return builder.toString();
+        return result;
     }
 }
