@@ -6,21 +6,22 @@
 //The carrier also has a health point given in its constructor as well
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class Carrier {
+public class Carrier{
 
-    private ArrayList<Aircraft> listOfAircraft;
+    private ArrayList<Aircraft> aircrafts;
     private int storeOfAmmo;
     private int healthPoint;
 
     public Carrier(int storeOfAmmo, int healthPoint) {
-        this.listOfAircraft = new ArrayList<>();
+        aircrafts = new ArrayList<>();
         this.storeOfAmmo = storeOfAmmo;
         this.healthPoint = healthPoint;
     }
 
     public void add(Aircraft aircraft) {
-        listOfAircraft.add(aircraft);
+        aircrafts.add(aircraft);
     }
 
     public void fill() throws StoreOfAmmoIsEmptyException {
@@ -28,35 +29,28 @@ public class Carrier {
         //If there is not enough ammo then it should start to fill the aircrafts with priority first
         //If there is no ammo when this method is called, it should throw an exception
 
-                for (Aircraft aircraft : listOfAircraft) {
-                    if (aircraft.getPriority()) {
-                        storeOfAmmo -= aircraft.getNeededAmmo();
-                        aircraft.refill(aircraft.getNeededAmmo());
-                    }
-                }
-                for (Aircraft aircraft : listOfAircraft) {
-                    if (!aircraft.getPriority()) {
-                        storeOfAmmo -= aircraft.getNeededAmmo();
-                        aircraft.refill(aircraft.getNeededAmmo());
-                    }
-                }
+        Collections.sort(aircrafts);
+
+        for (Aircraft aircraft : aircrafts) {
+            storeOfAmmo = aircraft.refill(storeOfAmmo);
+        }
             if (storeOfAmmo == 0) {
-            throw new StoreOfAmmoIsEmptyException();
-            }
+                throw new StoreOfAmmoIsEmptyException();
+        }
     }
 
     public void fight(Carrier otherCarrier) {
         //It should take another carrier as a reference parameter and fire all the ammo from the aircrafts to it,
         // then subtract all the damage from its health points
         otherCarrier.healthPoint -= getAllDamage();
-        for (Aircraft aircraft : listOfAircraft) {
+        for (Aircraft aircraft : aircrafts) {
             aircraft.fight();
         }
     }
 
     public int getAllDamage() {
         int allDamage = 0;
-        for (Aircraft aircraft : listOfAircraft) {
+        for (Aircraft aircraft : aircrafts) {
             allDamage += aircraft.getDealtDamage();
         }
         return allDamage;
@@ -66,12 +60,14 @@ public class Carrier {
         if (healthPoint <= 0) {
             return "It's dead Jim :(";
         } else {
-            String carrierStatus = "HP: " + healthPoint + ", Aircraft count: " + listOfAircraft.size() + ", Ammo Storage: " + storeOfAmmo + ", Total damage: " + getAllDamage();
+            String carrierStatus = "HP: " + healthPoint + ", Aircraft count: " + aircrafts.size() + ", Ammo Storage: " + storeOfAmmo + ", Total damage: " + getAllDamage();
             String aircraftStatus = "\nAircrafts:\n";
-            for (Aircraft aircraft : listOfAircraft) {
+            for (Aircraft aircraft : aircrafts) {
                 aircraftStatus += aircraft.getStatus() + "\n";
             }
             return carrierStatus + aircraftStatus;
         }
     }
+
+
 }

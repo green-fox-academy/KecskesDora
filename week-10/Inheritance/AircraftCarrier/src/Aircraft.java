@@ -9,16 +9,14 @@
 //Base damage: 50
 //All aircrafts should be created with an empty ammo storage
 
-public class Aircraft {
+public class Aircraft implements Comparable<Aircraft>{
 
-    private String name;
     private int ammoLevel;
     private int maxAmmoLevel;
     private int baseDamage;
     private boolean isPriority;
 
-    public Aircraft(String name){
-        this.name = name;
+    public Aircraft(){
         ammoLevel = 0;
     }
 
@@ -78,5 +76,10 @@ public class Aircraft {
 
     public int getDealtDamage() {
         return baseDamage * ammoLevel;
+    }
+
+    @Override
+    public int compareTo(Aircraft otherAircraft) {
+        return Boolean.compare(this.isPriority, otherAircraft.isPriority);
     }
 }
