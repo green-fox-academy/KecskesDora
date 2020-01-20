@@ -15,6 +15,7 @@ public class Exercise5 {
         int sumOfOddNumbers2 = numbers.stream()
                 .filter(n -> n % 2 == 1)
                 .reduce(0, (summa, n) -> summa + n);
+                //.reduce(0, Integer::sum);
         System.out.println(sumOfOddNumbers2);
     }
 }
