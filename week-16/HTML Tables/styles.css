@@ -1,0 +1,45 @@
+body {
+    background-color: dodgerblue;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    width: 100%;
+}
+
+table {
+    margin: 50px auto;
+    width: 500px;
+    border: 1px solid dodgerblue;
+    border-spacing: 0;
+    border-radius: 10px;
+    text-align: left;
+}
+
+td,
+th {
+    border: 1px solid;
+    height: 40px;
+    min-width: 350px;
+    max-width: 350px;
+    padding: 20px;
+}
+
+th {
+    background-color: black;
+    border: 2px solid lightslategray;
+    font-size: 30px;
+    color: lightgray;
+}
+
+td {
+    color:  lightslategray;
+    font-size: 25px;
+}
+
+tr:nth-child(even) {
+    background-color:  gainsboro;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
