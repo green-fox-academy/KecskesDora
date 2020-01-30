@@ -12,34 +12,44 @@
             <h2>Sign up</h2>
         
             <form action="https://newsletter-ws.herokuapp.com/register" method="POST" class="sign-up-form">
-                
-                <div class="column" id="left">
-                    <div class="input-field">  
-                        <input id="name" type="text" placeholder="Username">
+                <div class="grid">
+
+                <div class="col-left">
+                    <div>  
+                        <input class="field" id="name" type="text" placeholder="Username">
                     </div>
-                    <div class="input-field">
-                        <input id="email" type="email" placeholder="E-mail">
+                    <div>
+                        <input class="field" id="email" type="email" placeholder="E-mail">
                     </div>
-                    <div class="input-field">
-                        <input id="password" type="password" placeholder="Password">
+                    <div >
+                        <input class="field" id="password" type="password" placeholder="Password">
                     </div >
-                    <div class="input-field">
-                        <input id="passwordConfirmation" type="password" placeholder="Retype password">
+                    <div>
+                        <input class="field" id="passwordConfirmation" type="password" placeholder="Retype password">
                     </div>
                     <div>
                         <input id="sign-me-button" type="submit" value="sign me up">
                     </div>
                 </div>    
 
-                <div class="column" id="middle">
-                    OR
+                <div class="col-middle">
+                    <p class="or">OR</p>
                 </div>
 
-                <div class="column" id="right">
-                    <div class="login-button"></div>
-                    <input id="facebook-login" type="button" value="Login with facebook">
+                <div class="col-right">
+                    <div>
+                        <a class="log-in-link" id="facebook-link" href="https://www.facebook.com/">Log in with facebook</a>
+                    </div>
+                    <div>
+                        <a class="log-in-link" id="twitter-link" href="https://twitter.com/">Log in with Twitter</a>
+                    </div>
+                    <div>
+                        <a class="log-in-link" id="google-link" href="https://accounts.google.com/signin/v2/identifier?passive=1209600&continue=https%3A%2F%2Faboutme.google.com%2Fu%2F0%2F%3Freferer%3Dgplus&followup=https%3A%2F%2Faboutme.google.com%2Fu%2F0%2F%3Freferer%3Dgplus&flowName=GlifWebSignIn&flowEntry=ServiceLogin">Log in with Google+</a>
+                    </div>
                 </div>
                 
+                </div>
+                </form>
             </form>
         </section>
     </body>
