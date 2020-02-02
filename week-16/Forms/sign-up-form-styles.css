@@ -38,7 +38,7 @@ div.col-middle {
     width: 50px;
 }
 
-.field {
+.input-field input{
     width: 270px;
     height: 50px;
     border: none;
@@ -50,7 +50,7 @@ div.col-middle {
     margin-top: 10px;
 }
 
-.field:focus {
+.input-field input:focus {
     outline: none;
     border-bottom: 3px solid dodgerblue;
 }
@@ -95,7 +95,7 @@ div.col-right {
     margin-top: 70px; 
 }
 
-a.log-in-link {
+#log-in-link a{
     margin-top: 25px;
     margin-left: 20px;
     width: 270px;
