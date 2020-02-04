@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,16 +17,19 @@ public class SwearWords {
 
     public static int removeWords(List<String> lines, String[] words) {
         int removedWords = 0;
+        ArrayList<String> newLines = new ArrayList<>();
+        String newLine = "";
 
         for (int i = 0; i < lines.size(); i++) {
-            lines.get(i).toLowerCase().replace(".", "").replace(",", "");
-            String[] splitLines = lines.get(i).split(" ");
+            //lines.get(i).toLowerCase().replace(".", "").replace(",", "");
+            newLine = lines.get(i).toLowerCase().replace(".", "");
+            newLine = newLine.replace(",", "");
+            String[] splitLines = newLine.split(" ");
             for (String word : words) {
                 for (String splitLine : splitLines) {
                     if (splitLine.equals(word)) {
                         lines.remove(splitLine);
                         removedWords++;
-
                     }
                 }
             }
