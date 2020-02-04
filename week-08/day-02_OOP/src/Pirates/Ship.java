@@ -1,4 +1,3 @@
-
 package Pirates;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +7,10 @@ public class Ship {
     //The Ship stores Pirate-s instances in a list as the crew and has one captain who is also a Pirate.
     //When a ship is created it doesn't have a crew or a captain.
 
-    String name;
-    List<Pirate> crew;
-    Pirate captain;
-    boolean winBattle;
+    private String name;
+    private List<Pirate> pirates;
+    private Pirate captain;
+    private boolean winBattle;
 
     public Ship() {
 
@@ -19,19 +18,19 @@ public class Ship {
 
     public Ship(String name) {
         this.name = name;
-        this.winBattle = true;
+        winBattle = true;
     }
 
     public void fillShip() {
         //The ship can be filled with pirates and a captain via fillShip() method.
         //Filling the ship with a captain and random number of pirates.
 
-        this.captain = new Pirate();
-        this.crew = new ArrayList<Pirate>();
+        captain = new Pirate();
+        pirates = new ArrayList<>();
         int randomSizeOfCrew = (int) ((Math.random() * 30) + 5);
 
         for (int i = 1; i < randomSizeOfCrew; i++) {
-            this.crew.add(new Pirate());
+            pirates.add(new Pirate());
         }
     }
 
@@ -39,11 +38,11 @@ public class Ship {
         //Ships should be represented in a nice way on command line including information about
         //captains consumed rum, state (passed out / died)
 
-        System.out.println("State of " + this.name + ":");
-        System.out.println("Captain consumed " + captain.IntoxicationLevel + " pint rum.");
+        System.out.println("State of " + name + ":");
+        System.out.println("Captain consumed " + captain.getIntoxicationLevel() + " pint rum.");
 
-        if (this.captain.isAlive) {
-            if (this.captain.isPassedOut) {
+        if (captain.isAlive()) {
+            if (captain.isPassedOut()) {
                 System.out.println("Captain passed out.");
             } else {
                 System.out.println("Captain is alive and awake");
@@ -52,13 +51,13 @@ public class Ship {
             System.out.println("Captain is dead.");
         }
         //number of alive pirates in the crew
-        System.out.println(this.alivePiratesCounter() + " pirates is alive in the crew");
+        System.out.println(alivePiratesCounter() + " pirates is alive in the crew");
     }
 
     public int alivePiratesCounter() {
         int aliveCounter = 0;
-        for (int i = 1; i < this.crew.size(); i++) {
-            if (this.crew.get(i).isAlive) {
+        for (int i = 1; i < pirates.size(); i++) {
+            if (pirates.get(i).isAlive()) {
                 aliveCounter++;
             }
         }
@@ -68,7 +67,7 @@ public class Ship {
     public int calculateScore() {
         //calculate score: Number of Alive pirates in the crew - Number of consumed rum by the captain
         int calcScore = 0;
-        calcScore = alivePiratesCounter() - captain.IntoxicationLevel;
+        calcScore = alivePiratesCounter() - captain.getIntoxicationLevel();
         return calcScore;
     }
 
@@ -101,16 +100,16 @@ public class Ship {
 
     public void deaths() {
         //The loser crew has a random number of losses (deaths).
-        if (this.captain.isAlive) {
+        if (this.captain.isAlive()) {
             if ((int) (Math.random() * 2) == 1) {
                 this.captain.die();
             }
         }
 
-        for (int i = 0; i < this.crew.size(); i++) {
-            if (this.crew.get(i).isAlive) {
+        for (int i = 0; i < this.pirates.size(); i++) {
+            if (this.pirates.get(i).isAlive()) {
                 if (((int) (Math.random() * 2)) == 1) {
-                    this.crew.get(i).die();
+                    this.pirates.get(i).die();
                 }
             }
         }
@@ -121,19 +120,35 @@ public class Ship {
 
         int randomRumForCaptain = (int) (Math.random() * 5);
         for (int i = 0; i <= randomRumForCaptain; i++) {
-            if (captain.isAlive && !captain.isPassedOut) {
+            if (captain.isAlive() && !captain.isPassedOut()) {
                 this.captain.drinkSomeRum();
             }
         }
 
-        for (int i = 0; i < this.crew.size(); i++) {
-            if (this.crew.get(i).isAlive && !this.crew.get(i).isPassedOut) {
+        for (int i = 0; i < this.pirates.size(); i++) {
+            if (this.pirates.get(i).isAlive() && !this.pirates.get(i).isPassedOut()) {
                 int randomRumForCrew = (int) (Math.random() * 5);
                 for (int numberOfDrinks = 0; numberOfDrinks <= randomRumForCrew; numberOfDrinks++) {
-                    this.crew.get(i).drinkSomeRum();
+                    this.pirates.get(i).drinkSomeRum();
                 }
             }
         }
+    }
+
+    public boolean isWinner() {
+        return winBattle;
+    }
+
+    public void winBattle(Boolean win) {
+        winBattle = win;
+    }
+
+    public List<Pirate> pirates() {
+        return pirates;
+    }
+
+    public Pirate captain() {
+        return captain;
     }
 }
 

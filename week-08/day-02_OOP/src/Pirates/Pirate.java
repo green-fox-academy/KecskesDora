@@ -3,29 +3,42 @@ package Pirates;
 
 public class Pirate {
     //Create a Pirate class. While you can add other fields and methods, you must have these methods:-
-    public int IntoxicationLevel;
-    public boolean isAlive;
-    public boolean isPassedOut;
+    private int intoxicationLevel;
+    private boolean isAlive;
+    private boolean isPassedOut;
 
 
     public Pirate() {
-        this.IntoxicationLevel = 0;
+        this.intoxicationLevel = 0;
         this.isAlive = true;
         this.isPassedOut = false;
     }
 
     public Pirate(String captain) {
-        this.IntoxicationLevel = 0;
+        this.intoxicationLevel = 0;
         this.isAlive = true;
         this.isPassedOut = false;
     }
+
+    public int getIntoxicationLevel() {
+        return intoxicationLevel;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public boolean isPassedOut() {
+        return isPassedOut;
+    }
+
 
     public void drinkSomeRum() {
         //drinkSomeRum() - intoxicates the Pirate some
 
         if (this.isAlive) {
-            this.IntoxicationLevel++;
-            if (this.IntoxicationLevel >= 4) {
+            this.intoxicationLevel++;
+            if (this.intoxicationLevel >= 4) {
                 this.passOut();
             }
         } else {
@@ -39,7 +52,7 @@ public class Pirate {
         //else, "Arghh, I'ma Pirate. How d'ya d'ink its goin?", the pirate passes out and sleeps it off.
 
         if (this.isAlive) {
-            if (this.IntoxicationLevel <= 4) {
+            if (this.intoxicationLevel <= 4) {
                 System.out.println("Pour me anudder!");
             } else {
                 System.out.println("Arghh, I'ma Pirate. How d'ya d'ink its goin?");

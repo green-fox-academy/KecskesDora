@@ -9,16 +9,16 @@ public class BattleApp {
         ship1.fillShip();
         ship2.fillShip();
 
-        ship1.crew.get(5).howsItGoingMate();
-        ship1.crew.get(5).drinkSomeRum();
+        ship1.pirates().get(2).howsItGoingMate();
+        ship1.pirates().get(5).drinkSomeRum();
         for (int i = 0; i <= 5 ; i++) {
-            ship1.crew.get(3).drinkSomeRum();
-            System.out.println(ship1.crew.get(3).IntoxicationLevel);
+            ship1.pirates().get(3).drinkSomeRum();
+            System.out.println(ship1.pirates().get(3).getIntoxicationLevel());
         }
-        ship1.crew.get(3).howsItGoingMate();
-        ship1.captain.howsItGoingMate();
-        ship1.captain.drinkSomeRum();
-        ship2.captain.howsItGoingMate();
+        ship1.pirates().get(3).howsItGoingMate();
+        ship1.captain().howsItGoingMate();
+        ship1.captain().drinkSomeRum();
+        ship2.captain().howsItGoingMate();
         System.out.println();
 
         ship1.representShip();
@@ -33,15 +33,15 @@ public class BattleApp {
         ship2.representShip();
         System.out.println();
 
-        ship1.crew.get(5).howsItGoingMate();
-        ship1.captain.howsItGoingMate();
-        ship2.crew.get(3).howsItGoingMate();
-        ship2.captain.howsItGoingMate();
+        ship1.pirates().get(5).howsItGoingMate();
+        ship1.captain().howsItGoingMate();
+        ship2.pirates().get(3).howsItGoingMate();
+        ship2.captain().howsItGoingMate();
 
-        ship1.crew.get(2).brawl(ship2.crew.get(3));
-        System.out.println(ship1.crew.get(2).isAlive);
-        System.out.println(ship1.crew.get(2).isPassedOut);
-        System.out.println(ship2.crew.get(3).isAlive);
-        System.out.println(ship2.crew.get(3).isPassedOut);
+        ship1.pirates().get(2).brawl(ship2.pirates().get(3));
+        System.out.println(ship1.pirates().get(2).isAlive());
+        System.out.println(ship1.pirates().get(2).isPassedOut());
+        System.out.println(ship2.pirates().get(3).isAlive());
+        System.out.println(ship2.pirates().get(3).isPassedOut());
     }
 }

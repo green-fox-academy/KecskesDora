@@ -9,7 +9,7 @@ public class Armada {
     //Contains Ship-s as a list
 
     public String name;
-    public List<Ship> armada = new ArrayList<>();
+    public List<Ship> ships = new ArrayList<>();
 
     public Armada() {
 
@@ -21,56 +21,79 @@ public class Armada {
 
     public void fillArmada() {
         //fill armada with ships, fill ships
-        this.armada = new ArrayList<Ship>();
+        ships = new ArrayList<>();
         int randomSizeOfArmada = (int) ((Math.random() * 10) + 5);
 
         for (int i = 0; i < randomSizeOfArmada; i++) {
-            this.armada.add(i, new Ship());
-            this.armada.get(i).fillShip();
+            ships.add(i, new Ship());
+            ships.get(i).fillShip();
         }
-        System.out.println(this.armada.size());
+        System.out.println(ships.size());
     }
 
-    public void war(Armada otherArmada) {
-        //Have a armada.war(otherArmada) method where two armada can engage in war
+    public void war(Armada other) {
+        //Have a armada.war(other) method where two armada can engage in war
         //it should work like merge sort
         //first ship from the first armada battles the first of the other
         //the loser gets skipped so the next ship comes in play from that armada
         //whichever armada gets to the end of its ships loses the war
         //return true if this is the winner
 
-        int armadaIndex = 0;
-        int OtherarmadaIndex = 0;
-        Ship Ship1 = this.armada.get(armadaIndex);
-        Ship Ship2 = otherArmada.armada.get(OtherarmadaIndex);
+        int attackerIndex = 0;
+        int defenderIndex = 0;
+        Ship attacker = ships.get(attackerIndex);
+        Ship defender = other.ships.get(defenderIndex);
 
-        this.armada.get(armadaIndex).battle(otherArmada.armada.get(OtherarmadaIndex));
-
-        while (armadaIndex < this.armada.size() && OtherarmadaIndex < otherArmada.armada.size()) {
-
-            if (this.armada.get(armadaIndex).winBattle) {
-                OtherarmadaIndex++;
-                this.armada.get(armadaIndex).winBattle = false;
-                this.armada.get(armadaIndex).battle(otherArmada.armada.get(OtherarmadaIndex));
-            } else if (otherArmada.armada.get(OtherarmadaIndex).winBattle) {
-                armadaIndex++;
-                otherArmada.armada.get(OtherarmadaIndex).winBattle = false;
-                otherArmada.armada.get(OtherarmadaIndex).battle(this.armada.get(armadaIndex));
-            } else {
-                armadaIndex++;
-                OtherarmadaIndex++;
-                this.armada.get(armadaIndex).winBattle = false;
-                otherArmada.armada.get(OtherarmadaIndex).winBattle = false;
-                this.armada.get(armadaIndex).battle(otherArmada.armada.get(OtherarmadaIndex));
+        for (int i = 0; i < ships.size(); i++) {
+            if (i > 0 && attacker.isWinner()) {
+                i--;
+            }
+            for (int j = 0; j < other.ships.size(); j++) {
+                if (j > 0 && defender.isWinner()) {
+                    j--;
+                }
+                attacker.winBattle(false);
+                defender.winBattle(false);
+                attacker = ships.get(i);
+                defender = other.ships.get(j);
+                attacker.battle(defender);
+                if (attacker.isWinner()) {
+                    attacker.winBattle(true);
+                } else {
+                    defender.winBattle(false);
+                }
             }
         }
-            if (OtherarmadaIndex == otherArmada.armada.size()) {
-                System.out.println(this.name + " won");
-            }
-            if (armadaIndex == this.armada.size()) {
-                System.out.println(otherArmada.name + " won");
-            }
     }
+}
+/*
+        ships.get(attackerIndex).battle(other.ships.get(defenderIndex));
+
+        while (attackerIndex < this.ships.size() && defenderIndex < other.ships.size()) {
+
+            if (ships.get(attackerIndex).isWinner()) {
+                defenderIndex++;
+                ships.get(attackerIndex).winBattle(false);
+                ships.get(attackerIndex).battle(other.ships.get(defenderIndex));
+            } else if (other.ships.get(defenderIndex).isWinner()) {
+                attackerIndex++;
+                other.ships.get(defenderIndex).winBattle(false);
+                other.ships.get(defenderIndex).battle(ships.get(attackerIndex));
+            } else {
+                attackerIndex++;
+                defenderIndex++;
+                ships.get(attackerIndex).winBattle(false);
+                other.ships.get(defenderIndex).winBattle(false);
+                ships.get(attackerIndex).battle(other.ships.get(defenderIndex));
+            }
+        }
+            if (defenderIndex == other.ships.size()) {
+                System.out.println(name + " won");
+            }
+            if (attackerIndex == ships.size()) {
+                System.out.println(other.name + " won");
+            }
+    }*/
 
         //System.out.println(this.armada.get(0).winBattle);
         //System.out.println(otherArmada.armada.get(0).winBattle);
@@ -85,6 +108,6 @@ public class Armada {
                 }
             }
         }*/
-    }
+
 
 
