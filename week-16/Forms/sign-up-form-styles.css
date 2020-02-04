@@ -22,20 +22,25 @@ h2 {
     margin-bottom: 10px;
 }
 
-div.grid {
+.container {
     width: 650px;
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
 }
 
-div.grid div {
-    float:left;
-}
-
-div.col-left, div.col-right {
-    width: 300px;
+div.col-left {
+    grid-column: 1;
 }
 
 div.col-middle {
-    width: 50px;
+    grid-column: 2;
+    margin-top: 105px;
+    margin-left: 10px;
+}
+
+div.col-right {
+    grid-column: 3;
+    margin-top: 70px; 
 }
 
 .input-field input{
@@ -76,23 +81,19 @@ div.col-middle {
     cursor: pointer;
 }
 
-p.or {
+.or {
     width: 50px;
     height: 50px;
     background-color: #DDDDDD;
     color: #565656;
 
     border-radius: 50%;
-    box-shadow: 0px 3px 4px silver;
+    box-shadow: 0px 3px 4px darkgrey;
 
-    margin-top: 120px;
+    
     text-align: center;
     line-height: 2.6;
     font-size: 20px;
-}
-
-div.col-right {
-    margin-top: 70px; 
 }
 
 #log-in-link a{
@@ -130,4 +131,11 @@ div.col-right {
 #twitter-link:hover,
 #google-link:hover {
     background-color: darkorchid;
+}
+
+#sign-me-button:active,
+#facebook-link:active,
+#twitter-link:active,
+#google-link:active {
+    background-color: darkmagenta;
 }
