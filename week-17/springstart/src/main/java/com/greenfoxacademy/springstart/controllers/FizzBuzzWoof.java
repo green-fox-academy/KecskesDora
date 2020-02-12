@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class FizzBuzzWoof {
 
     private AtomicLong numberOfCalls = new AtomicLong();
-    int size = 24;
+    private int size;
 
     @RequestMapping("/fizz-buzz-woof")
     public String fizzBuzzWoof (Model model) {
@@ -47,7 +47,7 @@ public class FizzBuzzWoof {
             size = 24;
             return "Woof";
         } else {
-            size = 24;
+            size = 12;
             return numberOfCalls.toString();
         }
     }
