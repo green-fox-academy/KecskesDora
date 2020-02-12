@@ -13,13 +13,13 @@ public class HelloToAllTheWorld {
             "Salve", "Ciao", "Kon-nichiwa", "An-nyong Ha-se-yo", "Salvëte", "Ni hao", "Dzien' dobry", "Olá", "Bunã ziua", "Zdravstvuyte", "Hola", "Jambo", "Hujambo", "Hej",
             "Sa-wat-dee", "Merhaba", "Selam", "Vitayu", "Xin chào", "Hylo", "Sut Mae", "Sholem Aleychem", "Sawubona"};
 
-    @RequestMapping("/web/greetingTheWorld")
+    @RequestMapping("/web/greeting-the-world")
     public String greeting(Model model, @RequestParam String color, @RequestParam Integer size) {
 
         model.addAttribute("color", color);
         model.addAttribute("size", size);
         model.addAttribute("text", hellos[(int) (Math.random() * hellos.length)]);
 
-        return "greetingEveryone";
+        return "greeting-everyone";
     }
 }
