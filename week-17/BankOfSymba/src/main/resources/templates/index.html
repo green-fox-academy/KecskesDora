@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show Account</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div th:object="${account}">
+        <h1 th:text="'Name: ' + *{name}"
+        ></h1>
+        <h1 th:text="' Balance: ' + *{#numbers.formatDecimal(balance, 0, 2, 'POINT')} + ' Zebra'"
+        ></h1>
+        <h1 th:text="' Animal Type: ' + *{animalType}"
+        ></h1>
+    </div>
+</body>
+</html>

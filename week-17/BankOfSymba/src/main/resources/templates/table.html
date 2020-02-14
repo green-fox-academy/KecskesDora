@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bank Accounts</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<div>
+    <table>
+        <div class="header">
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Animal Type</th>
+                <th>Is King?</th>
+            </tr>
+        </div>
+        <div class="elements" th:each="account : ${accounts}" th:object="${account}">
+            <tr>
+                <td th:text="${accountStat.index}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')} + ' Zebra'"></td>
+                <td th:text="*{animalType}"></td>
+                <td th:text="*{isKing() ? 'King' : 'Not a King'}"></td>
+            </tr>
+        </div>
+    </table>
+</div>
+</body>
+</html>
