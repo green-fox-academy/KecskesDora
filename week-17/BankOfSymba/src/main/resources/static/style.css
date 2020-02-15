@@ -1,0 +1,71 @@
+
+body {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: darkslategray;
+    background-image: url("the-lion-king.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+h1 {
+    margin: 50px auto;
+    text-align: center;
+    background-color: seashell;
+    width: 400px;
+    border: 2px solid lightslategrey;
+    border-radius: 5px;
+}
+
+table {
+    margin: 50px auto;
+    width: 500px;
+
+    border-spacing: 0;
+    text-align: left;
+}
+
+td,
+th {
+    border: 1px solid lightslategrey;
+    padding: 0px 20px;
+    white-space: nowrap;
+}
+
+th {
+    height: 45px;
+    font-size: 23px;
+    background-color: silver;
+}
+
+td {
+    height: 35px;
+    font-size: 20px;
+    background-color: seashell;
+}
+
+th:first-child {
+    border-top-left-radius: 5px;
+}
+
+th:last-child {
+    border-top-right-radius: 5px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+#indexes {
+    text-align: center;
+}
+
+.king {
+    font-weight: bold;
+    font-style: italic;
+    background-color: slategrey;
+}

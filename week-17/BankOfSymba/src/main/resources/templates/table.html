@@ -3,9 +3,15 @@
 <head>
     <title>Bank Accounts</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
+
 <body>
-<div>
+    <div>
+    <h1>Bank of Symba</h1>
+    </div>
+
+    <div>
     <table>
         <div class="header">
             <tr>
@@ -14,18 +20,26 @@
                 <th>Balance</th>
                 <th>Animal Type</th>
                 <th>Is King?</th>
+                <th>Good/Bad</th>
+                <th>Good/Bad</th>
             </tr>
         </div>
-        <div class="elements" th:each="account : ${accounts}" th:object="${account}">
-            <tr>
-                <td th:text="${accountStat.index}"></td>
+
+        <div th:each="account : ${accounts}" th:object="${account}">
+            <tr th:attr="class=${account.isKing()} ? 'king' : 'notking'">
+                <td id="indexes" th:text="${accountStat.index}"></td>
                 <td th:text="*{name}"></td>
                 <td th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')} + ' Zebra'"></td>
                 <td th:text="*{animalType}"></td>
-                <td th:text="*{isKing() ? 'King' : 'Not a King'}"></td>
+                <td th:text="*{isKing() ? 'Yes' : 'No'}"></td>
+                <td th:switch="*{isGood()}">
+                    <span th:case="true">Good</span>
+                    <span th:case="false">Bad</span>
+                </td>
+                <td th:text="*{isGood() ? 'Good' : 'Bad'}"></td>
             </tr>
         </div>
     </table>
-</div>
+    </div>
 </body>
 </html>

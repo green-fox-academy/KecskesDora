@@ -18,12 +18,12 @@ public class BankController {
     private List<BankAccount> bankAccounts = new ArrayList<>();
 
     public BankController() {
-        bankAccounts.add(new BankAccount("Simba", 2000, "lion"));
-        bankAccounts.add(new BankAccount("Timon", 1000, "suricata"));
-        bankAccounts.add(new BankAccount("Pumbaa", 1100, "warthog"));
-        bankAccounts.add(new BankAccount("Zordon", 1500, "lion"));
-        bankAccounts.add(new BankAccount("Ed", 800, "hyena"));
-        bankAccounts.add(new BankAccount("Banzai", 900, "hyena"));
+        bankAccounts.add(new BankAccount("Simba", 2000, "lion", true, true));
+        bankAccounts.add(new BankAccount("Timon", 1000, "meerkat",false, true));
+        bankAccounts.add(new BankAccount("Pumbaa", 1100, "warthog", false, true));
+        bankAccounts.add(new BankAccount("Zordon", 1500, "lion", false, false));
+        bankAccounts.add(new BankAccount("Ed", 800, "hyena", false, false));
+        bankAccounts.add(new BankAccount("Banzai", 900, "hyena", false, false));
     }
 
     //@RequestMapping(path = "/show", method = RequestMethod.GET)
@@ -51,7 +51,5 @@ public class BankController {
         model.addAttribute("accounts", bankAccounts);
         return "table";
     }
-
-
 }
 
