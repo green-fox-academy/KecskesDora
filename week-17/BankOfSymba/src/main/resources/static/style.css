@@ -1,7 +1,7 @@
-
 body {
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: darkslategray;
+
     background-image: url("the-lion-king.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -11,8 +11,11 @@ body {
 h1 {
     margin: 50px auto;
     text-align: center;
+    width: 350px;
+
     background-color: seashell;
-    width: 400px;
+    opacity: 0.9;
+
     border: 2px solid lightslategrey;
     border-radius: 5px;
 }
@@ -30,6 +33,7 @@ th {
     border: 1px solid lightslategrey;
     padding: 0px 20px;
     white-space: nowrap;
+    opacity: 0.9;
 }
 
 th {
@@ -60,12 +64,16 @@ tr:last-child td:last-child {
     border-bottom-right-radius: 5px;
 }
 
-#indexes {
+.indexes {
     text-align: center;
+}
+
+.balance:after {
+    content: ' Zebra';
 }
 
 .king {
     font-weight: bold;
     font-style: italic;
-    background-color: slategrey;
+    color: goldenrod;
 }

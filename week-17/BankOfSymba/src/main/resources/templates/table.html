@@ -21,21 +21,23 @@
                 <th>Animal Type</th>
                 <th>Is King?</th>
                 <th>Good/Bad</th>
-                <th>Good/Bad</th>
             </tr>
         </div>
 
         <div th:each="account : ${accounts}" th:object="${account}">
             <tr th:attr="class=${account.isKing()} ? 'king' : 'notking'">
-                <td id="indexes" th:text="${accountStat.index}"></td>
+
+                <td class="indexes" th:text="${accountStat.index}"></td>
                 <td th:text="*{name}"></td>
-                <td th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')} + ' Zebra'"></td>
+                <td class="balance" th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')}"></td>
                 <td th:text="*{animalType}"></td>
                 <td th:text="*{isKing() ? 'Yes' : 'No'}"></td>
+                <!--
                 <td th:switch="*{isGood()}">
                     <span th:case="true">Good</span>
                     <span th:case="false">Bad</span>
                 </td>
+                OR:-->
                 <td th:text="*{isGood() ? 'Good' : 'Bad'}"></td>
             </tr>
         </div>
