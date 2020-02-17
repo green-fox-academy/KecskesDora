@@ -11,7 +11,7 @@
     <h1>Bank of Symba</h1>
     </div>
 
-    <div>
+    <section>
     <table>
         <div class="header">
             <tr>
@@ -24,10 +24,11 @@
             </tr>
         </div>
 
-        <div th:each="account : ${accounts}" th:object="${account}">
-            <tr th:attr="class=${account.isKing()} ? 'king' : 'notking'">
+        <div>
+            <tr th:each="account : ${accounts}" th:object="${account}"
+                th:attr="class=${account.isKing()} ? 'king' : 'notking'">
 
-                <td class="indexes" th:text="${accountStat.index}"></td>
+                <td class="indexes" th:text="${accountStat.count}"></td>
                 <td th:text="*{name}"></td>
                 <td class="balance" th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')}"></td>
                 <td th:text="*{animalType}"></td>
@@ -42,6 +43,25 @@
             </tr>
         </div>
     </table>
+    </section>
+
+    <section>
+    <div>
+        <form th:action="@{/accounts}" method="POST">
+            <div>
+                <label for="select-name">Raise the Balance!</label>
+                <select id="select-name" name="select-name">
+                    <option th:each="account : ${accounts}" th:value="${account.name}" th:text="${account.name}"></option>
+                </select>
+
+                <input type="submit" value="Raise">
+            </div>
+        </form>
     </div>
+
+    <div>
+        <a href="/add">Add new bank account</a>
+    </div>
+    </section>
 </body>
 </html>

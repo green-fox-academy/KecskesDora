@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add New Bank Account</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/add-style.css}" />
+</head>
+
+<body>
+<div>
+    <h1>Add New Bank Account!</h1>
+</div>
+
+<section>
+   <form th:action="@{/add}" method="POST">
+       <div>
+       <label for="name">Name:</label>
+       <input type="text" id="name" name="name" required>
+       </div>
+
+       <div>
+       <label for="balance">Balance:</label>
+       <input type="number" id="balance" name="balance" required>
+       </div>
+
+       <div>
+       <label for="animal-type">Animal type:</label>
+       <select id="animal-type" name="animalType" required>
+           <option>lion</option>
+           <option>warthog</option>
+           <option>meerkat</option>
+           <option>hyena</option>
+           <option>mandrill</option>
+           <option>african buffalo</option>
+           <option>cheetah</option>
+           <option>elephant</option>
+           <option>rhinoceros</option>
+           <option>jackal</option>
+           <option>hippopotamus</option>
+           <option>mongoose</option>
+           <option>baboon</option>
+           <option>other</option>
+       </select>
+       </div>
+
+       <div>
+           <span class="title">Is King?</span>
+               <input type="radio" id="Yes" value="true" name="isKing">
+               <label for="Yes">Yes</label>
+               <input type="radio" id="No" value="false" name="isKing">
+               <label for="Yes">No</label>
+       </div>
+
+       <div>
+           <span class="title">Good/Bad</span>
+               <input type="radio" id="Good" value="true" name="isGood">
+               <label for="Good">Good</label>
+               <input type="radio" id="Bad" value="false" name="isGood">
+               <label for="Bad">Bad</label>
+       </div>
+
+       <div>
+           <button type="submit">Add account</button>
+       </div>
+   </form>
+</section>
+
+</body>
+</html>

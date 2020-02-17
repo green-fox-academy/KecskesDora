@@ -2,7 +2,7 @@ body {
     font-family: Comic Sans MS, Comic Sans, cursive;
     color: darkslategray;
 
-    background-image: url("the-lion-king.jpg");
+    background-image: url("the-lion-king.jpg") ;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -75,5 +75,6 @@ tr:last-child td:last-child {
 .king {
     font-weight: bold;
     font-style: italic;
+    background-color: goldenrod;
     color: goldenrod;
 }
