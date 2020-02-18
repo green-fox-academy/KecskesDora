@@ -1,0 +1,10 @@
+body {
+    font-family: Comic Sans MS, Comic Sans, cursive;
+    color: darkslategray;
+
+    background-image: url("the-lion-king.jpg") ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+

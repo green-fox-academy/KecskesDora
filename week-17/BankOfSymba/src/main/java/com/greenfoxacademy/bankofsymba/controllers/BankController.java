@@ -49,19 +49,6 @@ public class BankController {
         return "index";
     }
 
-    //@RequestMapping(path = "/enjoy", method = RequestMethod.GET)
-    @GetMapping(value = "/enjoy")
-    public String enjoyYourself(Model model) {
-        model.addAttribute("text", "This is an <em>HTML</em> text. <b>Enjoy yourself!</b>");
-        return "ception";
-    }
-
-    @GetMapping(value = "/enjoy2")
-    @ResponseBody
-    public String enjoyYourself() {
-        return "This is an <em>HTML</em> text. <b>Enjoy yourself!</b>";
-    }
-
     @GetMapping("/accounts")
     public String listAccounts(Model model) {
         model.addAttribute("accounts", bankAccounts);
@@ -69,7 +56,8 @@ public class BankController {
     }
 
     @PostMapping("/accounts")
-    public String raiseBalance(@ModelAttribute(value = "select-name") String selected) {
+    //public String raiseBalance(@RequestParam("select-name") String selected) {
+    public String raiseBalance(@ModelAttribute("select-name") String selected) {
         for (BankAccount bankAccount : bankAccounts) {
             if (bankAccount.getName().equals(selected)) {
                 if (bankAccount.isKing()) {
@@ -87,20 +75,15 @@ public class BankController {
         return "add";
     }
 
-    @PostMapping("/add")
-    public String addAccount(BankAccount account) {
-        bankAccounts.add(account);
-        return "redirect:/accounts";
+    @GetMapping("/add2")
+    public String addNewAccount(Model model, @ModelAttribute("account") BankAccount account) {
+        model.addAttribute("account", account);
+        return "add2";
     }
 
-    @PostMapping("/add2")
-    public String addAccount2(@ModelAttribute (value = "name") String name,
-                              @ModelAttribute (value = "balance") int balance,
-                              @ModelAttribute (value = "animalType") String animalType,
-                              @ModelAttribute (value = "isKing") boolean isKing,
-                              @ModelAttribute (value = "isGood") boolean isGood) {
-
-        bankAccounts.add(new BankAccount(name, balance, animalType, isKing, isGood));
+    @PostMapping("/add")
+    public String addAccount(@ModelAttribute(name = "account") BankAccount account) {
+        bankAccounts.add(account);
         return "redirect:/accounts";
     }
 }
