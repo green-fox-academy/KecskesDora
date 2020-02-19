@@ -21,25 +21,33 @@
                 <th>Animal Type</th>
                 <th>Is King?</th>
                 <th>Good/Bad</th>
+                <th>Raise Balance</th>
             </tr>
         </div>
 
         <div>
             <tr th:each="account : ${accounts}" th:object="${account}"
-                th:attr="class=${account.isKing()} ? 'king' : 'notking'">
+                th:attr="class=${account.getIsKing()} ? 'king' : 'notking'">
 
                 <td class="indexes" th:text="${accountStat.count}"></td>
                 <td th:text="*{name}"></td>
                 <td class="balance" th:text="*{#numbers.formatDecimal(balance, 0, 2, 'POINT')}"></td>
                 <td th:text="*{animalType}"></td>
-                <td th:text="*{isKing() ? 'Yes' : 'No'}"></td>
+                <td th:text="*{getIsKing() ? 'Yes' : 'No'}"></td>
                 <!--
                 <td th:switch="*{isGood()}">
                     <span th:case="true">Good</span>
                     <span th:case="false">Bad</span>
                 </td>
                 OR:-->
-                <td th:text="*{isGood() ? 'Good' : 'Bad'}"></td>
+                <td th:text="*{getIsGood() ? 'Good' : 'Bad'}"></td>
+
+                <td class="button">
+                    <form th:action="@{/raise-balance}" method="POST">
+                        <button type="submit" th:name="raise-balance" th:value="*{name}">+</button>
+                    </form>
+                </td>
+
             </tr>
         </div>
     </table>
@@ -53,14 +61,13 @@
                 <select id="select-name" name="select-name">
                     <option th:each="account : ${accounts}" th:value="${account.name}" th:text="${account.name}"></option>
                 </select>
-
                 <input type="submit" value="Raise">
             </div>
         </form>
     </div>
 
     <div>
-        <a th:href="@{/add}">Add new bank account</a>
+        <a th:href="@{/add2}">Add new bank account</a>
     </div>
     </section>
 </body>

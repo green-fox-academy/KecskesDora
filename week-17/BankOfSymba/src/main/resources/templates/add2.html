@@ -15,47 +15,48 @@
     <form th:action="@{/add2}" th:object="${account}" method="POST">
         <div>
             <label for="name">Name:</label>
-            <input type="text" id="name" th:name="name" required>
+            <input type="text" id="name" th:name="name" th:field="*{name}" required>
         </div>
 
         <div>
             <label for="balance">Balance:</label>
-            <input type="number" id="balance" th:name="balance" required>
+            <input type="number" id="balance" th:name="balance" th:field="*{balance}" required>
         </div>
 
         <div>
             <label for="animal-type">Animal type:</label>
-            <select id="animal-type" th:field="animalType" required>
-                <option>lion</option>
-                <option>warthog</option>
-                <option>meerkat</option>
-                <option>hyena</option>
-                <option>mandrill</option>
-                <option>african buffalo</option>
-                <option>cheetah</option>
-                <option>elephant</option>
-                <option>rhinoceros</option>
-                <option>jackal</option>
-                <option>hippopotamus</option>
-                <option>mongoose</option>
-                <option>baboon</option>
-                <option>other</option>
+            <select id="animal-type" th:name="animalType" th:field="*{animalType}">
+                <option th:value="choose">choose</option>
+                <option th:value="lion">lion</option>
+                <option th:value="warthog">warthog</option>
+                <option th:value="meerkat">meerkat</option>
+                <option th:value="hyena">hyena</option>
+                <option th:value="mandrill">mandrill</option>
+                <option th:value="africanBuffalo">african buffalo</option>
+                <option th:value="cheetah">cheetah</option>
+                <option th:value="elephant">elephant</option>
+                <option th:value="rhinoceros">rhinoceros</option>
+                <option th:value="jackal">jackal</option>
+                <option th:value="hippopotamus">hippopotamus</option>
+                <option th:value="mongoose">mongoose</option>
+                <option th:value="baboon">baboon</option>
+                <option th:value="other">other</option>
             </select>
         </div>
 
         <div>
-            <span class="title">Is King?</span>
-            <input type="radio" id="Yes" th:value="true" th:name="isKing">
+            <span>Is King?</span>
+            <input type="radio" id="Yes" name="isKing" th:value="true">
             <label for="Yes">Yes</label>
-            <input type="radio" id="No" th:value="false" th:name="isKing">
+            <input type="radio" id="No" name="isKing" th:value="false">
             <label for="Yes">No</label>
         </div>
 
         <div>
-            <span class="title">Good/Bad</span>
-            <input type="radio" id="Good" th:value="true" th:name="isGood">
+            <span>Good/Bad</span>
+            <input type="radio" id="Good" name="isGood" th:value="true">
             <label for="Good">Good</label>
-            <input type="radio" id="Bad" th:value="false" th:name="isGood">
+            <input type="radio" id="Bad" name="isGood" th:value="false">
             <label for="Bad">Bad</label>
         </div>
 

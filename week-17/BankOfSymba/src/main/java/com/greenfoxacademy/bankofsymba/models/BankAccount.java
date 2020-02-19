@@ -2,15 +2,21 @@ package com.greenfoxacademy.bankofsymba.models;
 
 public class BankAccount {
     private String name;
-    private int balance;
+    private Integer balance;
     private String animalType;
-    private boolean isKing;
-    private boolean isGood;
+    private Boolean isKing;
+    private Boolean isGood;
 
-    public BankAccount(String name, int balance, String animalType, boolean isKing, boolean isGood) {
+
+    public BankAccount() {
+    }
+
+    public BankAccount(String name, Integer balance, String animalType, Boolean isKing, Boolean isGood) {
         this.name = name;
         this.balance = balance;
         this.animalType = animalType;
+        //this.isKing = isKing == null ? false: true;
+        //this.isGood = isGood == null ? false: true;
         this.isKing = isKing;
         this.isGood = isGood;
     }
@@ -23,11 +29,11 @@ public class BankAccount {
         this.name = name;
     }
 
-    public int getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
@@ -39,19 +45,19 @@ public class BankAccount {
         this.animalType = animalType;
     }
 
-    public boolean isKing() {
+    public boolean getIsKing() {
         return isKing;
     }
 
-    public void setKing(boolean king) {
+    public void setIsKing(boolean king) {
         isKing = king;
     }
 
-    public boolean isGood() {
+    public boolean getIsGood() {
         return isGood;
     }
 
-    public void setGood(boolean good) {
+    public void setIsGood(boolean good) {
         isGood = good;
     }
 }

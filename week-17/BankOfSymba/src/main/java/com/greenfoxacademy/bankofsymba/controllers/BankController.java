@@ -57,16 +57,14 @@ public class BankController {
 
     @PostMapping("/accounts")
     //public String raiseBalance(@RequestParam("select-name") String selected) {
-    public String raiseBalance(@ModelAttribute("select-name") String selected) {
-        for (BankAccount bankAccount : bankAccounts) {
-            if (bankAccount.getName().equals(selected)) {
-                if (bankAccount.isKing()) {
-                    bankAccount.setBalance(bankAccount.getBalance() + 100);
-                } else {
-                    bankAccount.setBalance(bankAccount.getBalance() + 10);
-                }
-            }
-        }
+    public String raiseBalance(@ModelAttribute("select-name") String selectedName) {
+        raise(selectedName);
+        return "redirect:/accounts";
+    }
+
+    @PostMapping("/raise-balance")
+    public String raiseBalanceByButton(@ModelAttribute("raise-balance") String selectedName) {
+        raise(selectedName);
         return "redirect:/accounts";
     }
 
@@ -75,16 +73,34 @@ public class BankController {
         return "add";
     }
 
-    @GetMapping("/add2")
-    public String addNewAccount(Model model, @ModelAttribute("account") BankAccount account) {
-        model.addAttribute("account", account);
-        return "add2";
-    }
-
     @PostMapping("/add")
     public String addAccount(@ModelAttribute(name = "account") BankAccount account) {
         bankAccounts.add(account);
         return "redirect:/accounts";
+    }
+
+    @GetMapping("/add2")
+    public String addNewAccountForm2(Model model, @ModelAttribute("account") BankAccount account) {
+        model.addAttribute("account", account);
+        return "add2";
+    }
+
+    @PostMapping("/add2")
+    public String addAccount2(Model model, @ModelAttribute("account") BankAccount account) {
+        bankAccounts.add(account);
+        return "redirect:/accounts";
+    }
+
+    public void raise(String name) {
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount.getName().equals(name)) {
+                if (bankAccount.getIsKing()) {
+                    bankAccount.setBalance(bankAccount.getBalance() + 100);
+                } else {
+                    bankAccount.setBalance(bankAccount.getBalance() + 10);
+                }
+            }
+        }
     }
 }
 

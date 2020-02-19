@@ -64,7 +64,8 @@ tr:last-child td:last-child {
     border-bottom-right-radius: 5px;
 }
 
-.indexes {
+.indexes,
+.button {
     text-align: center;
 }
 
