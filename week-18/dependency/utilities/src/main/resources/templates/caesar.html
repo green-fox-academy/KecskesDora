@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caesar</title>
+</head>
+
+<body>
+<div>
+    <span th:if="${error}" th:text="${error}"></span>
+    <span th:unless="${error}">
+        <h1 th:text="${newText}"></h1>
+    </span>
+</div>
+<a href="/useful">Back</a>
+</body>
+</html>
