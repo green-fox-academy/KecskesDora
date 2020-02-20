@@ -44,7 +44,7 @@
 
                 <td class="button">
                     <form th:action="@{/raise-balance}" method="POST">
-                        <button type="submit" th:name="raise-balance" th:value="*{name}">+</button>
+                        <button type="submit" th:name="selected" th:value="*{name}">+</button>
                     </form>
                 </td>
 
@@ -55,10 +55,10 @@
 
     <section>
     <div>
-        <form th:action="@{/accounts}" method="POST">
+        <form th:action="@{/raise-balance}" method="POST">
             <div>
                 <label for="select-name">Raise the Balance!</label>
-                <select id="select-name" name="select-name">
+                <select id="select-name" name="selected">
                     <option th:each="account : ${accounts}" th:value="${account.name}" th:text="${account.name}"></option>
                 </select>
                 <input type="submit" value="Raise">

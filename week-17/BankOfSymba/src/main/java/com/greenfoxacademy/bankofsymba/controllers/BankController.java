@@ -55,16 +55,11 @@ public class BankController {
         return "table";
     }
 
-    @PostMapping("/accounts")
-    //public String raiseBalance(@RequestParam("select-name") String selected) {
-    public String raiseBalance(@ModelAttribute("select-name") String selectedName) {
-        raise(selectedName);
-        return "redirect:/accounts";
-    }
-
     @PostMapping("/raise-balance")
-    public String raiseBalanceByButton(@ModelAttribute("raise-balance") String selectedName) {
-        raise(selectedName);
+    //public String raiseBalance(@RequestParam("raise-balance") String selected) {
+    //public String raiseBalanceByButton(@ModelAttribute("raise-balance") String selected) {
+    public String raiseBalance(String selected) {
+        raise(selected);
         return "redirect:/accounts";
     }
 
