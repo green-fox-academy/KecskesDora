@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GFA Main Page</title>
+</head>
+<body>
+<h2>Greenfox Class App</h2>
+<form th:action="@{/gfa/count}" method="get">
+    <h3 th:text="'Number of students: ' + ${count}"></h3>
+</form>
+
+    <div>
+        <a th:href="@{/gfa/list}">Student list</a>
+    </div>
+    <div>
+        <a th:href="@{/gfa/add}">Add new student</a>
+    </div>
+    <div>
+        <a th:href="@{/gfa/check}">Student checker</a>
+    </div>
+</body>
+</html>

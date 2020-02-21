@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checking Result</title>
+</head>
+
+<body>
+<div>
+    <h2>Checking result:</h2>
+</div>
+<div>
+    <span th:if="${contains}">Student is in the list.</span>
+    <span th:unless="${contains}">Student is not in the list.</span>
+</div>
+
+<div>
+    <a th:href="@{/gfa/check}">Back</a>
+</div>
+</body>
+</html>
