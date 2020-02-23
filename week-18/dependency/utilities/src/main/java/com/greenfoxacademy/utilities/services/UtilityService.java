@@ -39,6 +39,7 @@ public class UtilityService {
     }
 
     public boolean checkValidEmail(String email) {
+
         return email.contains("@") && email.contains(".");
     }
 }
