@@ -16,16 +16,18 @@
     <img src="greenfox.png" alt="fox">
 </div>
 <div>
-    <p th:text="'This is Mr. ' + ${name} + '. Currently living on pizza and lemonade. He knows 2 tricks'"></p>
+    <p th:text="${fox}"></p>
 </div>
 <div>
     <h1>Known tricks</h1>
 </div>
-<div>
-    <ul>
-        <li>write HTML</li>
-        <li>code in Java</li>
+<div th:if="${fox.numberOfTricks() != 0}">
+    <ul th:each="trick : ${fox.getTricks()}">
+        <li th:text="${trick}"></li>
     </ul>
+</div>
+<div th:unless="${fox.numberOfTricks() != 0}">
+    <p>You know no tricks yet. Go and learn some.</p>
 </div>
 </body>
 </html>
