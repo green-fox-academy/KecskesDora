@@ -13,14 +13,22 @@ public class FoxService {
 
     private FoxService() {
         foxes = new ArrayList<>();
-        foxes.add(new Fox("Vuk", Arrays.asList("running", "jumping"), "duck", "water"));
-        foxes.add(new Fox("Csele", Arrays.asList("running", "jumping"), "chicken", "water"));
-        foxes.add(new Fox("Karak", "hahn", "water"));
+        foxes.add(new Fox("Vuk","duck", "water"));
+        foxes.add(new Fox("Csele","chicken","water"));
+        foxes.add(new Fox("Karak"));
     }
 
     public void add(String name) {
+        if (find(name) != null) {
         foxes.add(new Fox(name));
+        }
     }
+
+    /*public void add2(Fox newFox) {
+        if (newFox != null) {
+            foxes.add(newFox);
+        }
+    }*/
 
     public boolean check(String name) {
         for (Fox fox : foxes) {
@@ -32,6 +40,15 @@ public class FoxService {
     }
 
     public Fox find(String name) {
+        for (Fox fox : foxes) {
+            if (fox.getName().equalsIgnoreCase(name)) {
+                return fox;
+            }
+        }
+        return null;
+    }
+
+    /*public Fox find(String name) {
         if(!check(name)) {
             add(name);
         }
@@ -42,6 +59,31 @@ public class FoxService {
             }
         }
         return foxToFind;
+    }
+
+    public Fox find2(String name) {
+        Fox foxToFind = null;
+        for (Fox fox : foxes) {
+            if (fox.getName().equalsIgnoreCase(name)) {
+                foxToFind = fox;
+            } else {
+                foxToFind = new Fox(name);
+                add2(foxToFind);
+            }
+        }
+        return foxToFind;
+    }*/
+
+    public void changeFood(String food, String name) {
+        find(name).setFood(food);
+    }
+
+    public void changeDrink(String drink, String name) {
+        find(name).setDrink(drink);
+    }
+
+    public void addNewTrick(String trick, String name) {
+        find(name).setTricks(trick);
     }
 }
 

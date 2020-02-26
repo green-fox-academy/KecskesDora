@@ -32,19 +32,7 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(String name) {
-        return "redirect:/?name=" + name;
-    }
-
-    @GetMapping("/nutritionStore")
-    public String nutritionStore(Model model, @RequestParam(value = "name", required = true) String name) {
-        model.addAttribute("name", name);
-        return "nutrition";
-    }
-
-    @PostMapping("/nutritionStore")
-    public String nutritionStore(@RequestParam(value = "name", required = true) String name, String food, String drink) {
-        foxService.find(name).setFood(food);
-        foxService.find(name).setDrink(drink);
+        foxService.add(name);
         return "redirect:/?name=" + name;
     }
 }
