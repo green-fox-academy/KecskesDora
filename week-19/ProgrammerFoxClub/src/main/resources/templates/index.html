@@ -8,7 +8,10 @@
 <div>
     <ul>
         <li>
-            <a href="">Information</a>
+            <a th:href="'/?name=' + ${name}">Information</a>
+        </li>
+        <li>
+            <a th:href="'/nutritionStore?name=' + ${name}">Nutrition Store</a>
         </li>
     </ul>
 </div>
