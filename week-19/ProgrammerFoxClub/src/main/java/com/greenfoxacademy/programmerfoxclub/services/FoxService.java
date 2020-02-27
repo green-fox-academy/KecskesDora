@@ -93,6 +93,10 @@ public class FoxService {
         return Arrays.asList(Tricks.values());
     }
 
+    /*public boolean learntAllTricks(Fox fox) {
+        return (fox.numberOfTricks() == learnableTricks().size());
+    }*/
+
     public List<Food> listOfFood() {
         return Arrays.asList(Food.values());
     }

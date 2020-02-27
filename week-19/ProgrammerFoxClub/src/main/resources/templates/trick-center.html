@@ -9,27 +9,31 @@
 <div>
     <ul>
         <li>
-            <a th:href="'/?name=' + ${name}">Information</a>
+            <a th:href="'/?name=' + ${fox.name}">Information</a>
         </li>
         <li>
-            <a th:href="'/nutritionStore?name=' + ${name}">Nutrition Store</a>
+            <a th:href="'/nutritionStore?name=' + ${fox.name}">Nutrition Store</a>
         </li>
         <li>
-            <a th:href="'/trickCenter?name=' + ${name}">Trick Center</a>
+            <a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
         </li>
     </ul>
 </div>
 <div>
     <img src="greenfox.png" alt="fox">
 </div>
-<form th:action="@{'/trickCenter?name=' + ${name}}" method="post">
-    <div>
+<form th:action="@{'/trickCenter?name=' + ${fox.name}}" method="post">
+
+    <div th:if="${!fox.learntAllTricks()}">
         <label for="trick">Tricks</label>
         <select id="trick" name="trick" required>
             <option th:each="trick : ${tricks}" th:text="${trick.name}"></option>
         </select>
 
         <button type="submit">Learn</button>
+    </div>
+    <div th:unless="${!fox.learntAllTricks()}">
+        <p>Congratulations, you have learnt all tricks!</p>
     </div>
 </form>
 </body>

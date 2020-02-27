@@ -51,6 +51,13 @@ public class Fox {
         return 0;
     }
 
+    public boolean learntAllTricks() {
+        if (!tricks.isEmpty()) {
+            return (tricks.size() == Arrays.asList(Food.values()).size() + 1);
+        }
+        return false;
+    }
+
     public String getFood() {
         if (food != null) {
             return food;
