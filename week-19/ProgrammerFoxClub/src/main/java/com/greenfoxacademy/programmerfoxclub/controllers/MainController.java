@@ -20,8 +20,12 @@ public class MainController {
 
     @GetMapping("/")
     public String getMainPage(Model model, @RequestParam(value = "name", required = true) String name) {
-        model.addAttribute("name", name);
-        model.addAttribute("fox", foxService.find(name));
+        /*if (name == null) {
+            return "login";
+        } else {*/
+            model.addAttribute("name", name);
+            model.addAttribute("fox", foxService.find(name));
+        //}
         return "index";
     }
 

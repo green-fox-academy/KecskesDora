@@ -27,7 +27,7 @@
     <div th:if="${!fox.learntAllTricks()}">
         <label for="trick">Tricks</label>
         <select id="trick" name="trick" required>
-            <option th:each="trick : ${tricks}" th:text="${trick.name}"></option>
+            <option th:each="trick : ${tricks}" th:text="${trick}"></option>
         </select>
 
         <button type="submit">Learn</button>

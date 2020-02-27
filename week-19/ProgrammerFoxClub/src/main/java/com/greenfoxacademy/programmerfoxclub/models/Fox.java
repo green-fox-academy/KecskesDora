@@ -3,6 +3,8 @@ package com.greenfoxacademy.programmerfoxclub.models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Fox {
     private String name;
@@ -11,11 +13,15 @@ public class Fox {
     private String drink;
 
     public Fox() {
+        food = "chicken";
+        drink = "water";
         tricks = new ArrayList<>();
     }
 
     public Fox(String name) {
         this.name = name;
+        food = "chicken";
+        drink = "water";
         tricks = new ArrayList<>();
     }
 
@@ -58,6 +64,18 @@ public class Fox {
         return false;
     }
 
+    public List<String> tricksToLearn() {
+        List<Tricks> allTricks = new ArrayList<>(Arrays.asList(Tricks.values()));
+        List<String> stringTricks = allTricks.stream()
+                .map(trick -> Objects.toString(trick, null))
+                .collect(Collectors.toList());
+
+        for (String trick : getTricks()) {
+            stringTricks.remove(trick);
+        }
+        return stringTricks;
+    }
+
     public String getFood() {
         if (food != null) {
             return food;
@@ -83,6 +101,6 @@ public class Fox {
     @Override
     public String toString() {
         return "This is " + name + ". Currently living on " + getFood() +
-                " and " + getDrink() + ". He knows " + numberOfTricks() + " tricks.";
+                " and " + getDrink() + ". He/She knows " + numberOfTricks() + " trick(s).";
     }
 }

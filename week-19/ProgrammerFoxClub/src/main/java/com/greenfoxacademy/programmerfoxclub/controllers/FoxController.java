@@ -36,7 +36,7 @@ public class FoxController {
     @GetMapping("/trickCenter")
     public String trickCenter(Model model, @RequestParam(value = "name", required = true) String name) {
         model.addAttribute("fox", foxService.find(name));
-        model.addAttribute("tricks", foxService.learnableTricks());
+        model.addAttribute("tricks", foxService.tricksToLearn(name));
         return "trick-center";
     }
 
