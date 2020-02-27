@@ -26,17 +26,12 @@
 <div>
     <label for="food">Food</label>
     <select id="food" name="food" required>
-        <option>hahn</option>
-        <option>chicken</option>
-        <option>duck</option>
-        <option>goose</option>
+        <option th:each="food : ${foodList}" th:text="${food.name}"></option>
     </select>
 
     <label for="drink">Drink</label>
     <select id="drink" name="drink" required>
-        <option>water</option>
-        <option>blood</option>
-        <option>milk</option>
+        <option th:each="drink : ${drinks}" th:text="${drink.name}"></option>
     </select>
 
     <button type="submit">Change</button>

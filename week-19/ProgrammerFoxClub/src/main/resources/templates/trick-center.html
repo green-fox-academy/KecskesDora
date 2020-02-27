@@ -26,10 +26,7 @@
     <div>
         <label for="trick">Tricks</label>
         <select id="trick" name="trick" required>
-            <option>jumping</option>
-            <option>running</option>
-            <option>hunting</option>
-            <option>teaching</option>
+            <option th:each="trick : ${tricks}" th:text="${trick.name}"></option>
         </select>
 
         <button type="submit">Learn</button>

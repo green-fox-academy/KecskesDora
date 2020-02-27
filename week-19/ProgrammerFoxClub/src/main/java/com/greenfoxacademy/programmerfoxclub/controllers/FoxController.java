@@ -21,6 +21,8 @@ public class FoxController {
     @GetMapping("/nutritionStore")
     public String nutritionStore(Model model, @RequestParam(value = "name", required = true) String name) {
         model.addAttribute("name", name);
+        model.addAttribute("drinks", foxService.drinks());
+        model.addAttribute("foodList", foxService.listOfFood());
         return "nutrition-store";
     }
 
@@ -34,6 +36,7 @@ public class FoxController {
     @GetMapping("/trickCenter")
     public String trickCenter(Model model, @RequestParam(value = "name", required = true) String name) {
         model.addAttribute("name", name);
+        model.addAttribute("tricks", foxService.learnableTricks());
         return "trick-center";
     }
 
