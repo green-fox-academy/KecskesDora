@@ -9,11 +9,13 @@
 <div>
     <h2>Checking result:</h2>
 </div>
+<!--
 <div>
     <span th:if="${contains}">Student is in the list.</span>
     <span th:unless="${contains}">Student is not in the list.</span>
 </div>
-
+-->
+<p th:text="${contains}"></p>
 <div>
     <a th:href="@{/gfa/check}">Back</a>
 </div>

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GfaController {
@@ -35,25 +36,20 @@ public class GfaController {
     }
 
     @PostMapping("/gfa/save")
-    public String saveNewStudent(@ModelAttribute("name") String name) {
-        service.save(name);
+    public String saveNewStudent(@RequestParam(name = "name") String newName) {
+        service.save(newName);
         return "redirect:/gfa/list";
     }
 
-    /*@GetMapping("/gfa/count")
-    public String countStudents(Model model) {
-        model.addAttribute("count", service.count().toString());
-        return "main-page";
-    }*/
-
     @GetMapping("/gfa/check")
-    public String checkStudentForm(Model model) {
+    public String checkStudentForm() {
         return "check";
     }
 
     @PostMapping("/gfa/check")
-    public String checkStudent(Model model, @ModelAttribute("name") String name) {
-        model.addAttribute("contains", service.check(name));
+    public String checkStudent(Model model, String name) {
+        //model.addAttribute("contains", service.check(name));
+        model.addAttribute("contains", service.checkName(name));
         return "checked";
     }
 }
