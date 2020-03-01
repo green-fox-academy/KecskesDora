@@ -3,26 +3,23 @@ package com.greenfoxacademy.programmerfoxclub.models;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Fox {
     private String name;
     private List<String> tricks;
     private String food;
     private String drink;
+    private List<String> actions;
 
     public Fox() {
-        food = "chicken";
-        drink = "water";
         tricks = new ArrayList<>();
+        actions = new ArrayList<>();
     }
 
     public Fox(String name) {
         this.name = name;
-        food = "chicken";
-        drink = "water";
         tricks = new ArrayList<>();
+        actions = new ArrayList<>();
     }
 
     public Fox(String name, String food, String drink) {
@@ -30,6 +27,7 @@ public class Fox {
         this.food = food;
         this.drink = drink;
         tricks = new ArrayList<>();
+        actions = new ArrayList<>();
     }
 
     public String getName() {
@@ -51,36 +49,36 @@ public class Fox {
     }
 
     public int numberOfTricks() {
-        if (!tricks.isEmpty()) {
+        if (tricks.isEmpty()) {
+            return 0;
+        } else {
             return tricks.size();
         }
-        return 0;
     }
 
     public boolean learntAllTricks() {
-        if (!tricks.isEmpty()) {
+        if (tricks.isEmpty()) {
+            return false;
+        } else {
             return (tricks.size() == Arrays.asList(Food.values()).size() + 1);
         }
-        return false;
     }
 
     public List<String> tricksToLearn() {
-        List<Tricks> allTricks = new ArrayList<>(Arrays.asList(Tricks.values()));
-        List<String> stringTricks = allTricks.stream()
-                .map(trick -> Objects.toString(trick, null))
-                .collect(Collectors.toList());
+        List<String> tricksToLearn = new ArrayList<>(Tricks.getList());
 
-        for (String trick : getTricks()) {
-            stringTricks.remove(trick);
+        for (String trick : tricks) {
+            tricksToLearn.remove(trick);
         }
-        return stringTricks;
+        return tricksToLearn;
     }
 
     public String getFood() {
-        if (food != null) {
+        if (food == null) {
+            return "no food";
+        } else {
             return food;
         }
-        return "no food";
     }
 
     public void setFood(String food) {
@@ -88,14 +86,42 @@ public class Fox {
     }
 
     public String getDrink() {
-        if (drink != null) {
+        if (drink == null) {
+            return "no drink";
+        } else {
             return drink;
         }
-        return "no drink";
     }
 
     public void setDrink(String drink) {
         this.drink = drink;
+    }
+
+    public List<String> getActions() {
+        return actions;
+    }
+
+    public void addAction(String newAction) {
+        actions.add(newAction);
+    }
+
+    public int numberOfActions() {
+        if (actions.isEmpty()) {
+            return 0;
+        } else {
+            return actions.size();
+        }
+    }
+
+    public List<String> lastFiveActions() {
+        List<String> lastFiveActions = new ArrayList<>();
+        if (actions.size() > 4) {
+            for (int i = actions.size() - 5; i < actions.size(); i++) {
+                lastFiveActions.add(actions.get(i));
+            }
+            return lastFiveActions;
+        }
+        return actions;
     }
 
     @Override

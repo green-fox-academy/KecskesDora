@@ -11,9 +11,15 @@
 </div>
 <div>
     <form th:action="@{/login}" method="post">
+        <div>
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name">
         <input type="submit" value="GO">
+        </div>
+        <div></div>
+        <div>
+            <a th:href="@{add-new}">Add new pet</a>
+        </div>
     </form>
 </div>
 </body>

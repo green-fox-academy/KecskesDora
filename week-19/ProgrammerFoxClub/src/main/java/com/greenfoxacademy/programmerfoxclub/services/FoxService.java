@@ -5,8 +5,12 @@ import com.greenfoxacademy.programmerfoxclub.models.Food;
 import com.greenfoxacademy.programmerfoxclub.models.Fox;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,12 +30,6 @@ public class FoxService {
         }
     }
 
-    /*public void add2(Fox newFox) {
-        if (newFox != null) {
-            foxes.add(newFox);
-        }
-    }*/
-
     public boolean check(String name) {
         for (Fox fox : foxes) {
             if (fox.getName().equalsIgnoreCase(name)) {
@@ -50,50 +48,32 @@ public class FoxService {
         return null;
     }
 
-    /*public Fox find(String name) {
-        if(!check(name)) {
-            add(name);
-        }
-        Fox foxToFind = null;
-        for (Fox fox : foxes) {
-            if (fox.getName().equalsIgnoreCase(name)) {
-                foxToFind = fox;
-            }
-        }
-        return foxToFind;
+    public String date() {
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy. MMMMMMMM dd. hh:mm:ss ");
+        return ft.format(date).toString().toLowerCase();
+        /*LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return now.format(formatter);*/
     }
 
-    public Fox find2(String name) {
-        Fox foxToFind = null;
-        for (Fox fox : foxes) {
-            if (fox.getName().equalsIgnoreCase(name)) {
-                foxToFind = fox;
-            } else {
-                foxToFind = new Fox(name);
-                add2(foxToFind);
-            }
+    public void changeAndTrackFood(String food, String name) {
+        if (!find(name).getFood().equals(food)) {
+            find(name).addAction(date() + " : Food has been changed from: " + find(name).getFood() + " to: " + food);
+            find(name).setFood(food);
         }
-        return foxToFind;
-    }*/
-
-    public void changeFood(String food, String name) {
-        find(name).setFood(food);
     }
 
-    public void changeDrink(String drink, String name) {
-        find(name).setDrink(drink);
+    public void changeAndTrackDrink(String drink, String name) {
+        if (!find(name).getDrink().equals(drink)) {
+            find(name).addAction(date() + " : Drink has been changed from: " + find(name).getDrink() + " to: " + drink);
+            find(name).setDrink(drink);
+        }
     }
 
-    public void addNewTrick(String trick, String name) {
+    public void addAndTrackNewTrick(String trick, String name) {
+        find(name).addAction(date() + " : Learned to: " + trick);
         find(name).setTricks(trick);
-    }
-
-    public List<Food> listOfFood() {
-        return Arrays.asList(Food.values());
-    }
-
-    public List<Drink> drinks() {
-        return Arrays.asList(Drink.values());
     }
 
     public List<String> tricksToLearn(String name) {

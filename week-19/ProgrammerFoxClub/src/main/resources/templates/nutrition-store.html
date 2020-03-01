@@ -17,6 +17,9 @@
         <li>
             <a th:href="'/trickCenter?name=' + ${name}">Trick Center</a>
         </li>
+        <li>
+            <a th:href="'/actionHistory?name=' + ${name}">Action History</a>
+        </li>
     </ul>
 </div>
 <div>
@@ -26,12 +29,12 @@
 <div>
     <label for="food">Food</label>
     <select id="food" name="food" required>
-        <option th:each="food : ${foodList}" th:text="${food}"></option>
+        <option th:each="food : ${foodList}" th:text="${food}" th:selected="${foodList.get(0)}"></option>
     </select>
 
     <label for="drink">Drink</label>
     <select id="drink" name="drink" required>
-        <option th:each="drink : ${drinks}" th:text="${drink}"></option>
+        <option th:each="drink : ${drinks}" th:text="${drink}" th:selected="${drinks.get(0)}"></option>
     </select>
 
     <button type="submit">Change</button>

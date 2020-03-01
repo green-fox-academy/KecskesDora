@@ -1,5 +1,7 @@
 package com.greenfoxacademy.programmerfoxclub.controllers;
 
+import com.greenfoxacademy.programmerfoxclub.models.Drink;
+import com.greenfoxacademy.programmerfoxclub.models.Food;
 import com.greenfoxacademy.programmerfoxclub.services.FoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,28 +23,34 @@ public class FoxController {
     @GetMapping("/nutritionStore")
     public String nutritionStore(Model model, @RequestParam(value = "name", required = true) String name) {
         model.addAttribute("name", name);
-        model.addAttribute("drinks", foxService.drinks());
-        model.addAttribute("foodList", foxService.listOfFood());
+        model.addAttribute("drinks", Drink.getList());
+        model.addAttribute("foodList", Food.getList());
         return "nutrition-store";
     }
 
     @PostMapping("/nutritionStore")
     public String nutritionStore(@RequestParam(value = "name", required = true) String name, String food, String drink) {
-        foxService.changeFood(food, name);
-        foxService.changeDrink(drink, name);
+        foxService.changeAndTrackFood(food, name);
+        foxService.changeAndTrackDrink(drink, name);
         return "redirect:/?name=" + name;
     }
 
     @GetMapping("/trickCenter")
     public String trickCenter(Model model, @RequestParam(value = "name", required = true) String name) {
         model.addAttribute("fox", foxService.find(name));
-        model.addAttribute("tricks", foxService.tricksToLearn(name));
+        //model.addAttribute("tricks", foxService.tricksToLearn(name));
         return "trick-center";
     }
 
     @PostMapping("/trickCenter")
     public String trickCenter(@RequestParam(value = "name", required = true) String name, String trick) {
-        foxService.addNewTrick(trick, name);
+        foxService.addAndTrackNewTrick(trick, name);
         return "redirect:/?name=" + name;
+    }
+
+    @GetMapping("/actionHistory")
+    public String actionHistory(Model model, @RequestParam(value = "name", required = true) String name) {
+        model.addAttribute("fox", foxService.find(name));
+        return "action-history";
     }
 }

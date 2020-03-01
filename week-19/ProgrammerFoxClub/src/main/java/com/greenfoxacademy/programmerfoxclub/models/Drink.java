@@ -1,5 +1,8 @@
 package com.greenfoxacademy.programmerfoxclub.models;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Drink {
     WATER("water"),
     BLOOD("blood"),
@@ -9,6 +12,10 @@ public enum Drink {
 
     Drink(String name) {
         this.name = name;
+    }
+
+    public static List<Drink> getList() {
+        return Arrays.asList(values());
     }
 
     @Override

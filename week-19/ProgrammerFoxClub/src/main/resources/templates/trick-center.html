@@ -17,6 +17,9 @@
         <li>
             <a th:href="'/trickCenter?name=' + ${fox.name}">Trick Center</a>
         </li>
+        <li>
+            <a th:href="'/actionHistory?name=' + ${fox.name}">Action History</a>
+        </li>
     </ul>
 </div>
 <div>
@@ -27,7 +30,7 @@
     <div th:if="${!fox.learntAllTricks()}">
         <label for="trick">Tricks</label>
         <select id="trick" name="trick" required>
-            <option th:each="trick : ${tricks}" th:text="${trick}"></option>
+            <option th:each="trick : ${fox.tricksToLearn()}" th:text="${trick}"></option>
         </select>
 
         <button type="submit">Learn</button>
