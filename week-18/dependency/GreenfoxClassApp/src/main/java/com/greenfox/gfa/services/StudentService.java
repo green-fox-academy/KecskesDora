@@ -1,57 +1,46 @@
 package com.greenfox.gfa.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class StudentService implements Services{
-    List<String> names;
-    FileSavingService fileSavingService;
+@Qualifier("list")
+public class StudentService implements GfaService{
+    private List<String> names;
 
-    @Autowired
-    public StudentService(FileSavingService fileSavingService) {
+    public StudentService() {
         names = new ArrayList<>();
-        /*names.add("Sanyi");
+        names.add("Sanyi");
         names.add("Lilla");
-        names.add("John");*/
-        this.fileSavingService = fileSavingService;
+        names.add("John");
     }
 
     @Override
     public List<String> findAll() {
-        //return names;
-        return fileSavingService.readFile();
+        return names;
     }
 
     @Override
     public void save(String student) {
-        //names.add(student);
-        names = fileSavingService.readFile();
         names.add(student);
-        fileSavingService.writeFile(names);
     }
 
     @Override
     public Integer count() {
-        //return names.size();
-        return fileSavingService.readFile().size();
+        return names.size();
     }
 
-    @Override
+    /*@Override
     public boolean check(String name) {
-        //return names.contains(name);
-        return fileSavingService.readFile().contains(name);
-    }
+        return names.contains(name);
+    }*/
 
     @Override
     public String checkName(String name) {
-        //if (names.contains(name)) {
-        if (fileSavingService.readFile().contains(name)) {
+        if (names.contains(name)) {
             return name + " is in the list.";
         } else {
             return name + " is not in the list.";

@@ -1,5 +1,6 @@
 package com.greenfox.gfa.services;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Repository
 public class FileSavingService {
     private static final String fileName ="C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-18\\dependency\\GreenfoxClassApp\\src\\main\\resources\\templates\\names.txt";
 
@@ -27,6 +28,16 @@ public class FileSavingService {
 
     public void writeFile(List<String> names) {
 
+        try {
+            Files.write(Paths.get(fileName), names);
+        } catch (IOException e) {
+            System.err.println("Unable to write file.");
+        }
+    }
+
+    public void writeInFile(List<String> names, String newName) {
+        //List<String> names = new ArrayList<>();
+        names.add(newName);
         try {
             Files.write(Paths.get(fileName), names);
         } catch (IOException e) {

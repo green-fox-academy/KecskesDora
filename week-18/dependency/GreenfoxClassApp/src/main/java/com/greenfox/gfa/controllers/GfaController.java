@@ -1,7 +1,9 @@
 package com.greenfox.gfa.controllers;
 
+import com.greenfox.gfa.services.GfaService;
 import com.greenfox.gfa.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GfaController {
-    StudentService service;
+    //StudentService service;
+     private GfaService service;
 
     @Autowired
-    public GfaController(StudentService service) {
+    public GfaController(@Qualifier("txt") GfaService service) {
         this.service = service;
     }
 
