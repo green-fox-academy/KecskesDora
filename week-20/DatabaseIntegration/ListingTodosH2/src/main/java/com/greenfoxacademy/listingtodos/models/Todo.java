@@ -3,9 +3,11 @@ package com.greenfoxacademy.listingtodos.models;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
+@Entity
 public class Todo {
+    @Id
     private long id;
     private String title;
     private boolean isUrgent;
