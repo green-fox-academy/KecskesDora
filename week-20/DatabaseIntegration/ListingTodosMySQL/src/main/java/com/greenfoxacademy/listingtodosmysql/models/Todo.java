@@ -23,6 +23,12 @@ public class Todo {
         isDone = false;
     }
 
+    public Todo(String title, boolean isUrgent, boolean isDone) {
+        this.title = title;
+        this.isUrgent = isUrgent;
+        this.isDone = isDone;
+    }
+
     public long getId() {
         return id;
     }
@@ -57,6 +63,6 @@ public class Todo {
 
     @Override
     public String toString() {
-        return title;
+        return id + title + isUrgent + isDone;
     }
 }
