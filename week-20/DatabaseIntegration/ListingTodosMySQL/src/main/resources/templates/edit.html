@@ -8,18 +8,18 @@
 <h1>
     Edit Todo
 </h1>
-<form th:action="@{/todos/edit}" th:object="${todo}" th:method="post">
+<form th:action="@{'/todos/' + ${todo.id} + '/edit'}" th:object="${todo}" th:method="post">
     <div>
         <label for="title">Todo Description</label>
-        <input type="text" id="title" th:field="*{todo.gettitle}">
+        <input type="text" id="title" th:field="*{title}">
     </div>
     <div>
         <label for="is-urgent">Urgent</label>
-        <input type="checkbox" id="is-urgent" th:name="isUrgent">
+        <input type="checkbox" id="is-urgent" th:name="*{isUrgent()}" th:checked="*{isUrgent()}">
     </div>
     <div>
         <label for="is-done">Done</label>
-        <input type="checkbox" id="is-done" th:name="isDone">
+        <input type="checkbox" id="is-done" th:name="*{isDone()}" th:checked="*{isDone()}">
     </div>
     <div>
         <input type="submit" value="Submit">

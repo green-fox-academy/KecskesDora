@@ -54,12 +54,12 @@ public class TodoController {
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String renderEditTodoForm(Model model, @PathVariable(value = "id", required = false) Long id) {
-        model.addAttribute("todo", todoRepository.findById(id));
+        model.addAttribute("todo", todoRepository.findTodoById(id));
         return "edit";
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.POST)
-    public String editTodo(@ModelAttribute("todo") Todo todo, @PathVariable(value = "id", required = false) Long id) {
+    public String editTodo(@ModelAttribute("todo") Todo todo) {
         todoRepository.save(todo);
         return "redirect:/todos/list";
     }
