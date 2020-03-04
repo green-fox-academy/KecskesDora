@@ -23,12 +23,10 @@
         <td th:text="*{isDone()}"></td>
         <td th:text="*{isUrgent()}"></td>
         <td>
-            <!--<form th:action="@{/todos/delete}" method="post">
-                <button type="submit" th:name="delete" th:value="*{id}">delete</button>
-            </form>-->
-            <form th:action="@{/todos/delete}" method="get">
-                <a th:href="'/todos/' + *{id} + '/delete'">delete</a>
-            </form>
+            <a th:href="'/todos/' + *{id} + '/delete'">delete</a>
+        </td>
+        <td>
+            <a th:href="'/todos/' + *{id} + '/edit'">edit</a>
         </td>
     </tr>
 </table>
