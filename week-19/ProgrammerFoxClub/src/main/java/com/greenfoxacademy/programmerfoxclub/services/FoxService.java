@@ -1,7 +1,5 @@
 package com.greenfoxacademy.programmerfoxclub.services;
 
-import com.greenfoxacademy.programmerfoxclub.models.Drink;
-import com.greenfoxacademy.programmerfoxclub.models.Food;
 import com.greenfoxacademy.programmerfoxclub.models.Fox;
 import org.springframework.stereotype.Service;
 
@@ -25,18 +23,9 @@ public class FoxService {
     }
 
     public void add(String name) {
-        if (find(name) != null) {
+        if (find(name) == null) {
         foxes.add(new Fox(name));
         }
-    }
-
-    public boolean check(String name) {
-        for (Fox fox : foxes) {
-            if (fox.getName().equalsIgnoreCase(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public Fox find(String name) {
@@ -76,8 +65,8 @@ public class FoxService {
         find(name).setTricks(trick);
     }
 
-    public List<String> tricksToLearn(String name) {
+    /*public List<String> tricksToLearn(String name) {
         return find(name).tricksToLearn();
-    }
+    }*/
 }
 

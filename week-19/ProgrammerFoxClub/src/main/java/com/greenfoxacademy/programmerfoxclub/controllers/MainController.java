@@ -21,37 +21,38 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String getMainPage(Model model, @RequestParam(value = "name", required = false) String name) {
-        //if (!foxService.check(name) || name.equals("") || name == null) {
-          //  return "redirect:/login";
-        //} else {
+    public String getInfoPage(Model model, @RequestParam(value = "name", required = false) String name) {
+        if (foxService.find(name) == null || name.equals("")) {
+            return "redirect:/login";
+        } else {
             model.addAttribute("fox", foxService.find(name));
-        //}
+        }
         return "index";
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String renderLoginPage(){
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("name") String name) {
-        /*if (name.equals("")) {
+    public String loginFox(@RequestParam("name") String name) {
+        if (name.equals("")) {
             return "redirect:/login";
-        }*/
-        foxService.add(name);
+        } else if (foxService.find(name) == null) {
+            return "redirect:/login/error";
+        }
         return "redirect:/?name=" + name;
     }
 
-    @GetMapping("/add-new")
-    public String loginWithMessage(Model model) {
-        //model.addAttribute("error", "You have provided a name that has not been used before, add it as a new one!");
-        return "add-new";
+    @GetMapping("/login/error")
+    public String loginErrorMessage(Model model) {
+        model.addAttribute("error", "You have provided a name that has not been used before, add it as a new one!");
+        return "error";
     }
 
-    @PostMapping("/add-new")
-    public String loginWithMessage(@RequestParam(value = "name") String name) {
+    @PostMapping("/add")
+    public String addNewFox(@RequestParam(value = "new-name") String name) {
         foxService.add(name);
         return "redirect:/?name=" + name;
     }
