@@ -10,9 +10,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Service
 public class FileSavingService {
-    private static final String fileName ="C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-18\\dependency\\GreenfoxClassApp\\src\\main\\resources\\templates\\names.txt";
+    private static final String fileName ="C:\\Users\\Dóri\\Greenfox\\KecskesDora\\week-18\\dependency\\GreenfoxClassApp\\src\\main\\java\\com\\greenfox\\gfa\\repositories\\names.txt";
 
     public List<String> readFile() {
         Path filePath = Paths.get(fileName);

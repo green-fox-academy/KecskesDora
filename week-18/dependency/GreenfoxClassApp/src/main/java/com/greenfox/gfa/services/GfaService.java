@@ -2,7 +2,8 @@ package com.greenfox.gfa.services;
 
 import java.util.List;
 
-public interface GfaService {
+
+public interface GfaService{
     List<String> findAll();
     void save(String student);
     Integer count();
