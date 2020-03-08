@@ -27,7 +27,7 @@ public class TodoController {
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
     public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive) {
         if (isActive == null) {
-            model.addAttribute("todos", todoRepository.findAll());
+            model.addAttribute("todos", todoRepository.findAllByOrderByIdAsc());
         } else {
             model.addAttribute("todos", todoRepository.findAllByIsDone(!Boolean.parseBoolean(isActive)));
         }
