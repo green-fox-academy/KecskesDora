@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "todo")
 public class Todo {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
     private boolean isUrgent;

@@ -42,7 +42,7 @@ public class TodoController {
     @RequestMapping(value = {"/add"}, method = RequestMethod.GET)
     public String renderAddForm(Model model, @ModelAttribute("todo") Todo todo) {
         model.addAttribute("todo", todo);
-        return "add";
+        return "add-todo";
     }
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
