@@ -25,11 +25,16 @@ public class TodoController {
     }*/
 
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
-    public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive) {
+    public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive,
+                            @RequestParam(value = "search", required = false) String searchedInput) {
         if (isActive == null) {
             model.addAttribute("todos", todoRepository.findAllByOrderByIdAsc());
         } else {
             model.addAttribute("todos", todoRepository.findAllByIsDone(!Boolean.parseBoolean(isActive)));
+
+        }
+        if (searchedInput != null) {
+            model.addAttribute("todos", todoRepository.findAllByTitleContains(searchedInput));
         }
         return "todolist";
     }
@@ -61,6 +66,12 @@ public class TodoController {
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.POST)
     public String editTodo(@ModelAttribute("todo") Todo todo) {
         todoRepository.save(todo);
+        return "redirect:/todos/list";
+    }
+
+    @RequestMapping(value = {"/", "/list"}, method = RequestMethod.POST)
+    public String searchResult(Model model, @RequestParam ("search") String search) {
+        model.addAttribute("todos", todoRepository.findAllByTitleContains(search));
         return "redirect:/todos/list";
     }
 }

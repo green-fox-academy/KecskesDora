@@ -10,4 +10,5 @@ public interface TodoRepository extends CrudRepository<Todo, Long> {
     Iterable<Todo> findAllByIsDone(boolean isActive);
     Iterable<Todo> findAllByOrderByIdAsc();
     Todo findTodoById(Long aLong);
+    Iterable<Todo> findAllByTitleContains(String searchedExpression);
 }
