@@ -11,6 +11,7 @@
     <tr>
         <th>ID</th>
         <th>DATE OF CREATION</th>
+        <th>DUE DATE</th>
         <th>ACTION</th>
         <th>ASSIGNEE</th>
         <th>DONE</th>
@@ -19,6 +20,7 @@
     <tr th:each="todo : ${todos}" th:object="${todo}">
         <td th:text="*{id}"></td>
         <td th:text="*{creationDate}"></td>
+        <td th:text="*{dueDate}"></td>
         <td th:text="*{title}"></td>
         <td th:text="*{assignee}"></td>
         <td th:text="*{done}"></td>

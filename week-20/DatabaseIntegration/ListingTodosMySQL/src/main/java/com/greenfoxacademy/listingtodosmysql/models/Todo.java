@@ -1,5 +1,7 @@
 package com.greenfoxacademy.listingtodosmysql.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +19,8 @@ public class Todo {
 
     @Temporal(TemporalType.DATE)
     private Date creationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dueDate;
 
     @ManyToOne
     private Assignee assignee;
@@ -25,6 +29,7 @@ public class Todo {
         isUrgent = false;
         isDone = false;
         creationDate = new Date();
+
     }
 
     public Todo(String title) {
@@ -32,6 +37,7 @@ public class Todo {
         isUrgent = false;
         isDone = false;
         creationDate = new Date();
+
     }
 
     public Todo(String title, boolean isUrgent, boolean isDone) {
@@ -40,11 +46,12 @@ public class Todo {
         this.isDone = isDone;
     }
 
-    public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee) {
+    public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee, Date dueDate) {
         this.title = title;
         this.isUrgent = isUrgent;
         this.isDone = isDone;
         this.assignee = assignee;
+        this.dueDate = dueDate;
     }
 
     public long getId() {
@@ -85,6 +92,14 @@ public class Todo {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public Assignee getAssignee() {
