@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "todo")
+//@Table(name = "todo")
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,8 @@ public class Todo {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-    //@ManyToOne
-    //private Assignee assignee;
+    @ManyToOne
+    private Assignee assignee;
 
     public Todo() {
         isUrgent = false;
@@ -34,11 +34,17 @@ public class Todo {
         creationDate = new Date();
     }
 
-    public Todo(String title, boolean isUrgent, boolean isDone, String name) {
+    public Todo(String title, boolean isUrgent, boolean isDone) {
         this.title = title;
         this.isUrgent = isUrgent;
         this.isDone = isDone;
-        //this.assignee = new Assignee(name);
+    }
+
+    public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee) {
+        this.title = title;
+        this.isUrgent = isUrgent;
+        this.isDone = isDone;
+        this.assignee = assignee;
     }
 
     public long getId() {
@@ -81,13 +87,13 @@ public class Todo {
         this.creationDate = creationDate;
     }
 
-    /*public Assignee getAssignee() {
+    public Assignee getAssignee() {
         return assignee;
     }
 
     public void setAssignee(Assignee assignee) {
         this.assignee = assignee;
-    }*/
+    }
 
     @Override
     public String toString() {

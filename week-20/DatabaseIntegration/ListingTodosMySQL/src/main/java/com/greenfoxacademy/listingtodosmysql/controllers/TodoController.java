@@ -70,15 +70,10 @@ public class TodoController {
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.POST)
-    public String editTodo(@ModelAttribute("todo") Todo todo, @RequestParam("assignee") Long id) {
+    public String editTodo(@ModelAttribute("todo") Todo todo) {
         todoService.save(todo);
+        assigneeService.addTodo(todo);
         return "redirect:/todos/list";
     }
-
-    /*@RequestMapping(value = {"/", "/list"}, method = RequestMethod.POST)
-    public String searchResult(Model model, @RequestParam ("search") String search) {
-        model.addAttribute("todos", todoRepository.findAllByTitleContains(search));
-        return "redirect:/todos/list";
-    }*/
 }
 

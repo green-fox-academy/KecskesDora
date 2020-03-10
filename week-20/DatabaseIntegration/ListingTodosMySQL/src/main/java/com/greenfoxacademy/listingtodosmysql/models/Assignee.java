@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "assignee")
+//@Table(name = "assignee")
 public class Assignee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,21 +13,23 @@ public class Assignee {
     private String name;
     private String email;
 
-    //@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //private List<Todo> todo;
+    @JoinColumn(name="assignee_id")
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Todo> todos;
 
     public Assignee() {
-        //todo = new ArrayList<>();
+        todos = new ArrayList<>();
     }
 
     public Assignee(String name) {
         this.name = name;
+        todos = new ArrayList<>();
     }
 
     public Assignee(String name, String email) {
         this.name = name;
         this.email = email;
-        //todo = new ArrayList<>();
+        todos = new ArrayList<>();
     }
 
     public long getId() {
@@ -54,16 +56,21 @@ public class Assignee {
         this.email = email;
     }
 
-    /*public List<Todo> getTodo() {
-        return todo;
+    public List<Todo> getTodos() {
+        return todos;
     }
 
-    public void setTodo(List<Todo> todo) {
-        this.todo = todo;
-    }*/
+    public void setTodos(List<Todo> todo) {
+        this.todos = todo;
+    }
+
+    public void addTodo(Todo todo) {
+        todos.add(todo);
+        todo.setAssignee(this);
+    }
 
     @Override
     public String toString() {
-        return "name";
+        return name;
     }
 }

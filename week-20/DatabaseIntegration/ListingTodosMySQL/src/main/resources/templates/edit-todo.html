@@ -22,8 +22,8 @@
         <input type="checkbox" id="is-done" th:field="*{done}">
     </div>
     <div>
-        <label for="assignee">Assignee</label>
-        <select id="assignee" name="assignee">
+        <label for="assignee">Select assignee</label>
+        <select id="assignee" name="assignee" th:field="*{assignee}">
             <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}"></option>
         </select>
     </div>

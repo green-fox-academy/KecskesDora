@@ -1,6 +1,7 @@
 package com.greenfoxacademy.listingtodosmysql.services;
 
 import com.greenfoxacademy.listingtodosmysql.models.Assignee;
+import com.greenfoxacademy.listingtodosmysql.models.Todo;
 import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,9 @@ public class AssigneeService {
 
     public void save(Assignee assignee) {
         assigneeRepository.save(assignee);
+    }
+
+    public void addTodo(Todo todo) {
+        todo.getAssignee().addTodo(todo);
     }
 }
