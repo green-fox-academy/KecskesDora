@@ -6,6 +6,8 @@ import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AssigneeService {
 
@@ -38,5 +40,9 @@ public class AssigneeService {
 
     public void addTodo(Todo todo) {
         todo.getAssignee().addTodo(todo);
+    }
+
+    public List<Todo> getAssignedTodos(Long id) {
+        return find(id).getTodos();
     }
 }

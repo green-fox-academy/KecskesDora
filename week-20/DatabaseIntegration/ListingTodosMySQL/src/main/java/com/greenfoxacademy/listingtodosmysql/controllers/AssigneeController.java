@@ -54,4 +54,11 @@ public class AssigneeController {
         assigneeService.save(editedAssignee);
         return "redirect:/assignees/list";
     }
+
+    @GetMapping("/{id}/todos")
+    public String listAssignedTodos(Model model, @PathVariable(value = "id", required = false) Long id) {
+        model.addAttribute("todos", assigneeService.getAssignedTodos(id));
+        model.addAttribute("name", assigneeService.find(id));
+        return "assigned-todos";
+    }
 }

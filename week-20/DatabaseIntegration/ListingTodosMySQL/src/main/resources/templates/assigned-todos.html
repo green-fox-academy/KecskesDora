@@ -3,20 +3,10 @@
 <link rel="stylesheet" th:href="@{/style.css}" />
 <head>
     <meta charset="UTF-8">
-    <title>Todo List</title>
+    <title>Assigneed Todos</title>
 </head>
 <body>
-<h1>
-    Todos for today:
-</h1>
-<a href="/todos/add">Add new todo</a>
-<div>
-    <form th:action="@{/todos/list}" action="get">
-        <label for="search">Search:</label>
-        <input type="text" id="search" name="search">
-        <input type="submit" value="search">
-    </form>
-</div>
+<h1 th:text="'Assigned todos to ' + ${name} + ':'"></h1>
 <table>
     <tr>
         <th>ID</th>
@@ -30,9 +20,7 @@
         <td th:text="*{id}"></td>
         <td th:text="*{creationDate}"></td>
         <td th:text="*{title}"></td>
-        <td>
-            <a th:href="'/assignees/' + *{assignee.id} + '/todos'" th:text="*{assignee}"></a>
-        </td>
+        <td th:text="*{assignee}"></td>
         <td th:text="*{done}"></td>
         <td th:text="*{urgent}"></td>
         <td>
@@ -44,10 +32,10 @@
     </tr>
 </table>
 <div>
-    <a th:href="@{/todos/list}">List all</a>
+    <a th:href="@{/assignees/list}">Back to assignees</a>
 </div>
 <div>
-    <a th:href="@{/assignees/list}">List of assignees</a>
+    <a th:href="@{/todos/list}">Back to list of todos</a>
 </div>
 </body>
 </html>
