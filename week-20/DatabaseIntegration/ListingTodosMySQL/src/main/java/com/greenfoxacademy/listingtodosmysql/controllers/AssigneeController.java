@@ -2,6 +2,7 @@ package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Assignee;
 import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
+import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,34 +12,46 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/assignees")
 public class AssigneeController {
 
-    private AssigneeRepository assigneeRepository;
+    private AssigneeService assigneeService;
 
     @Autowired
-    public AssigneeController(AssigneeRepository assigneeRepository) {
-        this.assigneeRepository = assigneeRepository;
+    public AssigneeController(AssigneeService assigneeService) {
+        this.assigneeService = assigneeService;
     }
 
     @GetMapping(value = {"/", "/list"})
     public String listAssignees(Model model) {
-        model.addAttribute("assignees", assigneeRepository.findAllByOrderByIdAsc());
+        model.addAttribute("assignees", assigneeService.findAll());
         return "assignees";
     }
 
     @GetMapping("/add")
     public String renderAddAssigneeForm(Model model, @ModelAttribute("assignee") Assignee assignee) {
-        model. addAttribute("assignee", assignee);
+        model.addAttribute("assignee", assignee);
         return "add-assignee";
     }
 
     @PostMapping("/add")
     public String addNewAssignee(@ModelAttribute("assignee") Assignee newAssignee) {
-        assigneeRepository.save(newAssignee);
+        assigneeService.add(newAssignee);
         return "redirect:/assignees/list";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteAssignee(@PathVariable(value = "id", required = false) Long id) {
-        assigneeRepository.deleteById(id);
+        assigneeService.delete(id);
+        return "redirect:/assignees/list";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String renderEditAssigneeForm(Model model, @PathVariable(value = "id", required = false) Long id) {
+        model.addAttribute("assignee", assigneeService.find(id));
+        return "edit-assignee";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editAssignee(@ModelAttribute("assignee") Assignee editedAssignee) {
+        assigneeService.save(editedAssignee);
         return "redirect:/assignees/list";
     }
 }

@@ -31,7 +31,7 @@ public class ListingtodosmysqlApplication implements CommandLineRunner {
         todoRepository.save(new Todo("do presentation", true, false));
         todoRepository.save(new Todo("sleep more", false, false));*/
 
-        assigneeRepository.save(new Assignee("Nagy Rita", "rita.nagy@proba.hu"));
-        assigneeRepository.save(new Assignee("Kis Ramona", "ramona.kis@proba.hu"));
+        //assigneeRepository.save(new Assignee("Nagy Rita", "rita.nagy@proba.hu"));
+        //assigneeRepository.save(new Assignee("Kis Ramona", "ramona.kis@proba.hu"));
     }
 }

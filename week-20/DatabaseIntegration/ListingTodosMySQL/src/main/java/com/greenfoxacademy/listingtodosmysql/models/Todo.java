@@ -1,6 +1,9 @@
 package com.greenfoxacademy.listingtodosmysql.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "todo")
@@ -12,21 +15,30 @@ public class Todo {
     private boolean isUrgent;
     private boolean isDone;
 
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+
+    //@ManyToOne
+    //private Assignee assignee;
+
     public Todo() {
         isUrgent = false;
         isDone = false;
+        creationDate = new Date();
     }
 
     public Todo(String title) {
         this.title = title;
         isUrgent = false;
         isDone = false;
+        creationDate = new Date();
     }
 
-    public Todo(String title, boolean isUrgent, boolean isDone) {
+    public Todo(String title, boolean isUrgent, boolean isDone, String name) {
         this.title = title;
         this.isUrgent = isUrgent;
         this.isDone = isDone;
+        //this.assignee = new Assignee(name);
     }
 
     public long getId() {
@@ -61,8 +73,24 @@ public class Todo {
         isDone = done;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /*public Assignee getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(Assignee assignee) {
+        this.assignee = assignee;
+    }*/
+
     @Override
     public String toString() {
-        return id + title + isUrgent + isDone;
+        return title;
     }
 }

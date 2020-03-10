@@ -1,7 +1,11 @@
 package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
+import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
+
+import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
+import com.greenfoxacademy.listingtodosmysql.services.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/todos")
 public class TodoController {
 
-    private TodoRepository todoRepository;
+    private TodoService todoService;
+    private AssigneeService assigneeService;
 
     @Autowired
-    public TodoController(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
+    public TodoController(TodoService todoService, AssigneeService assigneeService) {
+        this.todoService = todoService;
+        this.assigneeService = assigneeService;
     }
 
     /*@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
@@ -27,15 +33,14 @@ public class TodoController {
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
     public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive,
                             @RequestParam(value = "search", required = false) String searchedInput) {
-        if (isActive == null) {
+        /*if (searchedInput != null) {
+            model.addAttribute("todos", todoRepository.findAllByTitleContains(searchedInput));
+        } else if (isActive == null) {
             model.addAttribute("todos", todoRepository.findAllByOrderByIdAsc());
         } else {
             model.addAttribute("todos", todoRepository.findAllByIsDone(!Boolean.parseBoolean(isActive)));
-
-        }
-        if (searchedInput != null) {
-            model.addAttribute("todos", todoRepository.findAllByTitleContains(searchedInput));
-        }
+        }*/
+        model.addAttribute("todos", todoService.list(isActive, searchedInput));
         return "todolist";
     }
 
@@ -47,32 +52,33 @@ public class TodoController {
 
     @RequestMapping(value = {"/add"}, method = RequestMethod.POST)
     public String addNewTodo(@ModelAttribute("todo") Todo todo) {
-        todoRepository.save(todo);
+        todoService.save(todo);
         return "redirect:/todos/list";
     }
 
     @RequestMapping(value = {"/{id}/delete"}, method = RequestMethod.GET)
     public String deleteTodo(@PathVariable(value = "id", required = false) Long id) {
-        todoRepository.deleteById(id);
+        todoService.delete(id);
         return "redirect:/todos/list";
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.GET)
     public String renderEditTodoForm(Model model, @PathVariable(value = "id", required = false) Long id) {
-        model.addAttribute("todo", todoRepository.findTodoById(id));
-        return "edit";
+        model.addAttribute("todo", todoService.find(id));
+        model.addAttribute("assignees", assigneeService.findAll());
+        return "edit-todo";
     }
 
     @RequestMapping(value = {"/{id}/edit"}, method = RequestMethod.POST)
-    public String editTodo(@ModelAttribute("todo") Todo todo) {
-        todoRepository.save(todo);
+    public String editTodo(@ModelAttribute("todo") Todo todo, @RequestParam("assignee") Long id) {
+        todoService.save(todo);
         return "redirect:/todos/list";
     }
 
-    @RequestMapping(value = {"/", "/list"}, method = RequestMethod.POST)
+    /*@RequestMapping(value = {"/", "/list"}, method = RequestMethod.POST)
     public String searchResult(Model model, @RequestParam ("search") String search) {
         model.addAttribute("todos", todoRepository.findAllByTitleContains(search));
         return "redirect:/todos/list";
-    }
+    }*/
 }
 

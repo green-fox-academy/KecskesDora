@@ -20,13 +20,17 @@
 <table>
     <tr>
         <th>ID</th>
+        <th>DATE OF CREATION</th>
         <th>ACTION</th>
+        <th>ASSIGNEE</th>
         <th>DONE</th>
         <th>URGENT</th>
     </tr>
     <tr th:each="todo : ${todos}" th:object="${todo}">
         <td th:text="*{id}"></td>
+        <td th:text="*{creationDate}"></td>
         <td th:text="*{title}"></td>
+        <td></td>
         <td th:text="*{done}"></td>
         <td th:text="*{urgent}"></td>
         <td>

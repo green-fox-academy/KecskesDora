@@ -22,7 +22,15 @@
         <input type="checkbox" id="is-done" th:field="*{done}">
     </div>
     <div>
-        <input type="submit" value="Submit">
+        <label for="assignee">Assignee</label>
+        <select id="assignee" name="assignee">
+            <option th:each="assignee : ${assignees}" th:text="${assignee.name}" th:value="${assignee.id}"></option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+    <div>
         <a href="/todos/list">Cancel</a>
     </div>
 </form>
