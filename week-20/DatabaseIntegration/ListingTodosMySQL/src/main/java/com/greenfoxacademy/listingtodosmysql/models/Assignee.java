@@ -13,8 +13,8 @@ public class Assignee {
     private String name;
     private String email;
 
-    @JoinColumn(name="assignee_id")
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    //@JoinColumn(name="assignee_id")
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "assignee")
     private List<Todo> todos;
 
     public Assignee() {
@@ -67,6 +67,10 @@ public class Assignee {
     public void addTodo(Todo todo) {
         todos.add(todo);
         todo.setAssignee(this);
+    }
+
+    public void deleteTodo(Todo todo) {
+        todos.remove(todo);
     }
 
     @Override

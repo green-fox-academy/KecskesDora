@@ -1,7 +1,6 @@
 package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Assignee;
-import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

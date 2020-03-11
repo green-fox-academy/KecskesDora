@@ -22,14 +22,13 @@ public class Todo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Assignee assignee;
 
     public Todo() {
         isUrgent = false;
         isDone = false;
         creationDate = new Date();
-
     }
 
     public Todo(String title) {
@@ -37,13 +36,19 @@ public class Todo {
         isUrgent = false;
         isDone = false;
         creationDate = new Date();
-
     }
 
     public Todo(String title, boolean isUrgent, boolean isDone) {
         this.title = title;
         this.isUrgent = isUrgent;
         this.isDone = isDone;
+    }
+
+    public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee) {
+        this.title = title;
+        this.isUrgent = isUrgent;
+        this.isDone = isDone;
+        this.assignee = assignee;
     }
 
     public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee, Date dueDate) {
@@ -104,6 +109,14 @@ public class Todo {
 
     public Assignee getAssignee() {
         return assignee;
+    }
+
+    public Long getAssigneeId() {
+        if (assignee == null) {
+            return 0L;
+        } else {
+            return assignee.getId();
+        }
     }
 
     public void setAssignee(Assignee assignee) {

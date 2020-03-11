@@ -1,8 +1,6 @@
 package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
-import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
-import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
 
 import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
 import com.greenfoxacademy.listingtodosmysql.services.TodoService;

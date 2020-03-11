@@ -1,6 +1,5 @@
 package com.greenfoxacademy.listingtodosmysql.services;
 
-import com.greenfoxacademy.listingtodosmysql.models.Assignee;
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
 import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,9 @@ public class TodoService {
     }
 
     public void delete(Long id) {
+        Todo todo = find(id);
+        todo.getAssignee().deleteTodo(todo);
+        todo.setAssignee(null);
         todoRepository.deleteById(id);
     }
 

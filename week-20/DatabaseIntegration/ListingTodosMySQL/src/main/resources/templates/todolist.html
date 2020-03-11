@@ -33,7 +33,7 @@
         <td th:text="*{dueDate}"></td>
         <td th:text="*{title}"></td>
         <td>
-            <a th:href="'/assignees/' + *{assignee.id} + '/todos'" th:text="*{assignee}"></a>
+            <a th:href="'/assignees/' + *{getAssigneeId()} + '/todos'" th:text="*{assignee}"></a>
         </td>
         <td th:text="*{done}"></td>
         <td th:text="*{urgent}"></td>
