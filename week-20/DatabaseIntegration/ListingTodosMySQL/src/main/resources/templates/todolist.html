@@ -11,9 +11,20 @@
 </h1>
 <a href="/todos/add">Add new todo</a>
 <div>
-    <form th:action="@{/todos/list}" action="get">
-        <label for="search">Search:</label>
-        <input type="text" id="search" name="search">
+    <form th:action="@{/todos/list}" method="get">
+        <label for="search">Search by:</label>
+        <select th:name="searchBy">
+            <option th:value="title">title</option>
+            <option th:value="assignee">assignee</option>
+        </select>
+        <input type="search" id="search" th:name="search">
+
+        <select th:name="searchBy">
+            <option th:value="creation">creation date</option>
+            <option th:value="due">due date</option>
+        </select>
+        <input type="date" id="searchDate" th:name="search">
+
         <input type="submit" value="search">
     </form>
 </div>
@@ -30,10 +41,11 @@
     <tr th:each="todo : ${todos}" th:object="${todo}">
         <td th:text="*{id}"></td>
         <td th:text="*{creationDate}"></td>
-        <td th:text="*{dueDate}"></td>
+        <td th:text="*{#dates.format(dueDate, 'yyyy-MM-dd')}"></td>
         <td th:text="*{title}"></td>
         <td>
-            <a th:href="'/assignees/' + *{getAssigneeId()} + '/todos'" th:text="*{assignee}"></a>
+            <!--<a th:if="*{assignee} != null" th:href="'/assignees/' + *{assignee.id} + '/todos'" th:text="*{assignee.name}"></a>-->
+            <a th:href="'/assignees/' + *{getAssigneeId()} + '/todos'" th:text="*{getAssigneeName()}"></a>
         </td>
         <td th:text="*{done}"></td>
         <td th:text="*{urgent}"></td>

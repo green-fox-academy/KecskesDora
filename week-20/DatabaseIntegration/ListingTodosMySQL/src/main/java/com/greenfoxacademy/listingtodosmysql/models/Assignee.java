@@ -14,7 +14,7 @@ public class Assignee {
     private String email;
 
     //@JoinColumn(name="assignee_id")
-    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "assignee")
+    @OneToMany (/*cascade = CascadeType.ALL, fetch = FetchType.EAGER,*/ mappedBy = "assignee")
     private List<Todo> todos;
 
     public Assignee() {

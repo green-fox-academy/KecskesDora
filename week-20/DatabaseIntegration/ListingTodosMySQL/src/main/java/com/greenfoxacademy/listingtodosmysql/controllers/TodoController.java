@@ -2,8 +2,10 @@ package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
 
+import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
 import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
 import com.greenfoxacademy.listingtodosmysql.services.TodoService;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,15 +32,16 @@ public class TodoController {
 
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
     public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive,
-                            @RequestParam(value = "search", required = false) String searchedInput) {
-        /*if (searchedInput != null) {
-            model.addAttribute("todos", todoRepository.findAllByTitleContains(searchedInput));
+                            @RequestParam(name = "search", required = false) String searchField,
+                            @RequestParam(name = "searchBy", required = false) String searchBy) {
+
+        if (searchField != null) {
+            model.addAttribute("todos", todoService.search(searchField, searchBy));
         } else if (isActive == null) {
-            model.addAttribute("todos", todoRepository.findAllByOrderByIdAsc());
+            model.addAttribute("todos", todoService.findAll());
         } else {
-            model.addAttribute("todos", todoRepository.findAllByIsDone(!Boolean.parseBoolean(isActive)));
-        }*/
-        model.addAttribute("todos", todoService.list(isActive, searchedInput));
+            model.addAttribute("todos", todoService.findAllByDone(isActive));
+        }
         return "todolist";
     }
 
