@@ -3,6 +3,7 @@ package com.greenfoxacademy.listingtodosmysql.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,8 @@ public class Todo {
     private boolean isUrgent;
     private boolean isDone;
 
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dueDate;
@@ -98,12 +100,20 @@ public class Todo {
         return creationDate;
     }
 
+    public String getStringCreationDate() {
+        return creationDate.toString();
+    }
+
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
     public Date getDueDate() {
         return dueDate;
+    }
+
+    public String getStringDueDate() {
+        return dueDate.toString();
     }
 
     public void setDueDate(Date dueDate) {

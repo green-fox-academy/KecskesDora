@@ -13,18 +13,22 @@
 <div>
     <form th:action="@{/todos/list}" method="get">
         <label for="search">Search by:</label>
-        <select th:name="searchBy">
-            <option th:value="title">title</option>
-            <option th:value="assignee">assignee</option>
+        <select name="search-key">
+            <option value="null"> - </option>
+            <option value="title">title</option>
+            <option value="assignee">assignee</option>
         </select>
-        <input type="search" id="search" th:name="search">
-
-        <select th:name="searchBy">
-            <option th:value="creation">creation date</option>
-            <option th:value="due">due date</option>
+        <input type="search" id="search" name="search">
+        <input type="submit" value="search">
+    </form>
+    <form th:action="@{/todos/list}" method="get">
+        <label for="search-date">Search by date:</label>
+        <select name="search-key">
+            <option value="null"> - </option>
+            <option value="creation">creation date</option>
+            <option value="due">due date</option>
         </select>
-        <input type="date" id="searchDate" th:name="search">
-
+        <input type="search" id="search-date" name="search-date">
         <input type="submit" value="search">
     </form>
 </div>
@@ -40,7 +44,8 @@
     </tr>
     <tr th:each="todo : ${todos}" th:object="${todo}">
         <td th:text="*{id}"></td>
-        <td th:text="*{creationDate}"></td>
+        <td th:text="*{#dates.format(creationDate,'yyyy-MM-dd')}"></td>
+        <!--<td th:text="*{creationDate}"></td>-->
         <td th:text="*{#dates.format(dueDate, 'yyyy-MM-dd')}"></td>
         <td th:text="*{title}"></td>
         <td>

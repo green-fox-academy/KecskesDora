@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.text.ParseException;
+
 @Controller
 @RequestMapping("/todos")
 public class TodoController {
@@ -33,14 +36,17 @@ public class TodoController {
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
     public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive,
                             @RequestParam(name = "search", required = false) String searchField,
-                            @RequestParam(name = "searchBy", required = false) String searchBy) {
+                            @RequestParam(name = "search-key", required = false) String searchKey,
+                            @RequestParam(name = "search-date", required = false) String searchDateField) {
 
-        if (searchField != null) {
-            model.addAttribute("todos", todoService.search(searchField, searchBy));
-        } else if (isActive == null) {
+        if (searchField == null && searchDateField == null & isActive == null) {
             model.addAttribute("todos", todoService.findAll());
-        } else {
+        } else if (isActive != null) {
             model.addAttribute("todos", todoService.findAllByDone(isActive));
+        } else if (searchField != null && searchKey != null) {
+            model.addAttribute("todos", todoService.search(searchField, searchKey));
+        } else if (searchDateField != null && searchKey != null) {
+            model.addAttribute("todo", todoService.searchDate(searchDateField, searchKey));
         }
         return "todolist";
     }

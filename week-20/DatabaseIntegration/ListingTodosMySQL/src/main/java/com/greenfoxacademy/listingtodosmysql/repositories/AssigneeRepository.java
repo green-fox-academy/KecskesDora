@@ -9,5 +9,5 @@ public interface AssigneeRepository extends CrudRepository<Assignee, Long> {
 
     Iterable<Assignee> findAllByOrderByIdAsc();
     Assignee findAssigneeById(Long id);
-    Iterable<Assignee> findAssigneeByNameContains(String name);
+    Assignee findAssigneeByNameContains(String name);
 }

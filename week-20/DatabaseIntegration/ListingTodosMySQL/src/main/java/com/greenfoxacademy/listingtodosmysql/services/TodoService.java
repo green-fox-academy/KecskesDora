@@ -1,22 +1,32 @@
 package com.greenfoxacademy.listingtodosmysql.services;
 
+import com.fasterxml.jackson.databind.util.ArrayIterator;
+import com.greenfoxacademy.listingtodosmysql.models.Assignee;
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
 import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
 
     private TodoRepository todoRepository;
+    private AssigneeRepository assigneeRepository;
 
     @Autowired
-    public TodoService(TodoRepository todoRepository) {
+    public TodoService(TodoRepository todoRepository, AssigneeRepository assigneeRepository) {
         this.todoRepository = todoRepository;
+        this.assigneeRepository = assigneeRepository;
     }
 
     public void save(Todo todo) {
@@ -35,44 +45,74 @@ public class TodoService {
         return todoRepository.findTodoById(id);
     }
 
-    public Iterable<Todo> findAllByDone(String isActive) {
+    public List<Todo> findAllByDone(String isActive) {
         return todoRepository.findAllByIsDone(!Boolean.parseBoolean(isActive));
     }
 
-    public Iterable<Todo> findAll() {
+    public List<Todo> findAll() {
         return todoRepository.findAllByOrderByIdAsc();
     }
 
+    public List<Todo> search(String searchField, String searchKey) {
 
-    public Iterable<Todo> search(String searchField, String searchBy) {
-        switch (searchBy) {
+        switch (searchKey) {
             case "title":
                 return searchByTitle(searchField);
             case "assignee":
                 return searchByAssignee(searchField);
-            case "creation":
-                LocalDate date = LocalDate.parse(searchField);
-                return searchByCreationDate(date);
-            case "due":
-                LocalDate dueDate = LocalDate.parse(searchField);
-                return searchByDueDate(dueDate);
         }
         return null;
     }
 
-    public Iterable<Todo> searchByTitle(String title) {
-        return todoRepository.findAllByTitleContains(title);
+    //not working!!!
+    public List<Todo> searchDate(String searchDateField, String searchKey) {
+
+        switch (searchKey) {
+            case "creation":
+                return findAll().stream().filter(todo -> todo.getStringCreationDate().contains(searchDateField)).collect(Collectors.toList());
+            case "due":
+                return findAll().stream().filter(todo -> todo.getStringDueDate().contains(searchDateField)).collect(Collectors.toList());
+        }
+        return null;
     }
 
-    public Iterable<Todo> searchByAssignee(String name) {
-        return todoRepository.findAllByAssigneeContains(name);
+    /*not working!!!
+    public Iterable<Todo> searchDate(String searchDateField, String searchByDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+        Date parsed = new Date();
+        try {
+            parsed = sdf.parse(searchDateField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        switch (searchByDate) {
+            case "creation" :
+                return searchByCreationDate(parsed);
+            case "due":
+                return searchByDueDate(parsed);
+        }
+        return null;
+    }*/
+
+    public List<Todo> searchByTitle(String title) {
+        return todoRepository.findAllByTitleContainsIgnoreCase(title);
     }
 
-    public Iterable<Todo> searchByCreationDate(LocalDate date) {
-        return todoRepository.findAllByCreationDateContains(date);
+    public List<Todo> searchByAssignee(String name) {
+        return todoRepository.findAllByAssignee(findAssignee(name));
     }
 
-    public Iterable<Todo> searchByDueDate(LocalDate date) {
-        return todoRepository.findAllByDueDateContains(date);
+    public Assignee findAssignee(String name) {
+        return assigneeRepository.findAssigneeByNameContains(name);
+    }
+
+    public List<Todo> searchByCreationDate(Date creationDate) {
+        return todoRepository.findAllByCreationDateContains(creationDate);
+    }
+
+    public List<Todo> searchByDueDate(Date dueDate) {
+        return todoRepository.findAllByDueDateContains(dueDate);
     }
 }
