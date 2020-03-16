@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.time.LocalDate.now;
+
 @Entity
 //@Table(name = "todo")
 public class Todo {
@@ -47,12 +49,11 @@ public class Todo {
         creationDate = new Date();
     }
 
-    public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee) {
+    /*public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee) {
         this.title = title;
         this.isUrgent = isUrgent;
         this.isDone = isDone;
         this.assignee = assignee;
-        creationDate = new Date();
     }
 
     public Todo(String title, boolean isUrgent, boolean isDone, Assignee assignee, Date dueDate) {
@@ -61,8 +62,7 @@ public class Todo {
         this.isDone = isDone;
         this.assignee = assignee;
         this.dueDate = dueDate;
-        creationDate = new Date();
-    }
+    }*/
 
     public long getId() {
         return id;
@@ -100,20 +100,12 @@ public class Todo {
         return creationDate;
     }
 
-    public String getStringCreationDate() {
-        return creationDate.toString();
-    }
-
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
     public Date getDueDate() {
         return dueDate;
-    }
-
-    public String getStringDueDate() {
-        return dueDate.toString();
     }
 
     public void setDueDate(Date dueDate) {

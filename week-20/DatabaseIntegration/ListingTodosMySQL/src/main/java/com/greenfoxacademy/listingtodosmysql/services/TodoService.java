@@ -5,16 +5,15 @@ import com.greenfoxacademy.listingtodosmysql.models.Assignee;
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
 import com.greenfoxacademy.listingtodosmysql.repositories.AssigneeRepository;
 import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,7 +33,7 @@ public class TodoService {
     }
 
     public void delete(Long id) {
-        /*ez végül nem kellett, mert CascadeType.ALL nélkül is működik
+        /*ez végül nem kellett, mert CascadeType.ALL nélkül amúgy is működik
         Todo todo = find(id);
         todo.getAssignee().deleteTodo(todo);
         todo.setAssignee(null);*/
@@ -53,19 +52,26 @@ public class TodoService {
         return todoRepository.findAllByOrderByIdAsc();
     }
 
-    public List<Todo> search(String searchField, String searchKey) {
+    public List<Todo> search(String searchField, String searchKey) throws ParseException {
 
         switch (searchKey) {
             case "title":
                 return searchByTitle(searchField);
             case "assignee":
                 return searchByAssignee(searchField);
+            case "creation":
+                return searchByCreationDate(searchField);
+            case "due":
+                return searchByDueDate(searchField);
         }
         return null;
     }
 
     //not working!!!
-    public List<Todo> searchDate(String searchDateField, String searchKey) {
+    /*public List<Todo> searchDate(String searchDateField, String searchKey) {
+
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //LocalDate parsed = LocalDate.parse(searchDateField, formatter);
 
         switch (searchKey) {
             case "creation":
@@ -74,24 +80,18 @@ public class TodoService {
                 return findAll().stream().filter(todo -> todo.getStringDueDate().contains(searchDateField)).collect(Collectors.toList());
         }
         return null;
-    }
+    }*/
 
-    /*not working!!!
-    public Iterable<Todo> searchDate(String searchDateField, String searchByDate) {
+    //not working!!!
+    /*public Iterable<Todo> searchDate(String searchDateField, String searchKey) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-        Date parsed = new Date();
-        try {
-            parsed = sdf.parse(searchDateField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date searchedDate = new SimpleDateFormat("yyyy-MM-DD").parse(searchDateField);
 
-        switch (searchByDate) {
+        switch (searchKey) {
             case "creation" :
-                return searchByCreationDate(parsed);
+                return searchByCreationDate(searchedDate);
             case "due":
-                return searchByDueDate(parsed);
+                return searchByDueDate(searchedDate);
         }
         return null;
     }*/
@@ -108,11 +108,33 @@ public class TodoService {
         return assigneeRepository.findAssigneeByNameContains(name);
     }
 
-    public List<Todo> searchByCreationDate(Date creationDate) {
-        return todoRepository.findAllByCreationDateContains(creationDate);
+    public List<Todo> searchByCreationDate(String searchField) throws ParseException {
+        List<Todo> filteredTodos = new ArrayList<>();
+        Date searchedDate = new SimpleDateFormat("yyyy-MM-dd").parse(searchField);
+
+        for (Todo todo: findAll()) {
+            if (todo.getCreationDate() != null) {
+                if (todo.getCreationDate().compareTo(searchedDate) == 0) {
+                    filteredTodos.add(todo);
+                }
+            }
+        }
+        return filteredTodos;
+        //return todoRepository.findAllByCreationDateContains(creationDate);
     }
 
-    public List<Todo> searchByDueDate(Date dueDate) {
-        return todoRepository.findAllByDueDateContains(dueDate);
+    public List<Todo> searchByDueDate(String searchField) throws ParseException {
+        List<Todo> filteredTodos = new ArrayList<>();
+        Date searchedDate = new SimpleDateFormat("yyyy-MM-dd").parse(searchField);
+
+        for (Todo todo: findAll()) {
+            if (todo.getDueDate() != null) {
+                if (todo.getDueDate().compareTo(searchedDate) == 0) {
+                    filteredTodos.add(todo);
+                }
+            }
+        }
+        return filteredTodos;
+        //return todoRepository.findAllByDueDateContains(dueDate);
     }
 }

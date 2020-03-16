@@ -17,11 +17,13 @@
             <option value="null"> - </option>
             <option value="title">title</option>
             <option value="assignee">assignee</option>
+            <option value="creation">creation date</option>
+            <option value="due">due date</option>
         </select>
         <input type="search" id="search" name="search">
         <input type="submit" value="search">
     </form>
-    <form th:action="@{/todos/list}" method="get">
+    <!--<form th:action="@{/todos/list}" method="get">
         <label for="search-date">Search by date:</label>
         <select name="search-key">
             <option value="null"> - </option>
@@ -30,7 +32,7 @@
         </select>
         <input type="search" id="search-date" name="search-date">
         <input type="submit" value="search">
-    </form>
+    </form>-->
 </div>
 <table>
     <tr>
@@ -47,6 +49,7 @@
         <td th:text="*{#dates.format(creationDate,'yyyy-MM-dd')}"></td>
         <!--<td th:text="*{creationDate}"></td>-->
         <td th:text="*{#dates.format(dueDate, 'yyyy-MM-dd')}"></td>
+        <!--<td th:text="*{dueDate}"></td>-->
         <td th:text="*{title}"></td>
         <td>
             <!--<a th:if="*{assignee} != null" th:href="'/assignees/' + *{assignee.id} + '/todos'" th:text="*{assignee.name}"></a>-->
