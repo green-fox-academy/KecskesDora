@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trending posts</title>
+</head>
+<body>
+    <div>
+        <a th:href="submit">Submit new post</a>
+    </div>
+    <div>
+        <h1>Trending posts</h1>
+    </div>
+    <div>
+        <table>
+            <tr th:each="post : ${posts}" th:object="${post}">
+                <td th:text="*{score}"></td>
+                <td>
+                    <a th:href="'/vote-up/' + *{id}">+</a>
+                </td>
+                <td>
+                    <a th:href="'/vote-down/' + *{id}">-</a>
+                </td>
+                <td th:text="*{title}" th:href="*{url}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
