@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PostService {
+public class PostService implements IPostService{
     private PostRepository postRepository;
 
     @Autowired
@@ -17,23 +17,26 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
+    @Override
     public List<Post> listPosts() {
-        return postRepository.findAll();
+        return postRepository.findTop10ByOrderByScoreDesc();
     }
 
+    @Override
     public void addPost(Post newPost) {
         postRepository.save(newPost);
     }
 
-    public void voteUp(Long id) {
-       Optional<Post> post = postRepository.findById(id);
-        assert post.orElse(null) != null;
-        post.orElse(null).setScore(1);
-    }
-
-    public void voteDown(Long id) {
-        Optional<Post> post = postRepository.findById(id);
-        assert post.orElse(null) != null;
-        post.orElse(null).setScore(-1);
+    @Override
+    public void changeScore(Long id, int number) {
+       /*Optional<Post> optionalPost = postRepository.findById(id);
+       if (optionalPost.isPresent()) {
+           Post post = optionalPost.get();
+           post.setScore(post.getScore() + number);
+       }*/
+       Post post = postRepository.findById(id).orElse(null);
+       assert post != null;
+       post.changeScore(number);
+       postRepository.save(post);
     }
 }

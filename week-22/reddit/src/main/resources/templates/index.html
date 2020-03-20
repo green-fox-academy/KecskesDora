@@ -21,7 +21,9 @@
                 <td>
                     <a th:href="'/vote-down/' + *{id}">-</a>
                 </td>
-                <td th:text="*{title}" th:href="*{url}"></td>
+                <td>
+                    <a th:text="*{title}" th:href="*{url}"></a>
+                </td>
             </tr>
         </table>
     </div>

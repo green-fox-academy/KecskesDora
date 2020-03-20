@@ -52,6 +52,10 @@ public class Post {
     }
 
     public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void changeScore(int score) {
         this.score += score;
     }
 }
