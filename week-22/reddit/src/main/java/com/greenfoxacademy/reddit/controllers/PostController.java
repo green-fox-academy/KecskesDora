@@ -19,8 +19,8 @@ public class PostController {
         this.postService = postService;
     }
 
-    @GetMapping("/")
-    public String listPosts(Model model) {
+    @GetMapping({"/", "/{id}"})
+    public String listPosts(Model model, @PathVariable(required = false) Long id) {
         model.addAttribute("posts", postService.listPosts());
         return "index";
     }

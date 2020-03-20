@@ -21,6 +21,7 @@
                 <td>
                     <a th:href="'/vote-down/' + *{id}">-</a>
                 </td>
+                <td th:text="*{creationDate}"></td>
                 <td>
                     <a th:text="*{title}" th:href="*{url}"></a>
                 </td>

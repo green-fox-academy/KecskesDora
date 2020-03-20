@@ -1,9 +1,9 @@
 package com.greenfoxacademy.reddit.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Post {
@@ -13,12 +13,17 @@ public class Post {
     private String title;
     private String url;
     private int score;
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh.mm.ss")
+    private LocalDate creationDate;
+    @ManyToOne
+    private User user;
 
     public Post() {
-
+        creationDate = LocalDate.now();
     }
 
     public Post(String title, String url) {
+        creationDate = LocalDate.now();
         this.title = title;
         this.url = url;
     }
@@ -57,5 +62,21 @@ public class Post {
 
     public void changeScore(int score) {
         this.score += score;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

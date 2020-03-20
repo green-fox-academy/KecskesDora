@@ -19,7 +19,7 @@ public class PostService implements IPostService{
 
     @Override
     public List<Post> listPosts() {
-        return postRepository.findTop10ByOrderByScoreDesc();
+        return postRepository.findByOrderByScoreDesc();
     }
 
     @Override

@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long> {
-    List<Post> findTop10ByOrderByScoreDesc();
+    List<Post> findByOrderByScoreDesc();
     Optional<Post> findById(Long id);
 }
