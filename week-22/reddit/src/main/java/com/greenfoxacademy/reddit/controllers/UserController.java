@@ -30,4 +30,16 @@ public class UserController {
         userService.findById(user.getId());
         return "redirect:/" + user.getId();
     }
+
+    @GetMapping("/register")
+    public String renderRegistrationForm(Model model, @ModelAttribute User user) {
+        model.addAttribute("user", user);
+        return "registration";
+    }
+
+    @PostMapping("/register")
+    public String addNewUser(@ModelAttribute User user) {
+        userService.save(user);
+        return "redirect:/" + user.getId();
+    }
 }

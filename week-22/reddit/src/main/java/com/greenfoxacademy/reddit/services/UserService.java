@@ -19,4 +19,8 @@ public class UserService implements IUserService{
     public User findById(Long id) {
         return null;
     }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
 }
