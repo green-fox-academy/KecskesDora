@@ -2,18 +2,14 @@ package com.greenfoxacademy.listingtodosmysql.controllers;
 
 import com.greenfoxacademy.listingtodosmysql.models.Todo;
 
-import com.greenfoxacademy.listingtodosmysql.repositories.TodoRepository;
 import com.greenfoxacademy.listingtodosmysql.services.AssigneeService;
 import com.greenfoxacademy.listingtodosmysql.services.TodoService;
-import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.text.ParseException;
-import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/todos")
@@ -37,17 +33,17 @@ public class TodoController {
     @RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
     public String listTodos(Model model, @RequestParam(value = "is-active", required = false) String isActive,
                             @RequestParam(name = "search", required = false) String searchField,
-                            @RequestParam(name = "search-key", required = false) String searchKey/*,
-                            @RequestParam(name = "search-date", required = false) String searchDateField*/) throws ParseException {
+                            @RequestParam(name = "search-key", required = false) String searchKey) throws ParseException {
 
-        if (searchField == null && searchKey == null && isActive == null) {
-            model.addAttribute("todos", todoService.findAll());
-        } else if (isActive != null) {
-            model.addAttribute("todos", todoService.findAllByDone(isActive));
-        } else if (searchField != null && searchKey != null) {
-            model.addAttribute("todos", todoService.search(searchField, searchKey));
-        //} else if (searchDateField != null && searchKey != null) {
-            //model.addAttribute("todo", todoService.searchDate(searchDateField, searchKey));
+        model.addAttribute("isActive", isActive);
+        if (searchField == null && searchKey == null) {
+            if (isActive == null) {
+                model.addAttribute("todos", todoService.findAll());
+            } else {
+                model.addAttribute("todos", todoService.findAllByDone(isActive));
+            }
+        } else if (searchField != null & searchKey != null){
+            model.addAttribute("todos", todoService.search(isActive, searchField, searchKey));
         }
         return "todolist";
     }

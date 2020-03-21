@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" lang="en">
-<link rel="stylesheet" th:href="@{/style.css}" />
+<!--<link rel="stylesheet" th:href="@{/style.css}" />-->
+<link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 <head>
     <meta charset="UTF-8">
     <title>Todo List</title>
@@ -11,9 +12,9 @@
 </h1>
 <a href="/todos/add">Add new todo</a>
 <div>
-    <form th:action="@{/todos/list}" method="get">
-        <label for="search">Search by:</label>
-        <select name="search-key">
+    <form th:action="'/todos/list?is-active=' + ${isActive}" method="get">
+        <label for="search-key">Search by:</label>
+        <select id="search-key" class="custom-select custom-select-sm" name="search-key">
             <option value="null"> - </option>
             <option value="title">title</option>
             <option value="assignee">assignee</option>
@@ -23,28 +24,20 @@
         <input type="search" id="search" name="search">
         <input type="submit" value="search">
     </form>
-    <!--<form th:action="@{/todos/list}" method="get">
-        <label for="search-date">Search by date:</label>
-        <select name="search-key">
-            <option value="null"> - </option>
-            <option value="creation">creation date</option>
-            <option value="due">due date</option>
-        </select>
-        <input type="search" id="search-date" name="search-date">
-        <input type="submit" value="search">
-    </form>-->
 </div>
-<table>
+<table class="table">
+    <thead class="thead-light">
     <tr>
-        <th>ID</th>
-        <th>DATE OF CREATION</th>
-        <th>DUE DATE</th>
-        <th>ACTION</th>
-        <th>ASSIGNEE</th>
-        <th>DONE</th>
-        <th>URGENT</th>
+        <th scope="col">ID</th>
+        <th scope="col">DATE OF CREATION</th>
+        <th scope="col">DUE DATE</th>
+        <th scope="col">ACTION</th>
+        <th scope="col">ASSIGNEE</th>
+        <th scope="col">DONE</th>
+        <th scope="col">URGENT</th>
     </tr>
-    <tr th:each="todo : ${todos}" th:object="${todo}">
+    </thead>
+    <tr th:each="todo : ${todos}" th:object="${todo}" scope="row">
         <td th:text="*{id}"></td>
         <td th:text="*{#dates.format(creationDate,'yyyy-MM-dd')}"></td>
         <!--<td th:text="*{creationDate}"></td>-->
@@ -71,5 +64,7 @@
 <div>
     <a th:href="@{/assignees/list}">List of assignees</a>
 </div>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </body>
 </html>

@@ -54,54 +54,64 @@ public class TodoService {
 
     public List<Todo> search(String searchField, String searchKey) throws ParseException {
 
+        List<Todo> result = new ArrayList<>();
+
         switch (searchKey) {
             case "title":
-                return searchByTitle(searchField);
+                result = searchByTitle(searchField);
+                break;
             case "assignee":
-                return searchByAssignee(searchField);
+                result = searchByAssignee(searchField);
+                break;
             case "creation":
-                return searchByCreationDate(searchField);
+                result = searchByCreationDate(searchField);
+                break;
             case "due":
-                return searchByDueDate(searchField);
+                result = searchByDueDate(searchField);
+                break;
+            case "null":
+                return null;
         }
-        return null;
+        return result;
     }
 
-    //not working!!!
-    /*public List<Todo> searchDate(String searchDateField, String searchKey) {
+    public List<Todo> search(String isActive, String searchField, String searchKey) throws ParseException {
 
-        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //LocalDate parsed = LocalDate.parse(searchDateField, formatter);
+        List<Todo> result = new ArrayList<>();
+        boolean activeSearch = Boolean.parseBoolean(isActive);
 
         switch (searchKey) {
+            case "title":
+                result = searchByTitleAndDone(searchField, activeSearch);
+            case "assignee":
+                result = searchByAssigneeAndDone(searchField, activeSearch);
+                break;
             case "creation":
-                return findAll().stream().filter(todo -> todo.getStringCreationDate().contains(searchDateField)).collect(Collectors.toList());
+                result = searchByCreationDate(searchField);
+                break;
             case "due":
-                return findAll().stream().filter(todo -> todo.getStringDueDate().contains(searchDateField)).collect(Collectors.toList());
+                result = searchByDueDate(searchField);
+                break;
+            case "null":
+                return null;
         }
-        return null;
-    }*/
-
-    //not working!!!
-    /*public Iterable<Todo> searchDate(String searchDateField, String searchKey) throws ParseException {
-
-        Date searchedDate = new SimpleDateFormat("yyyy-MM-DD").parse(searchDateField);
-
-        switch (searchKey) {
-            case "creation" :
-                return searchByCreationDate(searchedDate);
-            case "due":
-                return searchByDueDate(searchedDate);
-        }
-        return null;
-    }*/
+        return result;
+    }
 
     public List<Todo> searchByTitle(String title) {
         return todoRepository.findAllByTitleContainsIgnoreCase(title);
     }
 
+    public List<Todo> searchByTitleAndDone(String title, boolean isActive) {
+        return todoRepository.findByTitleContainsIgnoreCaseAndIsDone(title, !isActive);
+    }
+
     public List<Todo> searchByAssignee(String name) {
         return todoRepository.findAllByAssignee(findAssignee(name));
+    }
+
+    public List<Todo> searchByAssigneeAndDone(String name, boolean isActive) {
+        return todoRepository.findByAssigneeAndIsDone(findAssignee(name), !isActive);
     }
 
     public Assignee findAssignee(String name) {
@@ -109,32 +119,16 @@ public class TodoService {
     }
 
     public List<Todo> searchByCreationDate(String searchField) throws ParseException {
-        List<Todo> filteredTodos = new ArrayList<>();
-        Date searchedDate = new SimpleDateFormat("yyyy-MM-dd").parse(searchField);
-
-        for (Todo todo: findAll()) {
-            if (todo.getCreationDate() != null) {
-                if (todo.getCreationDate().compareTo(searchedDate) == 0) {
-                    filteredTodos.add(todo);
-                }
-            }
-        }
+        List<Todo> filteredTodos = todoRepository.findALLByCreationDate(dateFormatter(searchField));
         return filteredTodos;
-        //return todoRepository.findAllByCreationDateContains(creationDate);
     }
 
     public List<Todo> searchByDueDate(String searchField) throws ParseException {
-        List<Todo> filteredTodos = new ArrayList<>();
-        Date searchedDate = new SimpleDateFormat("yyyy-MM-dd").parse(searchField);
-
-        for (Todo todo: findAll()) {
-            if (todo.getDueDate() != null) {
-                if (todo.getDueDate().compareTo(searchedDate) == 0) {
-                    filteredTodos.add(todo);
-                }
-            }
-        }
+        List<Todo> filteredTodos = todoRepository.findALLByDueDate(dateFormatter(searchField));
         return filteredTodos;
-        //return todoRepository.findAllByDueDateContains(dueDate);
+    }
+
+    public Date dateFormatter(String date) throws ParseException{
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 }
