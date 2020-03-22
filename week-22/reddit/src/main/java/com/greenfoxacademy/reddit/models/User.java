@@ -11,11 +11,15 @@ public class User {
     private Long id;
     private String name;
     private String password;
-    @OneToMany(/*fetch = FetchType.EAGER, cascade = CascadeType.ALL, */mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Post> posts;
 
     public User() {
         posts = new ArrayList<>();
+    }
+
+    public User(String name) {
+        this.name = name;
     }
 
     public User(String name, String password) {

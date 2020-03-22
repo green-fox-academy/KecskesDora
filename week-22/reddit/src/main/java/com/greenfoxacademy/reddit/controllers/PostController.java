@@ -1,7 +1,9 @@
 package com.greenfoxacademy.reddit.controllers;
 
 import com.greenfoxacademy.reddit.models.Post;
+import com.greenfoxacademy.reddit.models.User;
 import com.greenfoxacademy.reddit.services.PostService;
+import com.greenfoxacademy.reddit.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,28 +15,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PostController {
     private PostService postService;
+    private UserService userService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostService postService, UserService userService) {
         this.postService = postService;
+        this.userService = userService;
     }
 
-    @GetMapping({"/", "/{id}"})
-    public String listPosts(Model model, @PathVariable(required = false) Long id) {
+    @GetMapping({"/", "/{name}"})
+    public String listPosts(Model model, @PathVariable(required = false) String name) {
+        model.addAttribute("id", name);
         model.addAttribute("posts", postService.listPosts());
         return "index";
     }
 
-    @GetMapping("/submit")
-    public String renderSubmitForm(Model model, @ModelAttribute Post post) {
-        model.addAttribute("post", post);
+    @GetMapping({"/submit", "/{name}/submit"})
+    public String renderSubmitForm(Model model, @PathVariable(required = false) String name) {
+        model.addAttribute("name", name);
+        model.addAttribute("post", new Post());
         return "submit";
     }
 
-    @PostMapping("/submit")
-    public String submitNewPost(@ModelAttribute Post post) {
+    @PostMapping({"/submit", "/{name}/submit"})
+    public String submitNewPost(@ModelAttribute Post post, @PathVariable(required = false) String name) {
         postService.addPost(post);
-        return "redirect:/";
+        postService.setUser(post, name);
+        userService.setPost(post, name);
+        return "redirect:/" + name;
     }
 
     @GetMapping("/vote-up/{id}")

@@ -1,5 +1,6 @@
 package com.greenfoxacademy.reddit.services;
 
+import com.greenfoxacademy.reddit.models.Post;
 import com.greenfoxacademy.reddit.models.User;
 import com.greenfoxacademy.reddit.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,21 @@ public class UserService implements IUserService{
         this.userRepository = userRepository;
     }
 
-    @Override
     public User findById(Long id) {
-        return null;
+        return userRepository.findById(id).orElse(null);
+    }
+
+    public User findByName(String name) {
+        return userRepository.findByName(name).orElse(null);
     }
 
     public void save(User user) {
         userRepository.save(user);
+    }
+
+    public void setPost(Post post, String name) {
+        if (name != null) {
+            findByName(name).addPost(post);
+        }
     }
 }

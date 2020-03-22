@@ -20,15 +20,14 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String renderLoginFrom(Model model, @ModelAttribute User user) {
-        model.addAttribute("user", user);
+    public String renderLoginFrom() {
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user) {
-        userService.findById(user.getId());
-        return "redirect:/" + user.getId();
+    public String loginUser(@RequestParam String name) {
+        userService.findByName(name);
+        return "redirect:/" + name;
     }
 
     @GetMapping("/register")
@@ -40,6 +39,6 @@ public class UserController {
     @PostMapping("/register")
     public String addNewUser(@ModelAttribute User user) {
         userService.save(user);
-        return "redirect:/" + user.getId();
+        return "redirect:/" + user.getName();
     }
 }

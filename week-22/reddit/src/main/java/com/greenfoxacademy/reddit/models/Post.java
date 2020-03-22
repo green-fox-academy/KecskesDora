@@ -79,4 +79,11 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getUserName() {
+        if (user != null) {
+            return user.getName();
+        }
+        return "";
+    }
 }

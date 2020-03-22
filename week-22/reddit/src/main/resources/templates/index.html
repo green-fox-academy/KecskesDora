@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Trending posts</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
     <div>
-        <a th:href="submit">Submit new post</a>
+        <a th:href="${name} + '/submit'" class="btn btn-primary" role="button">Submit new post</a>
     </div>
     <div>
         <h1>Trending posts</h1>
     </div>
     <div>
-        <table>
-            <tr th:each="post : ${posts}" th:object="${post}">
-                <td th:text="*{score}"></td>
+        <table class="table table-striped table-light">
+            <thead>
+            <tr>
+                <th scope="col">Score</th>
+                <th scope="col">Posted by</th>
+                <th scope="col">Date of post</th>
+                <th scope="col">Post</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr scope="col" th:each="post : ${posts}" th:object="${post}">
                 <td>
-                    <a th:href="'/vote-up/' + *{id}">+</a>
+                    <a th:href="'/vote-up/' + *{id}"><!--<span>&#8679;</span>-->
+                        <svg class="bi bi-caret-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.247 4.86l-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 00.753-1.659l-4.796-5.48a1 1 0 00-1.506 0z"/>
+                        </svg>
+                    </a>
+                    <p th:text="*{score}"></p>
+                    <a th:href="'/vote-down/' + *{id}"><!--<span>&#8681;</span>-->
+                        <svg class="bi bi-caret-down-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 01.753 1.659l-4.796 5.48a1 1 0 01-1.506 0z"/>
+                        </svg>
+                    </a>
                 </td>
-                <td>
-                    <a th:href="'/vote-down/' + *{id}">-</a>
-                </td>
+                <td th:text="*{getUserName()}"></td>
                 <td th:text="*{creationDate}"></td>
                 <td>
                     <a th:text="*{title}" th:href="*{url}"></a>
                 </td>
             </tr>
+            </tbody>
         </table>
     </div>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </body>
 </html>

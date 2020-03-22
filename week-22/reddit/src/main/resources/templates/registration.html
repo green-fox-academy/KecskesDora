@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
 </head>
 <body>
 <form action="/register" method="post" th:object="${user}">
     <div>
-        <label for="name"></label>
+        <label for="name">Name</label>
         <input type="text" id="name" th:field="*{name}">
     </div>
     <div>
-        <label for="password"></label>
+        <label for="password">Password</label>
         <input type="password" id="password" th:field="*{password}">
     </div>
     <div>
-        <label for="confirm"></label>
+        <label for="confirm">Confirm password</label>
         <input type="password" id="confirm" th:field="*{password}">
     </div>
     <div>
-        <input type="submit" value="Login">
+        <input type="submit" class="btn btn-primary" value="Register">
     </div>
 </form>
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </body>
 </html>
