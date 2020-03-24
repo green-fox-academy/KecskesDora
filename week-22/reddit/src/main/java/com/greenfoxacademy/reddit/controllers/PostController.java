@@ -23,10 +23,11 @@ public class PostController {
         this.userService = userService;
     }
 
-    @GetMapping({"/", "/{name}"})
-    public String listPosts(Model model, @PathVariable(required = false) String name) {
+    @GetMapping({"/", "/{page}", "/{name}", "/{page}/{name}"})
+    public String listPosts(Model model, @PathVariable(required = false) Integer page, @PathVariable(required = false) String name) {
         model.addAttribute("id", name);
-        model.addAttribute("posts", postService.listPosts());
+        model.addAttribute("posts", postService.listPosts(page));
+        model.addAttribute("page", page);
         return "index";
     }
 

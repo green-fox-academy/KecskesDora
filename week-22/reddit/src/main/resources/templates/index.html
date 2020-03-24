@@ -46,6 +46,10 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <a th:if="${page} != 0" th:href="${page} - 1">Previous</a>
+        <a th:href="${page} + 1">Next</a>
+    </div>
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 </body>

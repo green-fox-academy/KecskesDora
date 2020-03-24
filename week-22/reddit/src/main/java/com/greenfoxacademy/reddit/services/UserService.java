@@ -30,7 +30,10 @@ public class UserService implements IUserService{
 
     public void setPost(Post post, String name) {
         if (name != null) {
-            findByName(name).addPost(post);
+            User user = findByName(name);
+            user.addPost(post);
+            userRepository.save(user);
         }
+
     }
 }
