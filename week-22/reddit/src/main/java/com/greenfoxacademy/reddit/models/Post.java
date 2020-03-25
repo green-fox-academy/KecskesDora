@@ -16,7 +16,7 @@ public class Post {
     @DateTimeFormat(pattern = "yyyy-MM-dd hh.mm.ss")
     private LocalDate creationDate;
     @ManyToOne
-    private User user;
+    private User owner;
 
     public Post() {
         creationDate = LocalDate.now();
@@ -72,17 +72,17 @@ public class Post {
         this.creationDate = creationDate;
     }
 
-    public User getUser() {
-        return user;
+    public User getowner() {
+        return owner;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.owner = user;
     }
 
-    public String getUserName() {
-        if (user != null) {
-            return user.getName();
+    public String getOwnerName() {
+        if (owner != null) {
+            return owner.getName();
         }
         return "";
     }

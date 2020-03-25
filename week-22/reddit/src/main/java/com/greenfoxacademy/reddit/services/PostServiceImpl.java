@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -21,11 +19,6 @@ public class PostServiceImpl implements PostService{
         this.postRepository = postRepository;
         this.userService = userService;
     }
-
-    /*@Override
-    public List<Post> listPosts() {
-        return postRepository.findAllByOrderByScoreDesc();
-    }*/
 
     @Override
     public Page<Post> listPosts(Integer page) {

@@ -23,27 +23,37 @@ public class PostController {
         this.userService = userService;
     }
 
-    @GetMapping({"/", "/{page}", "/{name}", "/{page}/{name}"})
-    public String listPosts(Model model, @PathVariable(required = false) Integer page, @PathVariable(required = false) String name) {
-        model.addAttribute("id", name);
+    @GetMapping({"/", "/user/{name}"})
+    public String listPostsOnMainPage(Model model, @PathVariable(required = false) String name) {
+
+        model.addAttribute("name", name);
+        model.addAttribute("posts", postService.listPosts(0));
+        model.addAttribute("page", 0);
+        return "index";
+    }
+
+    @GetMapping({"/page/{page}", "page/{page}/user/{name}"})
+    public String listPostsOnNextPage(Model model, @PathVariable(required = false) int page, @PathVariable(required = false) String name) {
+
+        model.addAttribute("name", name);
         model.addAttribute("posts", postService.listPosts(page));
         model.addAttribute("page", page);
         return "index";
     }
 
-    @GetMapping({"/submit", "/{name}/submit"})
+    @GetMapping({"/submit", "/user/{name}/submit"})
     public String renderSubmitForm(Model model, @PathVariable(required = false) String name) {
         model.addAttribute("name", name);
         model.addAttribute("post", new Post());
         return "submit";
     }
 
-    @PostMapping({"/submit", "/{name}/submit"})
+    @PostMapping({"/submit", "/user/{name}/submit"})
     public String submitNewPost(@ModelAttribute Post post, @PathVariable(required = false) String name) {
         postService.addPost(post);
         postService.setUser(post, name);
         userService.setPost(post, name);
-        return "redirect:/" + name;
+        return "redirect:/user/" + name;
     }
 
     @GetMapping("/vote-up/{id}")

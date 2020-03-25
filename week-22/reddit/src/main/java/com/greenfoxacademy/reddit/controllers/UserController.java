@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/login")
     public String loginUser(@RequestParam String name) {
         userService.findByName(name);
-        return "redirect:/" + name;
+        return "redirect:/user/" + name;
     }
 
     @GetMapping("/register")
@@ -39,6 +39,6 @@ public class UserController {
     @PostMapping("/register")
     public String addNewUser(@ModelAttribute User user) {
         userService.save(user);
-        return "redirect:/" + user.getName();
+        return "redirect:/user/" + user.getName();
     }
 }

@@ -11,7 +11,7 @@ public class User {
     private Long id;
     private String name;
     private String password;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
     private List<Post> posts;
 
     public User() {
