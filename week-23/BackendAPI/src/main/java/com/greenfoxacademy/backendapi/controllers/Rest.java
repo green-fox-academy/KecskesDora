@@ -1,6 +1,6 @@
 package com.greenfoxacademy.backendapi.controllers;
 
-import com.greenfoxacademy.backendapi.Services;
+import com.greenfoxacademy.backendapi.services.Services;
 import com.greenfoxacademy.backendapi.models.dtos.ErrorMessage;
 import com.greenfoxacademy.backendapi.models.entities.*;
 import org.springframework.http.ResponseEntity;
@@ -47,13 +47,24 @@ public class Rest {
     }
 
     @PostMapping("/dountil/{action}")
-    public ResponseEntity doUntil(@RequestBody Until until, @PathVariable String action) {
+    public ResponseEntity doUntil(@RequestBody DoUntil until, @PathVariable String action) {
         if (until == null) {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide a number!"));
         } else if (action.equals("sum") || action.equals("factor")) {
-            return ResponseEntity.status(200).body(new DoUntil(service.action(until, action)));
+            return ResponseEntity.status(200).body(new Result(service.action(until, action)));
         } else {
             return ResponseEntity.status(404).body(new ErrorMessage("No action found"));
+        }
+    }
+
+    @PostMapping("/arrays")
+    public ResponseEntity arrayHandler(@RequestBody ArrayHandler arrayHandler) {
+        if (arrayHandler.getWhat().equals("sum") || arrayHandler.getWhat().equals("multiply")) {
+            return ResponseEntity.status(200).body(new Result(service.arrayHandler(arrayHandler, arrayHandler.getWhat())));
+        } else if (arrayHandler.getWhat().equals("double")) {
+            return ResponseEntity.status(200).body(new ResultArray(service.doubleElements(arrayHandler)));
+        } else {
+            return ResponseEntity.status(400).body(new ErrorMessage("Please provide what to do with the numbers!"));
         }
     }
 }
