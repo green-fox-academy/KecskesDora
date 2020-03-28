@@ -1,20 +1,22 @@
 package com.greenfoxacademy.backendapi.controllers;
 
+import com.greenfoxacademy.backendapi.Services;
 import com.greenfoxacademy.backendapi.models.dtos.ErrorMessage;
-import com.greenfoxacademy.backendapi.models.entities.AppendA;
-import com.greenfoxacademy.backendapi.models.entities.Doubling;
-import com.greenfoxacademy.backendapi.models.entities.Greeter;
+import com.greenfoxacademy.backendapi.models.entities.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class Rest {
 
+    private Services service;
+
+    public Rest(Services service) {
+        this.service = service;
+    }
+
     @GetMapping("/doubling")
-    public ResponseEntity doubling(@RequestParam (required = false) Integer input) {
+    public ResponseEntity doubling(@RequestParam(required = false) Integer input) {
         if (input == null) {
             return ResponseEntity.status(200).body(new ErrorMessage("Please provide an input!"));
         } else {
@@ -23,7 +25,7 @@ public class Rest {
     }
 
     @GetMapping("/greeter")
-    public ResponseEntity greeter(@RequestParam (required = false) String name, @RequestParam (required = false) String title) {
+    public ResponseEntity greeter(@RequestParam(required = false) String name, @RequestParam(required = false) String title) {
         if (name == null && title == null) {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide a name and a title!"));
         } else if (name != null && title == null) {
@@ -41,6 +43,17 @@ public class Rest {
             return ResponseEntity.status(404).body(new ErrorMessage("Please provide an input!"));
         } else {
             return ResponseEntity.status(200).body(new AppendA(appendable));
+        }
+    }
+
+    @PostMapping("/dountil/{action}")
+    public ResponseEntity doUntil(@RequestBody Until until, @PathVariable String action) {
+        if (until == null) {
+            return ResponseEntity.status(400).body(new ErrorMessage("Please provide a number!"));
+        } else if (action.equals("sum") || action.equals("factor")) {
+            return ResponseEntity.status(200).body(new DoUntil(service.action(until, action)));
+        } else {
+            return ResponseEntity.status(404).body(new ErrorMessage("No action found"));
         }
     }
 }
