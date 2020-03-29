@@ -56,15 +56,15 @@ public class PostController {
         return "redirect:/user/" + name;
     }
 
-    @GetMapping("/vote-up/{id}")
-    public String voteUp(@PathVariable Long id) {
-        postService.changeScore(id, 1);
-        return "redirect:/";
+    @GetMapping("/user/{name}/vote-up/{postId}")
+    public String voteUp(@PathVariable String name, @PathVariable Long postId) {
+        postService.changeScore(name, postId, 1);
+        return "redirect:/user/" + name;
     }
 
-    @GetMapping("/vote-down/{id}")
-    public String voteDown(@PathVariable Long id) {
-        postService.changeScore(id, -1);
-        return "redirect:/";
+    @GetMapping("/user/{name}/vote-down/{postId}")
+    public String voteDown(@PathVariable String name, @PathVariable Long postId) {
+        postService.changeScore(name, postId, -1);
+        return "redirect:/user/" + name;
     }
 }

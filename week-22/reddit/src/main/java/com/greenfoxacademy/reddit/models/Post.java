@@ -1,9 +1,12 @@
 package com.greenfoxacademy.reddit.models;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -13,17 +16,24 @@ public class Post {
     private String title;
     private String url;
     private int score;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd hh.mm.ss")
     private LocalDate creationDate;
+
     @ManyToOne
     private User owner;
 
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Vote> votes;
+
     public Post() {
         creationDate = LocalDate.now();
+        votes = new ArrayList<>();
     }
 
     public Post(String title, String url) {
         creationDate = LocalDate.now();
+        votes = new ArrayList<>();
         this.title = title;
         this.url = url;
     }
@@ -72,11 +82,11 @@ public class Post {
         this.creationDate = creationDate;
     }
 
-    public User getowner() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setUser(User user) {
+    public void setOwner(User user) {
         this.owner = user;
     }
 
@@ -85,5 +95,18 @@ public class Post {
             return owner.getName();
         }
         return "";
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public void addVote(Vote vote) {
+        votes.add(vote);
+        score += vote.getValue();
     }
 }

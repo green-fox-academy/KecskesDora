@@ -5,10 +5,8 @@ import org.springframework.data.domain.Page;
 
 public interface PostService {
     Page<Post> listPosts(Integer page);
-
     void addPost(Post post);
-
-    void changeScore(Long id, int number);
-
+    void changeScore(String name, Long postId, int value);
     void setUser(Post post, String name);
+    Post findById(Long id);
 }
