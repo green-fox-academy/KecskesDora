@@ -1,8 +1,8 @@
 package com.greenfoxacademy.reddit.services;
 
-import com.greenfoxacademy.reddit.models.Post;
-import com.greenfoxacademy.reddit.models.User;
-import com.greenfoxacademy.reddit.models.Vote;
+import com.greenfoxacademy.reddit.models.entities.Post;
+import com.greenfoxacademy.reddit.models.entities.User;
+import com.greenfoxacademy.reddit.models.entities.Vote;
 import com.greenfoxacademy.reddit.repositories.PostRepository;
 import com.greenfoxacademy.reddit.repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

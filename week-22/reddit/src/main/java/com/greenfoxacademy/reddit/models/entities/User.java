@@ -1,4 +1,4 @@
-package com.greenfoxacademy.reddit.models;
+package com.greenfoxacademy.reddit.models.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ public class User {
 
     private String name;
     private String password;
+    private String confirmPassword;
 
     @OneToMany(/*cascade = CascadeType.ALL,*/ mappedBy = "owner")
     private List<Post> posts;
@@ -23,16 +24,22 @@ public class User {
     public User() {
         posts = new ArrayList<>();
         votes = new ArrayList<>();
+        password = confirmPassword;
     }
 
     public User(String name) {
+        posts = new ArrayList<>();
+        votes = new ArrayList<>();
         this.name = name;
+        password = confirmPassword;
     }
 
-    public User(String name, String password) {
+    public User(String name, String password, String confirmPassword) {
         posts = new ArrayList<>();
+        votes = new ArrayList<>();
         this.name = name;
         this.password = password;
+        this.password = confirmPassword;
     }
 
     public Long getId() {
@@ -57,6 +64,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public List<Post> getPosts() {

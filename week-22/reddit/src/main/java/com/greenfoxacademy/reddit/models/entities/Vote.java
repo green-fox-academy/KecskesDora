@@ -1,4 +1,7 @@
-package com.greenfoxacademy.reddit.models;
+package com.greenfoxacademy.reddit.models.entities;
+
+import com.greenfoxacademy.reddit.models.entities.Post;
+import com.greenfoxacademy.reddit.models.entities.User;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;

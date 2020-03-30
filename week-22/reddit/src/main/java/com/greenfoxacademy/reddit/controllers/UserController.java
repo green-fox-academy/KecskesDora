@@ -1,6 +1,7 @@
 package com.greenfoxacademy.reddit.controllers;
 
-import com.greenfoxacademy.reddit.models.User;
+import com.greenfoxacademy.reddit.models.dtos.ErrorMessage;
+import com.greenfoxacademy.reddit.models.entities.User;
 import com.greenfoxacademy.reddit.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,24 +21,37 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String renderLoginFrom() {
+    public String renderLoginFrom(Model model, @RequestParam (required = false) String error) {
+        model.addAttribute("error", error);
         return "login";
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String name) {
-        userService.findByName(name);
-        return "redirect:/user/" + name;
+    public String loginUser(@ModelAttribute User user) {
+        User loggedInUser = userService.loginUser(user);
+        if (loggedInUser != null) {
+            return "redirect:/user/" + user.getName();
+        } else {
+            return "redirect:/login?error=" + new ErrorMessage("Invalid username or password!");
+        }
     }
 
     @GetMapping("/register")
-    public String renderRegistrationForm(Model model, @ModelAttribute User user) {
+    public String renderRegistrationForm(Model model, @ModelAttribute User user,
+                                         @RequestParam (name = "error", required = false) String error) {
+
         model.addAttribute("user", user);
+        model.addAttribute("error", error);
         return "registration";
     }
 
     @PostMapping("/register")
     public String addNewUser(@ModelAttribute User user) {
+        if (!userService.checkNewUsername(user)) {
+            return "redirect:/register?error=" + new ErrorMessage("Username already exist!");
+        } else if (!userService.checkEmails(user)) {
+            return "redirect:/register?error=" + new ErrorMessage("Given passwords are not correct!");
+        }
         userService.save(user);
         return "redirect:/user/" + user.getName();
     }

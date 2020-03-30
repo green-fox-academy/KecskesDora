@@ -17,7 +17,10 @@
     </div>
     <div>
         <label for="confirm">Confirm password</label>
-        <input type="password" id="confirm" th:field="*{password}">
+        <input type="password" id="confirm" th:field="*{confirmPassword}">
+    </div>
+    <div>
+        <p th:if="${error} != null" th:text="${error}" style="color:red"></p>
     </div>
     <div>
         <input type="submit" class="btn btn-primary" value="Register">

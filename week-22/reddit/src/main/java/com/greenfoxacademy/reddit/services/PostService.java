@@ -1,6 +1,6 @@
 package com.greenfoxacademy.reddit.services;
 
-import com.greenfoxacademy.reddit.models.Post;
+import com.greenfoxacademy.reddit.models.entities.Post;
 import org.springframework.data.domain.Page;
 
 public interface PostService {
