@@ -9,4 +9,6 @@ public interface PostService {
     void changeScore(String name, Long postId, int value);
     void setUser(Post post, String name);
     Post findById(Long id);
+    void voteUp(String name, Long postId);
+    void voteDown(String name, Long postId);
 }

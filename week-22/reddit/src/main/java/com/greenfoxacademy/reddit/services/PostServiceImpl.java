@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class PostServiceImpl implements PostService{
@@ -42,11 +44,63 @@ public class PostServiceImpl implements PostService{
         Post post = findById(postId);
         if (user != null && post != null) {
             Vote vote = new Vote(post, user, value);
-                if (!voteRepository.findVoteByUserAndPostAndValue(user, post, value).isPresent()) {
-                    voteRepository.save(vote);
-                    post.addVote(vote);
-                    postRepository.save(post);
+            Optional<Vote> optionalVote = voteRepository.findVoteByUserAndPost(user, post);
+            if (!optionalVote.isPresent()) {
+                voteRepository.save(vote);
+                post.addVote(vote);
+                post.changeScore(value);
+            } else {
+                if (optionalVote.get().getValue() == - value) {
+                    post.changeScore(2 * value);
+                    optionalVote.get().setValue(value);
+                    voteRepository.save(optionalVote.get());
                 }
+            }
+            postRepository.save(post);
+        }
+    }
+
+    @Override
+    public void voteUp(String name, Long postId) {
+        User user = userService.findByName(name);
+        Post post = findById(postId);
+        if (user != null && post != null) {
+            Vote vote = new Vote(post, user, 1);
+            Optional<Vote> optionalVote = voteRepository.findVoteByUserAndPost(user, post);
+            if (!optionalVote.isPresent()) {
+                voteRepository.save(vote);
+                post.addVote(vote);
+                post.changeScore(1);
+            } else {
+                if (optionalVote.get().getValue() == -1) {
+                    post.changeScore(2);
+                    optionalVote.get().setValue(1);
+                    voteRepository.save(optionalVote.get());
+                }
+            }
+            postRepository.save(post);
+        }
+    }
+
+    @Override
+    public void voteDown(String name, Long postId) {
+        User user = userService.findByName(name);
+        Post post = findById(postId);
+        if (user != null && post != null) {
+            Vote vote = new Vote(post, user, -1);
+            Optional<Vote> optionalVote = voteRepository.findVoteByUserAndPost(user, post);
+            if (!optionalVote.isPresent()) {
+                voteRepository.save(vote);
+                post.addVote(vote);
+                post.changeScore(-1);
+            } else {
+                if (optionalVote.get().getValue() == 1) {
+                    post.changeScore(-2);
+                    optionalVote.get().setValue(-1);
+                    voteRepository.save(optionalVote.get());
+                }
+            }
+            postRepository.save(post);
         }
     }
 

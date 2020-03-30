@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,10 +14,10 @@ public class User {
     private String name;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(/*cascade = CascadeType.ALL,*/ mappedBy = "owner")
     private List<Post> posts;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Vote> votes;
 
     public User() {

@@ -17,4 +17,5 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
     List<Post> findAllByOrderByScoreDesc();
     Optional<Post> findById(Long id);
     Optional<Post> findPostByVotesContains(Vote vote);
+
 }

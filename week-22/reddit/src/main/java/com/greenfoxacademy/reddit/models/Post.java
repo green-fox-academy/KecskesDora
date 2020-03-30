@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@Table(name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -107,6 +108,5 @@ public class Post {
 
     public void addVote(Vote vote) {
         votes.add(vote);
-        score += vote.getValue();
     }
 }

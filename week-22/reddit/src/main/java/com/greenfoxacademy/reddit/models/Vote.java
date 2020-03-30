@@ -24,6 +24,11 @@ public class Vote {
 
     }
 
+    public Vote(Post post, User user) {
+        this.post = post;
+        this.user = user;
+    }
+
     public Vote(Post post, User user, int value) {
         this.post = post;
         this.user = user;
