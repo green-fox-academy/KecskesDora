@@ -18,22 +18,6 @@ public class DoUntil {
         this.until = until;
     }
 
-    public int sum() {
-        int counter = 0;
-        for (int i = 1; i <= until ; i++) {
-           counter += i;
-        }
-        return counter;
-    }
-
-    public int factor() {
-        int factorial = 1;
-        for (int i = 1; i <= until; i++) {
-            factorial *= i;
-        }
-        return factorial;
-    }
-
     @Override
     public String toString() {
         return "{" +

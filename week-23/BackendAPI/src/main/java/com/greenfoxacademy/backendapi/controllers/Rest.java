@@ -1,7 +1,8 @@
 package com.greenfoxacademy.backendapi.controllers;
 
+import com.greenfoxacademy.backendapi.services.ArrayHandlerService;
+import com.greenfoxacademy.backendapi.services.DoUntilService;
 import com.greenfoxacademy.backendapi.services.LogService;
-import com.greenfoxacademy.backendapi.services.Services;
 import com.greenfoxacademy.backendapi.models.dtos.ErrorMessage;
 import com.greenfoxacademy.backendapi.models.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Rest {
 
-    private Services service;
+    private DoUntilService doUntilService;
+    private ArrayHandlerService arrayHandlerService;
     private LogService logService;
 
     @Autowired
-    public Rest(Services service, LogService logService) {
-        this.service = service;
+    public Rest(DoUntilService doUntilService, ArrayHandlerService arrayHandlerService, LogService logService) {
+        this.doUntilService = doUntilService;
+        this.arrayHandlerService = arrayHandlerService;
         this.logService = logService;
     }
 
@@ -60,7 +63,7 @@ public class Rest {
         if (until == null) {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide a number!"));
         } else if (action.equals("sum") || action.equals("factor")) {
-            return ResponseEntity.status(200).body(new Result(service.action(until, action)));
+            return ResponseEntity.status(200).body(new Result(doUntilService.action(until, action)));
         } else {
             return ResponseEntity.status(404).body(new ErrorMessage("No action found"));
         }
@@ -70,9 +73,9 @@ public class Rest {
     public ResponseEntity arrayHandler(@RequestBody ArrayHandler arrayHandler) {
         logService.save(new Log("/arrays", arrayHandler.toString()));
         if (arrayHandler.getWhat().equals("sum") || arrayHandler.getWhat().equals("multiply")) {
-            return ResponseEntity.status(200).body(new Result(service.arrayHandler(arrayHandler, arrayHandler.getWhat())));
+            return ResponseEntity.status(200).body(new Result(arrayHandlerService.arrayHandler(arrayHandler, arrayHandler.getWhat())));
         } else if (arrayHandler.getWhat().equals("double")) {
-            return ResponseEntity.status(200).body(new ResultArray(service.doubleElements(arrayHandler)));
+            return ResponseEntity.status(200).body(new ResultArray(arrayHandlerService.doubleArrayElements(arrayHandler)));
         } else {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide what to do with the numbers!"));
         }
@@ -82,7 +85,7 @@ public class Rest {
     public ResponseEntity listLogs() {
         Logs logs = new Logs(logService.listLogs());
         if(logs.getEntries().isEmpty()) {
-            return ResponseEntity.status(400).body(new ErrorMessage("There is no logs saved yet."));
+            return ResponseEntity.status(400).body(new ErrorMessage("No logs saved yet."));
         }
         return ResponseEntity.status(200).body(logs);
     }

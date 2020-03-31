@@ -1,5 +1,6 @@
 package com.greenfoxacademy.backendapi.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //@DateTimeFormat(pattern = "yyyy-MM-dd hh.mm.ss")
+    @JsonIgnore
     private Date createdAt;
     private String endpoint;
     private String data;
