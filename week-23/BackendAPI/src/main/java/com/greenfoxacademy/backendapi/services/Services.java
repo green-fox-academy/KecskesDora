@@ -7,10 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class Services {
 
-    public Services() {
-
-    }
-
     public int action(DoUntil until, String action) {
         int result = 0;
         if (action.equals("sum")) {

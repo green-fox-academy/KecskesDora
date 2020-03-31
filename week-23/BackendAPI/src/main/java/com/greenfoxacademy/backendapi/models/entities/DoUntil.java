@@ -33,4 +33,11 @@ public class DoUntil {
         }
         return factorial;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "until: " + until +
+                "}";
+    }
 }

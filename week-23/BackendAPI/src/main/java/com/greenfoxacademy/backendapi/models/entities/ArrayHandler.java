@@ -1,5 +1,7 @@
 package com.greenfoxacademy.backendapi.models.entities;
 
+import java.util.Arrays;
+
 public class ArrayHandler {
     private String what;
     private int[] numbers;
@@ -47,6 +49,14 @@ public class ArrayHandler {
             doubled[i] = numbers[i] * 2;
         }
         return doubled;
+    }
+
+    @Override
+    public String toString () {
+        return "{" +
+                "what: " + what +
+                ", numbers: " + Arrays.toString(numbers) +
+                "}";
     }
 }
 

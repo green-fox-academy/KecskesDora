@@ -10,9 +10,4 @@ public class MainController {
     public String renderIndex() {
         return "index";
     }
-
-    @org.springframework.web.bind.annotation.RestController
-    public static class RestController {
-
-    }
 }

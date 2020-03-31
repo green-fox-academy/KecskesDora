@@ -1,8 +1,10 @@
 package com.greenfoxacademy.backendapi.controllers;
 
+import com.greenfoxacademy.backendapi.services.LogService;
 import com.greenfoxacademy.backendapi.services.Services;
 import com.greenfoxacademy.backendapi.models.dtos.ErrorMessage;
 import com.greenfoxacademy.backendapi.models.entities.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,13 +12,17 @@ import org.springframework.web.bind.annotation.*;
 public class Rest {
 
     private Services service;
+    private LogService logService;
 
-    public Rest(Services service) {
+    @Autowired
+    public Rest(Services service, LogService logService) {
         this.service = service;
+        this.logService = logService;
     }
 
     @GetMapping("/doubling")
     public ResponseEntity doubling(@RequestParam(required = false) Integer input) {
+        logService.save(new Log("/doubling", "input=" + input));
         if (input == null) {
             return ResponseEntity.status(200).body(new ErrorMessage("Please provide an input!"));
         } else {
@@ -26,6 +32,7 @@ public class Rest {
 
     @GetMapping("/greeter")
     public ResponseEntity greeter(@RequestParam(required = false) String name, @RequestParam(required = false) String title) {
+        logService.save(new Log("/greeter", "name=" + name + "&title=" + title));
         if (name == null && title == null) {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide a name and a title!"));
         } else if (name != null && title == null) {
@@ -39,6 +46,7 @@ public class Rest {
 
     @GetMapping("/appenda/{appendable}")
     public ResponseEntity appendA(@PathVariable(required = false) String appendable) {
+        logService.save(new Log("/appenda", appendable));
         if (appendable == null) {
             return ResponseEntity.status(404).body(new ErrorMessage("Please provide an input!"));
         } else {
@@ -48,6 +56,7 @@ public class Rest {
 
     @PostMapping("/dountil/{action}")
     public ResponseEntity doUntil(@RequestBody DoUntil until, @PathVariable String action) {
+        logService.save(new Log("/dountil/" + action , until.toString()));
         if (until == null) {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide a number!"));
         } else if (action.equals("sum") || action.equals("factor")) {
@@ -59,6 +68,7 @@ public class Rest {
 
     @PostMapping("/arrays")
     public ResponseEntity arrayHandler(@RequestBody ArrayHandler arrayHandler) {
+        logService.save(new Log("/arrays", arrayHandler.toString()));
         if (arrayHandler.getWhat().equals("sum") || arrayHandler.getWhat().equals("multiply")) {
             return ResponseEntity.status(200).body(new Result(service.arrayHandler(arrayHandler, arrayHandler.getWhat())));
         } else if (arrayHandler.getWhat().equals("double")) {
@@ -66,6 +76,15 @@ public class Rest {
         } else {
             return ResponseEntity.status(400).body(new ErrorMessage("Please provide what to do with the numbers!"));
         }
+    }
+
+    @GetMapping("/log")
+    public ResponseEntity listLogs() {
+        Logs logs = new Logs(logService.listLogs());
+        if(logs.getEntries().isEmpty()) {
+            return ResponseEntity.status(400).body(new ErrorMessage("There is no logs saved yet."));
+        }
+        return ResponseEntity.status(200).body(logs);
     }
 }
 
