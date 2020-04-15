@@ -1,9 +1,9 @@
 KecskesDora
 
-[https://github.com/KecskesDora/todo-app] TodoApp
+[TodoApp](https://github.com/KecskesDora/todo-app)
 
-[https://github.com/KecskesDora/wanderer-java] Wanderer
+[Wanderer](https://github.com/KecskesDora/wanderer-java)
 
-[https://github.com/KecskesDora/p2p-chat] p2p chat project
+[p2p chat project](https://github.com/KecskesDora/p2p-chat)
 
 
