@@ -1,5 +1,7 @@
 package com.greenfoxacademy.security.controllers;
 
+import com.greenfoxacademy.security.models.Role;
+import com.greenfoxacademy.security.models.dtos.UserDTO;
 import com.greenfoxacademy.security.models.entities.User;
 import com.greenfoxacademy.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +21,27 @@ public class MainController {
         this.userService = userService;
     }
 
+   /*@GetMapping("/login")
+    public String renderLoginForm(Model model, @ModelAttribute UserDTO user) {
+        //model.addAttribute("user", user);
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute UserDTO user) {
+
+        return "login";
+    }
+
     @GetMapping("/register")
-    public String renderRegistrationForm(Model model) {
-        model.addAttribute("user", new User());
+    public String renderRegistrationForm(Model model, @ModelAttribute UserDTO user) {
+        model.addAttribute("user", user);
         return "register";
     }
 
     @PostMapping("/register")
-    public String register(Model model, @ModelAttribute User user) {
+    public String register(@ModelAttribute User user) {
         userService.save(user);
-        return "hello";
-    }
-
-    /*@GetMapping("/login")
-    public String renderLoginForm(Model model) {
-        model.addAttribute("user", new User());
-        return "login";
-    }
-
-    @GetMapping("/login")
-    public String loginUser() {
-
-        return "login";
+        return "redirect:/login";
     }*/
-
-    @GetMapping("/hello")
-    public String greeting() {
-        return "hello";
-    }
 }

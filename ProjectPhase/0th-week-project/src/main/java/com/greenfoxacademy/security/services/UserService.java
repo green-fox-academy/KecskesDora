@@ -1,5 +1,6 @@
 package com.greenfoxacademy.security.services;
 
+import com.greenfoxacademy.security.models.Role;
 import com.greenfoxacademy.security.models.entities.User;
 import com.greenfoxacademy.security.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
