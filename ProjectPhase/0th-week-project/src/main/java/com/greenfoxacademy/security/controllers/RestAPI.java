@@ -1,26 +1,24 @@
 package com.greenfoxacademy.security.controllers;
 
-import com.greenfoxacademy.security.models.dtos.Recipe;
-import com.greenfoxacademy.security.services.RecipeFinderService;
+import com.greenfoxacademy.security.models.dtos.Meal;
+import com.greenfoxacademy.security.models.dtos.Meals;
 import com.greenfoxacademy.security.services.RecipeRequestService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class RestAPI {
 
-    private RecipeRequestService recipeFinderRequestService;
+    private RecipeRequestService recipeRequestService;
 
     @Autowired
-    public RestAPI(RecipeRequestService recipeFinderRequestService) {
-        this.recipeFinderRequestService = recipeFinderRequestService;
+    public RestAPI(RecipeRequestService recipeRequestService) {
+        this.recipeRequestService = recipeRequestService;
     }
 
     @GetMapping("/welcome")
@@ -29,8 +27,7 @@ public class RestAPI {
     }
 
     @GetMapping("/api/recipe")
-    public ResponseEntity getRecipe(@RequestBody Recipe recipe) throws IOException {
-        recipeFinderRequestService.sendRequest();
-        return ResponseEntity.ok().body(recipe);
+    public ResponseEntity getRecipe() throws IOException {
+        return ResponseEntity.ok().body(recipeRequestService.sendRequest("a"));
     }
 }
