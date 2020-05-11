@@ -8,7 +8,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
-import java.util.List;
 
 @Service
 public class RecipeRequestService {
@@ -23,6 +22,9 @@ public class RecipeRequestService {
         Call<Meals> retrofitCall = recipeFinderService.findRecipe(a);
         Response<Meals> response = retrofitCall.execute();
 
+        if (!response.isSuccessful()) {
+            throw new IOException(response.errorBody() != null ? response.errorBody().string() : "Unknown error");
+        }
         return response.body();
     }
 }

@@ -1,5 +1,6 @@
 package com.greenfoxacademy.security.models.entities;
 
+import com.greenfoxacademy.security.models.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +20,13 @@ public class User implements UserDetails {
     private String role;
 
     public User() {
-        role = "ROLE_USER";
+
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
-        this.role = "ROLE_USER";
+        this.role = role;
     }
 
     public Long getId() {

@@ -8,8 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Arrays;
-
 @SpringBootApplication
 public class SecurityApplication implements CommandLineRunner {
 
@@ -18,6 +16,7 @@ public class SecurityApplication implements CommandLineRunner {
     }
 
     private UserService userService;
+    private static final String ENVIRONMENT = System.getenv("ENVIRONMENT");
 
     @Autowired
     public SecurityApplication(UserService userService) {
@@ -26,8 +25,9 @@ public class SecurityApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        userService.save(new User("user1", "111"));
-        userService.save(new User("user2", "222"));
-        userService.save(new User("user3", "333"));
+        if (ENVIRONMENT.equals("Test")) {
+            userService.save(new User("admin", "111", "ROLE_ADMIN"));
+            userService.save(new User("user", "222", "ROLE_USER"));
+        }
     }
 }

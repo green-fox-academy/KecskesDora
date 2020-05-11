@@ -5,11 +5,14 @@ import com.greenfoxacademy.security.models.dtos.Meals;
 import com.greenfoxacademy.security.services.RecipeRequestService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.awt.*;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 public class RestAPI {
@@ -23,11 +26,11 @@ public class RestAPI {
 
     @GetMapping("/welcome")
     public String greeting() {
-        return "<h1>Welcome!<h1>";
+        return "Welcome admin!";
     }
 
-    @GetMapping("/api/recipe")
-    public ResponseEntity getRecipe() throws IOException {
-        return ResponseEntity.ok().body(recipeRequestService.sendRequest("a"));
+    @GetMapping(value = "/api/recipe/{a}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getRecipe(@PathVariable String a) throws IOException {
+        return ResponseEntity.ok().body(recipeRequestService.sendRequest(a));
     }
 }
