@@ -2,7 +2,7 @@ import java.util.*;
 public class AlternatingCharacters {
 
   public static void main(String[] args){
-    System.out.println(alternatingCharacters("AABBCC"));
+    System.out.println(alternatingCharacters2("AABBCCCDD"));
   }
 
   private static int alternatingCharacters(String s) {
@@ -18,6 +18,18 @@ public class AlternatingCharacters {
       }
     }
     return charDeleted.size();
+  }
+
+  private static int alternatingCharacters2(String s) {
+    char[] sArr = s.toCharArray();
+    int counter = 0;
+
+    for (int i = 0; i < sArr.length - 1; i++) {
+      if (sArr[i] == sArr[i + 1]) {
+        counter ++;
+      }
+    }
+    return counter;
   }
 
 }
