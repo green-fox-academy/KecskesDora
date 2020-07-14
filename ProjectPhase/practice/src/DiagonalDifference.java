@@ -11,7 +11,7 @@ public class DiagonalDifference {
     List<Integer> arr3 = new ArrayList<>(Arrays.asList(9, 9, 1));
     List<List<Integer>> arr = new ArrayList<>(Arrays.asList(arr1, arr2, arr3));
 
-    System.out.println(diagonalDifference(arr));
+    System.out.println(diagonalDifference2(arr));
   }
 
   public static int diagonalDifference(List<List<Integer>> arr) {
@@ -23,6 +23,16 @@ public class DiagonalDifference {
         b = (i + j == arr.size() - 1) ? (b + arr.get(i).get(j)) : b;
       }
     }
+    return Math.abs(a - b);
+  }
+
+  public static int diagonalDifference2(List<List<Integer>> arr) {
+    int a = 0;
+    int b = 0;
+    for (int i = 0; i < arr.size(); i++) {
+        a += arr.get(i).get(i);
+        b += arr.get(i).get(arr.size() - i - 1);
+      }
     return Math.abs(a - b);
   }
 
